@@ -1,0 +1,13 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+
+:root {
+    --primary: #9F2C0F;
+    --primary-neutral: #F2F0F0;
+    --seconday-neutral: #BBB2A9;
+}
