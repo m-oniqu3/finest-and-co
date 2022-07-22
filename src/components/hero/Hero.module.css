@@ -13,10 +13,12 @@
   background: rgba(226, 220, 220, 0.43);
   backdrop-filter: blur(24.2225px);
   width: 85%;
-  padding: 2rem 1.5rem;
+  padding: 3rem 1.5rem;
+  border-radius: 0px 200px 0px 0px;
 }
 
 .hero h1 {
+  width: 85%;
   font-weight: 400;
   font-size: 1.5rem;
   line-height: 29px;
