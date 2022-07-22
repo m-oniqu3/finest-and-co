@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "./ProductList.module.css";
 import Container from "../helpers/wrapper/Container";
 import { useGetProductsQuery } from "../../store/features/api/apiSlice";
 import Product from "./Product";
@@ -24,16 +25,13 @@ const ProductList = () => {
   }
 
   return (
-    <section>
-      <Container>
-        <div>
-          <h3>Products</h3>
-          <Button>Sort</Button>
-        </div>
-
-        {content}
-      </Container>
-    </section>
+    <Container>
+      <div className={styled.list__header}>
+        <h3>Products</h3>
+        <Button>Sort</Button>
+      </div>
+      <section className={styled.list}>{content}</section>
+    </Container>
   );
 };
 

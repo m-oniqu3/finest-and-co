@@ -1,0 +1,15 @@
+.list__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 1rem
+}
+
+.list__header h3 {
+    font-weight: 600;
+    color: var(--primary);
+}
+
+.list__header button {
+    margin: 0;
+}
