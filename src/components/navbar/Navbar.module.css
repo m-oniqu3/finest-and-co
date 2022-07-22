@@ -8,15 +8,34 @@
         rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
 }
 
-.nav__group {
+.nav__group,
+.nav__links,
+.nav__icons {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
+
+.nav__links {
+    list-style: none;
+    gap: .5rem;
+}
+
+.nav__links a {
+    text-decoration: none;
+    color: var(--seconday-neutral);
+    font-weight: 500;
+    transition: all .3s ease-in-out;
+}
+
+.nav__links a:hover {
+    color: var(--primary);
+}
+
 .logo {
     font-family: 'Yeseva One', cursive;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     font-weight: 700;
     color: var(--primary);
 }
