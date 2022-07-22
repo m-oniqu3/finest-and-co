@@ -5,5 +5,5 @@
     color: var(--primary-neutral);
     font-weight: 500;
     border: none;
-
+    cursor: pointer;
 }

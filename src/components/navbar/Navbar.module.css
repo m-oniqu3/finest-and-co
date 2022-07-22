@@ -14,6 +14,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    cursor: pointer;
 }
 
 
@@ -27,10 +28,15 @@
     color: var(--seconday-neutral);
     font-weight: 500;
     transition: all .3s ease-in-out;
+    cursor: pointer;
 }
 
 .nav__links a:hover {
     color: var(--primary);
+}
+
+.nav__icons {
+    gap: .2rem;
 }
 
 .logo {
