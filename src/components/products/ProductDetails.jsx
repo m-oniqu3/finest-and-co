@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "./ProductDetails.module.css";
 import Container from "../helpers/wrapper/Container";
 import Color from "../helpers/ui/colour/Color";
@@ -8,8 +8,9 @@ import { BsArrowLeft } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 
 const ProductDetails = (props) => {
-  const { product } = props;
+  const { product, showDetails } = props;
   const navigate = useNavigate();
+  const [image, setImage] = useState();
 
   //format for price
   const nf = new Intl.NumberFormat("en-US");
@@ -17,14 +18,20 @@ const ProductDetails = (props) => {
   //navigate to the previous page
   const handlePrevious = () => navigate(-1);
 
-  //set the initial state of the product image
-  const [image, setImage] = useState(product.images[0]);
+  // if showDetails is false, set the image with img prop
+  useEffect(() => {
+    if (!showDetails && !product.images) {
+      setImage(product.img);
+    } else if (showDetails && product.images) {
+      setImage(product.images[0]);
+    }
+  }, [product, showDetails]);
 
   //update the image when the user clicks on a different image
   const handleImage = (image) => setImage(image);
 
   //map over the images and return a list of images
-  const smallImages = product.images.map((image) => {
+  const smallImages = product.images?.map((image) => {
     return (
       <figure key={image.id} onClick={() => handleImage(image)}>
         <img src={image.thumbnails.small.url} alt={image.alt} />
@@ -40,20 +47,27 @@ const ProductDetails = (props) => {
   return (
     <section className={styled.details}>
       <Container>
-        <p className={styled.arrow} onClick={handlePrevious}>
-          <BsArrowLeft size="25" /> Back to Shop
-        </p>
+        {showDetails && (
+          <p className={styled.arrow} onClick={handlePrevious}>
+            <BsArrowLeft size="25" /> Back to Shop
+          </p>
+        )}
+
         <div className={styled.details__group}>
           <div>
             <figure className={styled.details__image}>
               <img
-                src={image.thumbnails.full.url}
-                alt={product.alt ? product.alt : product.name}
+                src={showDetails ? image?.thumbnails?.full?.url : image}
+                alt={showDetails ? product.name : product.alt}
               />
-              <div className={styled.product__colours}>{colours} </div>
+              {showDetails && (
+                <div className={styled.product__colours}>{colours} </div>
+              )}
             </figure>
 
-            <div className={styled.details__images}>{smallImages}</div>
+            {showDetails && (
+              <div className={styled.details__images}>{smallImages}</div>
+            )}
           </div>
 
           <article className={styled.details__info}>
@@ -63,14 +77,16 @@ const ProductDetails = (props) => {
               <p>{product.company}</p>
             </div>
 
-            <Ratings product={product} />
+            {showDetails && <Ratings product={product} />}
 
             <p className={styled.product__desc}>{product.description}</p>
-            <p className={styled.product__price}>
-              $ {nf.format(product.price)}
-            </p>
+            {showDetails && (
+              <p className={styled.product__price}>
+                $ {nf.format(product.price)}
+              </p>
+            )}
 
-            <ProductDetailsButtons product={product} />
+            {showDetails && <ProductDetailsButtons product={product} />}
           </article>
         </div>
       </Container>

@@ -15,7 +15,7 @@ const product = {
 const Shop = () => {
   return (
     <>
-      {/* <ProductDetails product={product} /> */}
+      <ProductDetails product={product} />
       <ProductList />
     </>
   );

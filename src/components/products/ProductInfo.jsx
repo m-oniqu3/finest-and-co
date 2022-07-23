@@ -13,7 +13,7 @@ const ProductInfo = () => {
   let content;
 
   if (results.isSuccess) {
-    content = <ProductDetails product={results.data} />;
+    content = <ProductDetails product={results.data} showDetails={true} />;
   }
 
   if (results.isLoading) {
