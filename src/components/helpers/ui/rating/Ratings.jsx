@@ -21,10 +21,7 @@ const Ratings = (props) => {
 
   return (
     <div className={styled.ratings}>
-      <p className={styled.stars}>
-        <span>{fullStars}</span>
-        {stars}
-      </p>
+      <div>{fullStars}</div>
       <p>{product.reviews} Reviews</p>
     </div>
   );
