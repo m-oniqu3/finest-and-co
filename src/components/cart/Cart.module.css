@@ -1,0 +1,27 @@
+.cart__container {
+    padding: 2rem 0;
+}
+
+.cart__heading {
+    color: var(--secondary-neutral);
+    text-align: center;
+    padding-bottom: 1rem;
+    font-weight: 500;
+}
+
+.cart__total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--secondary-neutral);
+    margin: 2rem auto;
+
+    max-width: 700px;
+}
+
+.cart__total span {
+    color: var(--primary);
+    font-weight: 700;
+    padding-left: 5px;
+    font-size: 1rem;
+}
