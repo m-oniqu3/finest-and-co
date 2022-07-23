@@ -25,18 +25,32 @@
 
 .nav__links a {
     text-decoration: none;
-    color: var(--seconday-neutral);
+    color: var(--secondary-neutral);
     font-weight: 500;
     transition: all .3s ease-in-out;
     cursor: pointer;
 }
 
 .nav__links a:hover {
-    color: var(--primary);
+    color: rgb(127, 126, 126);
 }
 
 .nav__icons {
-    gap: .2rem;
+    list-style: none;
+    gap: .4rem;
+}
+
+.nav__icons li {
+    position: relative;
+}
+
+.nav__icons p {
+    position: absolute;
+    top: -.8rem;
+    right: -2px;
+    font-size: .875rem;
+    color: var(--secondary-neutral);
+    font-weight: 500;
 }
 
 .logo {

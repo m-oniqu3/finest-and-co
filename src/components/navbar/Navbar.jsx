@@ -3,9 +3,12 @@ import styled from "./Navbar.module.css";
 import Container from "../helpers/wrapper/Container";
 import { AiOutlineShopping } from "react-icons/ai";
 import { CgHeart } from "react-icons/cg";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
+  const { amountOfItemsInCart } = useSelector((state) => state.cart);
+
   return (
     <div className={styled.nav}>
       <Container>
@@ -21,10 +24,22 @@ const Navbar = () => {
             </li>
           </ul>
 
-          <div className={styled.nav__icons}>
-            <CgHeart size="22" color="var(--primary)" />
-            <AiOutlineShopping size="24" color="var(--primary)" />
-          </div>
+          <ul className={styled.nav__icons}>
+            <li>
+              <NavLink to="/wishlist">
+                <CgHeart size="22" color="var(--primary)" />
+              </NavLink>
+            </li>
+
+            <li>
+              <Link to="/cart">
+                <AiOutlineShopping size="22" color="var(--primary)" />
+              </Link>
+              {amountOfItemsInCart > 0 && (
+                <p className={styled.amount}>{amountOfItemsInCart}</p>
+              )}
+            </li>
+          </ul>
         </nav>
       </Container>
     </div>
