@@ -1,5 +1,5 @@
 import React from "react";
-import Color from "../helpers/colour/Color";
+import Color from "../helpers/ui/colour/Color";
 import styled from "./Product.module.css";
 
 const Product = (props) => {

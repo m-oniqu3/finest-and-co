@@ -4,6 +4,7 @@ import Container from "../helpers/wrapper/Container";
 import { useGetProductsQuery } from "../../store/features/api/apiSlice";
 import Product from "./Product";
 import Button from "../helpers/ui/button/Button";
+import Error from "../helpers/error/Error";
 
 const ProductList = () => {
   const results = useGetProductsQuery();
@@ -21,7 +22,7 @@ const ProductList = () => {
   }
 
   if (results.isError) {
-    content = <p>{results.error}</p>;
+    content = <Error error={results.error} />;
   }
 
   return (
