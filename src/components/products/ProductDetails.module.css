@@ -11,6 +11,19 @@
     border-radius: .5rem;
 }
 
+.details__images {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1rem 0;
+    cursor: pointer;
+}
+
+.details__images img {
+    width: 100%;
+    border-radius: .2rem;
+}
+
 .details__info {
     padding: 2rem 0
 }

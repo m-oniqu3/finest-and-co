@@ -2,30 +2,37 @@ import React from "react";
 import styled from "./ProductDetails.module.css";
 import Container from "../helpers/wrapper/Container";
 
-const ProductDetails = () => {
+const ProductDetails = (props) => {
+  const { product } = props;
+
+  const smallImages = product.images.map((image) => {
+    return (
+      <figure key={image.id}>
+        <img src={image.thumbnails.small.url} alt={image.alt} />
+      </figure>
+    );
+  });
   return (
     <section className={styled.details}>
       <Container>
         <div className={styled.details__group}>
           <figure className={styled.details__image}>
             <img
-              src="https://images.unsplash.com/photo-1618221710640-c0eaaa2adb49?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1332&q=80"
-              alt="A living room set with a couch, two chairs and a coffee table"
+              src={product.images[0].thumbnails.full.url}
+              alt={product.alt ? product.alt : product.name}
             />
           </figure>
 
+          <div className={styled.details__images}>{smallImages}</div>
+
           <article className={styled.details__info}>
-            <h1 className={styled.details__info__title}>New Arrival</h1>
+            <h1 className={styled.details__info__title}>{product.name}</h1>
             <div className={styled.details__info__filters}>
-              <p>Living Room</p>
-              <p>Ikea</p>
+              <p>{product.category}</p>
+              <p>{product.company}</p>
             </div>
 
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime,
-              quia iste quaerat asperiores dolores earum culpa! Deleniti
-              obcaecati quae ut.
-            </p>
+            <p>{product.description}</p>
           </article>
         </div>
       </Container>
