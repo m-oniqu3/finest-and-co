@@ -20,14 +20,13 @@ const ProductDetailsButtons = (props) => {
   };
   return (
     <div className={styled.buttons}>
-      <Button>
-        Wishlist
-        <CgHeart size="22" color="var(--primary-neutral)" />
-      </Button>
       <Button onClick={addToCartHandler}>
         Add To Cart
         <AiOutlineShopping size="24" color="var(--primary-neutral)" />
       </Button>
+      <div className={styled.wishlist}>
+        <CgHeart size="22" color="var(--primary-neutral)" />
+      </div>
     </div>
   );
 };

@@ -64,7 +64,7 @@
 }
 
 .product__icons {
-    background-color: rgb(179, 177, 177);
+    background: rgb(201, 201, 201);
     padding: .3rem;
     border-radius: 100%;
     display: flex;
@@ -74,5 +74,5 @@
 }
 
 .product__icons:hover {
-    background-color: rgb(145, 141, 141);
+    background-color: rgb(179, 177, 177);
 }
