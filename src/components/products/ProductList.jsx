@@ -5,6 +5,7 @@ import { useGetProductsQuery } from "../../store/features/api/apiSlice";
 import Product from "./Product";
 import Button from "../helpers/ui/button/Button";
 import Error from "../helpers/error/Error";
+import Loading from "../helpers/loading/Loading";
 
 const ProductList = () => {
   const results = useGetProductsQuery();
@@ -12,7 +13,7 @@ const ProductList = () => {
   let content;
 
   if (results.isLoading) {
-    content = <p>Loading...</p>;
+    content = <Loading />;
   }
 
   if (results.isSuccess) {
