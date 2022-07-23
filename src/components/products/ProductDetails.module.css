@@ -8,6 +8,7 @@
 
 .details__image img {
     width: 100%;
+    border-radius: .5rem;
 }
 
 .details__info {

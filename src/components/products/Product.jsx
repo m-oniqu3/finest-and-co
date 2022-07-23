@@ -2,10 +2,14 @@ import React from "react";
 import Color from "../helpers/ui/colour/Color";
 import styled from "./Product.module.css";
 import { useNavigate } from "react-router-dom";
+import { CgHeart } from "react-icons/cg";
 
 const Product = (props) => {
   const { product } = props;
   const navigate = useNavigate();
+
+  //format for price
+  const nf = new Intl.NumberFormat("en-US");
 
   //return the colors of the product
   const colours = product.colors?.map((color) => {
@@ -22,10 +26,18 @@ const Product = (props) => {
       </figure>
 
       <div className={styled.product__details}>
-        <p className={styled.product__category}> {product.category}</p>
         <h4 className={styled.product__name}>{product.name}</h4>
-        <p className={styled.product__price}>${product.price}</p>
+        <p className={styled.product__category}>
+          {product.category}, {product.company}
+        </p>
         <div className={styled.product__colours}>{colours} </div>
+
+        <div className={styled.product__group}>
+          <p className={styled.product__price}>$ {nf.format(product.price)}</p>
+          <div className={styled.product__icons}>
+            <CgHeart size="22" color="white" />
+          </div>
+        </div>
       </div>
     </article>
   );
