@@ -5,6 +5,7 @@
     position: relative;
     height: 18rem;
     width: 80%;
+    max-width: 15rem;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
     cursor: pointer;
     border-radius: 0.5rem;
