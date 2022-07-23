@@ -30,7 +30,7 @@ const ProductList = () => {
     <Container>
       <div className={styled.list__header}>
         <h3>Products</h3>
-        <Button>Sort</Button>
+        <Button>Filter</Button>
       </div>
       <section className={styled.list}>{content}</section>
     </Container>
