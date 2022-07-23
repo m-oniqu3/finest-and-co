@@ -2,6 +2,17 @@
     margin: 1.5rem 0;
 }
 
+.arrow {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 1rem;
+    margin: 1rem 0;
+    color: var(--secondary-neutral);
+    font-weight: 600;
+    cursor: pointer;
+}
+
 .details__image {
     position: relative;
     width: 100%;

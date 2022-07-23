@@ -4,13 +4,18 @@ import Container from "../helpers/wrapper/Container";
 import Color from "../helpers/ui/colour/Color";
 import ProductDetailsButtons from "./ProductDetailsButtons";
 import Ratings from "../helpers/ui/rating/Ratings";
+import { BsArrowLeft } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
 
 const ProductDetails = (props) => {
   const { product } = props;
+  const navigate = useNavigate();
 
   //format for price
   const nf = new Intl.NumberFormat("en-US");
-  console.log(product);
+
+  //navigate to the previous page
+  const handlePrevious = () => navigate(-1);
 
   //set the initial state of the product image
   const [image, setImage] = useState(product.images[0]);
@@ -35,7 +40,9 @@ const ProductDetails = (props) => {
   return (
     <section className={styled.details}>
       <Container>
-        <p>Back to Shop</p>
+        <p className={styled.arrow} onClick={handlePrevious}>
+          <BsArrowLeft size="25" /> Back to Shop
+        </p>
         <div className={styled.details__group}>
           <div>
             <figure className={styled.details__image}>

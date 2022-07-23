@@ -7,5 +7,10 @@
     border: none;
     cursor: pointer;
     border-radius: 0.5rem;
+    transition: all 0.3s ease-in-out;
+}
 
+
+.button:hover {
+    background-color: #b92804
 }
