@@ -1,0 +1,16 @@
+.ratings {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.ratings p {
+    font-weight: 600;
+    color: var(--secondary-neutral);
+}
+
+.stars {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
