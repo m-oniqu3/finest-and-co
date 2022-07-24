@@ -46,8 +46,8 @@
 
 .nav__icons p {
     position: absolute;
-    top: -.8rem;
-    right: -2px;
+    top: -.875rem;
+    right: -4px;
     font-size: .875rem;
     color: var(--secondary-neutral);
     font-weight: 500;

@@ -41,6 +41,7 @@
     justify-content: space-between;
     align-items: center;
     gap: .5rem;
+    max-width: 50px;
 }
 
 .item__quantity-group div {

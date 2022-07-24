@@ -34,6 +34,7 @@ const Cart = () => {
           Your Shopping Cart
           {emptyCart && <> is empty.</>}
         </h4>
+
         {emptyCart && <p>empty</p>}
 
         <div className={styled.cart__total}>
