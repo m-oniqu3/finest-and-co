@@ -2,8 +2,7 @@ import React from "react";
 import styled from "./CartItem.module.css";
 import { useDispatch } from "react-redux";
 import { increase, decrease } from "../../store/features/cart/cartSlice";
-import { BsPlusCircleFill } from "react-icons/bs";
-import { AiFillMinusCircle } from "react-icons/ai";
+import { AiFillMinusSquare, AiFillPlusSquare } from "react-icons/ai";
 
 function CartItem({ item }) {
   const dispatch = useDispatch();
@@ -17,31 +16,32 @@ function CartItem({ item }) {
 
   return (
     <section key={item.id} className={styled.item}>
+      <figure className={styled.item__image}>
+        <img src={item.image} alt={item.name} />
+      </figure>
+
       <article className={styled.item__content}>
-        <figure className={styled.item__image}>
-          <img src={item.image} alt={item.name} />
-        </figure>
+        <h4 className={styled.item__name}>{item.name}</h4>
 
-        <div className={styled.item__caption}>
-          <h4>{item.name}</h4>
-          <p>$ {nf.format(item.price)}</p>
-        </div>
-
-        <div className={styled.total__group}>
+        <div className={styled.item__calculate}>
           <div className={styled["item__quantity-group"]}>
-            <div onClick={increaseHandler}>
-              <BsPlusCircleFill color="var(--secondary-neutral)" size="20" />
+            <div onClick={decreaseHandler}>
+              <AiFillMinusSquare color="var(--secondary-neutral)" size="25" />
             </div>
 
             <p>{item.quantity}</p>
 
-            <div onClick={decreaseHandler}>
-              <AiFillMinusCircle color="var(--secondary-neutral)" size="22" />
+            <div onClick={increaseHandler}>
+              <AiFillPlusSquare color="var(--secondary-neutral)" size="25" />
             </div>
           </div>
 
-          <p>${nf.format(item.productTotal)}</p>
+          <p>x</p>
+
+          <p>$ {nf.format(item.price)}</p>
         </div>
+
+        <p className={styled.item__price}>$ {nf.format(item.productTotal)}</p>
       </article>
     </section>
   );
