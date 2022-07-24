@@ -1,0 +1,13 @@
+.summary__details {
+    margin: 1.5rem 0;
+}
+
+.summary__details p {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.summary__details p:last-child {
+    padding-top: .5rem;
+}

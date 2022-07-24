@@ -3,22 +3,23 @@
 }
 
 .cart__heading {
-    color: var(--secondary-neutral);
-    text-align: center;
-    padding-bottom: 1rem;
-    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.arrow {
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    gap: 1rem;
-    margin: 1rem 0;
+.cart__heading h4 {
     color: var(--secondary-neutral);
-    font-weight: 600;
+    text-align: center;
+    font-weight: 500;
+    margin-right: auto;
+}
+
+.cart__heading span {
+    margin-right: auto;
     cursor: pointer;
 }
+
 
 .cart__total {
     display: flex;
