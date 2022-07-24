@@ -14,24 +14,24 @@ const CartSummary = () => {
       <div className={styled.summary__details}>
         <p>
           SubTotal
-          <span>$ {nf.format(subTotal)}</span>
+          <span>{nf.format(subTotal)}</span>
         </p>
 
         <p>
           Shipping
-          <span>+$ {nf.format(shipping)}</span>
+          <span>+{nf.format(shipping)}</span>
         </p>
 
         <p>
           Tax
-          <span>+$ {nf.format(tax)}</span>
-        </p>
-
-        <p>
-          Total
-          <span>$ {nf.format(finalTotal)}</span>
+          <span>+{nf.format(tax)}</span>
         </p>
       </div>
+
+      <p className={styled.summary__total}>
+        Total
+        <span>{nf.format(finalTotal)}</span>
+      </p>
     </article>
   );
 };
