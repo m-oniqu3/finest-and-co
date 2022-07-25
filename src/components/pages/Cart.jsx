@@ -7,6 +7,8 @@ import CartItem from "../cart/CartItem";
 import { IoIosArrowDropleftCircle } from "react-icons/io";
 import Container from "../helpers/wrapper/Container";
 import CartSummary from "../cart/CartSummary";
+import Empty from "../helpers/ui/empty/Empty";
+import addToCart from "../../images/add-to-cart.svg";
 
 const Cart = () => {
   const navigate = useNavigate();
@@ -19,14 +21,17 @@ const Cart = () => {
     dispatch(calculateTotal());
   }, [dispatch, cartItems]);
 
+  //navigate to the previous page
   const handlePrevious = () => navigate(-1);
 
-  // map over each item in cartItems from the store and return a CartItem
+  // map over each item in cartItems from the store and return a CartItem with the item info
   const cart = cartItems.map((item) => {
     return <CartItem key={item.id} item={item} />;
   });
 
   const emptyCart = cartItems.length === 0;
+  const emptyText =
+    "Your cart is empty, but we can fix that. Visit the shop and start adding items to your cart.";
 
   return (
     <section className={styled.cart__container}>
@@ -41,9 +46,21 @@ const Cart = () => {
           <h4>Your Shopping Cart</h4>
         </div>
 
-        {emptyCart && <p>empty</p>}
-        {cart}
-        <CartSummary />
+        {/* if cart is empty then show message else show the cartitems */}
+        {emptyCart ? (
+          <Empty
+            image={addToCart}
+            heading="Your cart is empty."
+            text={emptyText}
+            button="Start shopping"
+            route="/shop"
+          />
+        ) : (
+          { cart }
+        )}
+
+        {/* only show cart summary if the cart is not empty */}
+        {!emptyCart && <CartSummary />}
       </Container>
     </section>
   );

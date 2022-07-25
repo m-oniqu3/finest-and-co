@@ -1,0 +1,23 @@
+.empty {
+    padding: 2rem 0;
+    text-align: center;
+}
+
+.empty figure {
+    width: 80%;
+    margin: 1rem auto;
+}
+
+.empty figure img {
+    width: 100%;
+}
+
+.empty h2 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+
+.empty p {
+    padding-bottom: .5rem;
+}
