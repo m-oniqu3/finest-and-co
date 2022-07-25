@@ -2,3 +2,11 @@
     width: 85%;
     margin: 0 auto;
 }
+
+/* Media Queries */
+
+@media (min-width: 768px) {
+    .container {
+        width: 90%;
+    }
+}

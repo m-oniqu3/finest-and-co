@@ -17,6 +17,12 @@
     cursor: pointer;
 }
 
+.logo {
+    font-family: 'Yeseva One', cursive;
+    font-size: clamp(1.2rem, 3vw, 1.6rem);
+    font-weight: 700;
+    color: var(--primary);
+}
 
 .nav__links {
     list-style: none;
@@ -26,6 +32,7 @@
 .nav__links a {
     text-decoration: none;
     color: var(--secondary-neutral);
+    font-size: clamp(1rem, 3vw, 1.2rem);
     font-weight: 400;
     transition: all .3s ease-in-out;
     cursor: pointer;
@@ -51,11 +58,4 @@
     font-size: .875rem;
     color: var(--secondary-neutral);
     font-weight: 500;
-}
-
-.logo {
-    font-family: 'Yeseva One', cursive;
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: var(--primary);
 }
