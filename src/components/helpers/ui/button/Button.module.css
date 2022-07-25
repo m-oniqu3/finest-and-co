@@ -3,6 +3,7 @@
     margin-top: 1rem;
     background-color: var(--primary);
     color: var(--primary-neutral);
+    font-size: clamp(1rem, 3vw, 1.2rem);
     font-weight: 500;
     border: none;
     cursor: pointer;

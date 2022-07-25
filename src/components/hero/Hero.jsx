@@ -10,14 +10,16 @@ const Hero = () => {
   return (
     <section className={styled.background}>
       <article className={styled.hero}>
-        <h1>
-          <span>extra-ordinary</span> service made <span>affordable</span>
-        </h1>
-        <p className="text">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed eligendi
-          non qui impedit.
-        </p>
-        <Button onClick={handleClick}>Shop Now</Button>
+        <div className={styled.hero__content}>
+          <h1>
+            <span>extra-ordinary</span> service made <span>affordable</span>
+          </h1>
+          <p className="text">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed
+            eligendi non qui impedit. Lorem ipsum dolor sit amet.
+          </p>
+          <Button onClick={handleClick}>Shop Now</Button>
+        </div>
       </article>
     </section>
   );

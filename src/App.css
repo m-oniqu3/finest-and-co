@@ -12,3 +12,9 @@
     --primary-neutral: #F2F0F0;
     --secondary-neutral: #a5a4a4;
 }
+
+/* Media Queries */
+
+.text {
+    font-size: clamp(1rem, 3vw, 1.2rem);
+}
