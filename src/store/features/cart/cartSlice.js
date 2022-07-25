@@ -3,7 +3,12 @@ import { createSlice, current } from "@reduxjs/toolkit";
 const initialState = {
   cartItems: [],
   amountOfItemsInCart: 0,
-  cartTotal: 0,
+  total: {
+    subTotal: 0,
+    tax: 0,
+    shipping: 0,
+    finalTotal: 0,
+  },
 };
 
 /** addToCart
@@ -86,8 +91,21 @@ const cartSlice = createSlice({
 
     calculateTotal: (state) => {
       let total = 0;
-      state.cartItems.forEach((item) => (total += item.productTotal));
-      state.cartTotal = total;
+      let subTotal = 0;
+      let shipping = 0;
+      let tax = 0;
+      state.cartItems.forEach((item) => {
+        subTotal += item.productTotal;
+        tax += item.productTotal * 0.1;
+        shipping += item.productTotal * 0.05;
+      });
+      total = subTotal + tax + shipping;
+      state.total = {
+        subTotal,
+        tax,
+        shipping,
+        finalTotal: total,
+      };
     },
   },
 });

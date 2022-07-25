@@ -4,19 +4,13 @@ import Container from "../helpers/wrapper/Container";
 import Color from "../helpers/ui/colour/Color";
 import ProductDetailsButtons from "./ProductDetailsButtons";
 import Ratings from "../helpers/ui/rating/Ratings";
-import { BsArrowLeft } from "react-icons/bs";
-import { useNavigate } from "react-router-dom";
 
 const ProductDetails = (props) => {
   const { product, showDetails } = props;
-  const navigate = useNavigate();
   const [image, setImage] = useState();
 
   //format for price
   const nf = new Intl.NumberFormat("en-US");
-
-  //navigate to the previous page
-  const handlePrevious = () => navigate(-1);
 
   // if showDetails is false, set the image with img prop
   useEffect(() => {
@@ -47,12 +41,6 @@ const ProductDetails = (props) => {
   return (
     <section className={styled.details}>
       <Container>
-        {showDetails && (
-          <p className={styled.arrow} onClick={handlePrevious}>
-            <BsArrowLeft size="25" /> Back to Shop
-          </p>
-        )}
-
         <div className={styled.details__group}>
           <div>
             <figure className={styled.details__image}>

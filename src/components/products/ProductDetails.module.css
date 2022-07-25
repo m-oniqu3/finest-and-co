@@ -2,16 +2,6 @@
     margin: 1.5rem 0;
 }
 
-.arrow {
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    gap: 1rem;
-    margin: 1rem 0;
-    color: var(--secondary-neutral);
-    font-weight: 600;
-    cursor: pointer;
-}
 
 .details__image {
     position: relative;
@@ -42,7 +32,7 @@
 .product__colours {
     display: flex;
     flex-direction: column;
-    justify-content: start;
+    justify-content: flex-start;
     align-items: center;
     gap: .3rem;
     padding-top: .5rem;
@@ -57,7 +47,7 @@
 
 .details__info__title {
     font-size: 1.5rem;
-    font-weight: 900;
+    font-weight: 800;
     color: var(--primary);
     text-transform: capitalize;
 }
@@ -81,6 +71,7 @@
 
 .product__desc {
     padding: .5rem 0;
+    line-height: 135%;
 }
 
 .product__price {
@@ -92,7 +83,6 @@
 .product__stars {
     font-weight: 500;
     display: flex;
-    /* justify-content: space-between; */
     align-items: center;
     gap: 4px;
 }

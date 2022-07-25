@@ -1,0 +1,40 @@
+.summary h3 {
+    font-weight: 500;
+}
+
+.summary__details {
+    margin: 1.5rem 0;
+    padding: .5rem 0;
+    border-bottom: 2px solid var(--primary-neutral);
+}
+
+.summary__details p {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: .3rem 0;
+    color: rgb(161, 158, 158);
+    font-weight: 400;
+}
+
+.summary__details span {
+    color: black;
+    font-weight: 400;
+    font-size: small;
+}
+
+.summary__details :first-child span {
+    font-size: large;
+}
+
+.summary__total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 500;
+}
+
+.summary__total span {
+    font-weight: 500;
+    font-size: larger;
+}

@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Rubik', sans-serif;
     font-weight: 300;
 }
 
@@ -10,5 +10,5 @@
 :root {
     --primary: #9F2C0F;
     --primary-neutral: #F2F0F0;
-    --secondary-neutral: #BBB2A9;
+    --secondary-neutral: #a5a4a4;
 }

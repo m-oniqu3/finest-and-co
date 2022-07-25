@@ -15,7 +15,7 @@ const ProductDetailsButtons = (props) => {
   //dispatch the action to add the current item to the cart
   const addToCartHandler = () => {
     dispatch(
-      addToCart({ id, name, price, imgSrc: images[0].thumbnails.small.url })
+      addToCart({ id, name, price, imgSrc: images[0].thumbnails.large.url })
     );
   };
   return (

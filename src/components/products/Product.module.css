@@ -42,7 +42,7 @@
 .product__colours {
     display: flex;
     flex-direction: column;
-    justify-content: start;
+    justify-content: flex-start;
     align-items: center;
     gap: .3rem;
     padding-top: .5rem;
