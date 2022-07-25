@@ -1,0 +1,11 @@
+ .info {
+     padding: 1rem 0;
+ }
+
+ .info span {
+     display: flex;
+     align-items: center;
+     gap: .5rem;
+     font-weight: 400;
+     color: var(--secondary-neutral);
+ }

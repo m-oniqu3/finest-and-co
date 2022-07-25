@@ -1,6 +1,6 @@
 .nav {
     height: 10vh;
-    background: rgba(226, 220, 220, 0.43);
+    background: rgba(216, 216, 216, 0.43);
     backdrop-filter: blur(30px);
     display: flex;
     align-items: center;
@@ -26,13 +26,13 @@
 .nav__links a {
     text-decoration: none;
     color: var(--secondary-neutral);
-    font-weight: 500;
+    font-weight: 400;
     transition: all .3s ease-in-out;
     cursor: pointer;
 }
 
 .nav__links a:hover {
-    color: rgb(127, 126, 126);
+    color: rgb(77, 76, 76);
 }
 
 .nav__icons {

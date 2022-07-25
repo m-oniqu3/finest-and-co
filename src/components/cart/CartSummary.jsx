@@ -30,7 +30,7 @@ const CartSummary = () => {
 
       <p className={styled.summary__total}>
         Total
-        <span>{nf.format(finalTotal)}</span>
+        <span>${nf.format(finalTotal)}</span>
       </p>
     </article>
   );

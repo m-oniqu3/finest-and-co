@@ -57,7 +57,7 @@
 
 .details__info__title {
     font-size: 1.5rem;
-    font-weight: 900;
+    font-weight: 800;
     color: var(--primary);
     text-transform: capitalize;
 }
@@ -81,6 +81,7 @@
 
 .product__desc {
     padding: .5rem 0;
+    line-height: 135%;
 }
 
 .product__price {
@@ -92,7 +93,6 @@
 .product__stars {
     font-weight: 500;
     display: flex;
-    /* justify-content: space-between; */
     align-items: center;
     gap: 4px;
 }
