@@ -1,12 +1,7 @@
 .product {
-    background-color: var(--primary-neutral);
-    padding: 1rem;
-    margin: 0 auto 2rem;
-    width: 90%;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
     cursor: pointer;
-    border-radius: 0.5rem;
     position: relative;
+
 }
 
 .product__image {
@@ -20,7 +15,6 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 0.5rem;
 }
 
 .product__details {
@@ -47,8 +41,8 @@
     gap: .3rem;
     padding-top: .5rem;
     position: absolute;
-    bottom: 42%;
-    right: 25px;
+    top: 0;
+    right: 10px;
 }
 
 .product__group {
@@ -75,4 +69,25 @@
 
 .product__icons:hover {
     background-color: rgb(179, 177, 177);
+}
+
+
+/* Media Queries */
+
+@media (min-width:360px) {
+    .product__image {
+        height: 10rem;
+    }
+
+    .product {
+        height: 18rem;
+    }
+
+    .product__group {
+        position: absolute;
+        bottom: 0%;
+        width: 100%;
+
+    }
+
 }
