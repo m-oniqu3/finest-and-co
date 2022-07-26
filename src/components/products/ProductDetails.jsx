@@ -42,7 +42,7 @@ const ProductDetails = (props) => {
     <section className={styled.details}>
       <Container>
         <div className={styled.details__group}>
-          <div>
+          <div className={styled.details__image__group}>
             <figure className={styled.details__image}>
               <img
                 src={showDetails ? image?.thumbnails?.full?.url : image}

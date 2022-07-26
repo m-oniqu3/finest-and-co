@@ -9,7 +9,7 @@ const product = {
   category: "Living Room",
   name: "New Arrival",
   description:
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime, quia iste quaerat asperiores dolores earum culpa! Deleniti obcaecati quae ut.",
+    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime, quia iste quaerat asperiores dolores earum culpa! Deleniti obcaecati quae ut. Quisquam, quidem. Lorem ipsum dolor sit amet consectetur adipisicing elit. ",
 };
 
 const Shop = () => {
