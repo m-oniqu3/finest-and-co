@@ -1,0 +1,28 @@
+.arrivals {
+    padding: 2rem 0;
+}
+
+.arrivals figure {
+    width: 100%;
+}
+
+.arrivals figure img {
+    width: 100%;
+}
+
+.arrivals__btn-group {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding-bottom: 1rem;
+}
+
+.arrivals article {
+    background-color: #f6f6f6;
+    padding: 2rem 0;
+}
+
+.arrivals article h1 {
+    font-size: clamp(1.8rem, 3vw, 2rem);
+    font-weight: 600;
+}

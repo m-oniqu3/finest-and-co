@@ -20,7 +20,9 @@ const Hero = () => {
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed
             eligendi non qui impedit. Lorem ipsum dolor sit amet.
           </p>
-          <Button onClick={handleClick}>Shop Now</Button>
+          <Button className="primary" onClick={handleClick}>
+            Shop Now
+          </Button>
         </div>
       </article>
     </section>
