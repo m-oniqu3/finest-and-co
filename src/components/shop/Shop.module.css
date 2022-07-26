@@ -1,0 +1,15 @@
+.shop__buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    overflow-x: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.shop__buttons button {
+    text-transform: capitalize;
+    min-width: fit-content;
+}

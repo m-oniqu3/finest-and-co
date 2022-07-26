@@ -17,7 +17,7 @@ const Arrivals = () => {
           <Container>
             <h1>New Arrival</h1>
             <div className={styled["arrivals__btn-group"]}>
-              <Button className="secondary">Living Room</Button>
+              <Button className="secondary">Kitchen</Button>
               <Button className="secondary">Ikea</Button>
             </div>
 
