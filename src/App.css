@@ -17,4 +17,6 @@
 
 .text {
     font-size: clamp(1rem, 3vw, 1.1rem);
+    line-height: 20px;
+    padding: .5rem 0;
 }

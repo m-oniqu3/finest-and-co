@@ -1,5 +1,5 @@
 .button {
-    padding: 8px 20px;
+    padding: 10px 20px;
     margin-top: 1rem;
     background-color: var(--primary);
     color: var(--primary-neutral);
@@ -7,7 +7,6 @@
     font-weight: 400;
     border: none;
     cursor: pointer;
-    border-radius: 5rem;
     transition: all 0.3s ease-in-out;
 }
 

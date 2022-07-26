@@ -1,11 +1,9 @@
 .nav {
+    background: none;
     height: 10vh;
-    background: rgba(216, 216, 216, 0.43);
-    backdrop-filter: blur(30px);
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px,
-        rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
 }
 
 .nav__group,
@@ -18,10 +16,10 @@
 }
 
 .logo {
-    font-family: 'Yeseva One', cursive;
-    font-size: clamp(1.2rem, 3vw, 1.5rem);
-    font-weight: 700;
+    font-size: clamp(1.4rem, 3vw, 1.8rem);
+    font-weight: 500;
     color: var(--primary);
+    font-family: 'Arial Rounded MT Bold';
 }
 
 .nav__links {

@@ -1,4 +1,5 @@
 import React from "react";
+import Navbar from "../navbar/Navbar";
 import ProductDetails from "../products/ProductDetails";
 import ProductList from "../products/ProductList";
 
@@ -15,6 +16,7 @@ const product = {
 const Shop = () => {
   return (
     <>
+      <Navbar />
       <ProductDetails product={product} />
       <ProductList />
     </>
