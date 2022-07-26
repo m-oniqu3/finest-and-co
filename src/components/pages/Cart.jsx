@@ -56,7 +56,7 @@ const Cart = () => {
             route="/shop"
           />
         ) : (
-          { cart }
+          cart
         )}
 
         {/* only show cart summary if the cart is not empty */}
