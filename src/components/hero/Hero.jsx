@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../helpers/ui/button/Button";
+import Navbar from "../navbar/Navbar";
 import styled from "./Hero.module.css";
 
 const Hero = () => {
@@ -9,6 +10,7 @@ const Hero = () => {
 
   return (
     <section className={styled.background}>
+      <Navbar />
       <article className={styled.hero}>
         <div className={styled.hero__content}>
           <h1>

@@ -13,8 +13,17 @@
     --secondary-neutral: #a5a4a4;
 }
 
-/* Media Queries */
+.logo {
+    font-size: clamp(1.4rem, 3vw, 1.8rem);
+    font-weight: 500;
+    color: var(--primary);
+    font-family: 'Arial Rounded MT Bold';
+}
 
 .text {
     font-size: clamp(1rem, 3vw, 1.1rem);
+    line-height: 20px;
+    padding: .5rem 0;
 }
+
+/* Media Queries */

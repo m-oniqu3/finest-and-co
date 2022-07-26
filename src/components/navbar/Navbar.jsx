@@ -1,48 +1,49 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "./Navbar.module.css";
 import Container from "../helpers/wrapper/Container";
-import { AiOutlineShopping } from "react-icons/ai";
-import { CgHeart } from "react-icons/cg";
-import { NavLink, Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { AiOutlineUser } from "react-icons/ai";
+import { RiMenuLine } from "react-icons/ri";
+import { NavLink } from "react-router-dom";
+import Menu from "./Menu";
 
 const Navbar = () => {
-  const { amountOfItemsInCart } = useSelector((state) => state.cart);
+  const [isOpen, setIsOpen] = useState(false);
+
+  //if isOpen is true, prevent scrolling on body
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  });
+
+  //function to change isOpen state
+  const handleMenu = () => setIsOpen((state) => !state);
 
   return (
-    <div className={styled.nav}>
-      <Container>
-        <nav className={styled.nav__group}>
-          <p className={styled.logo}>finest&co</p>
+    <>
+      <div className={styled.nav}>
+        <Container>
+          <nav className={styled.nav__group}>
+            <p className="logo">finest&co</p>
 
-          <ul className={styled.nav__links}>
-            <li>
-              <NavLink to="/">Home</NavLink>
-            </li>
-            <li>
-              <NavLink to="/shop">Shop</NavLink>
-            </li>
-          </ul>
+            <ul className={styled.nav__icons}>
+              <li>
+                <NavLink to="/">
+                  <AiOutlineUser size="22" color="var(--primary)" />
+                </NavLink>
+              </li>
 
-          <ul className={styled.nav__icons}>
-            <li>
-              <NavLink to="/wishlist">
-                <CgHeart size="22" color="var(--primary)" />
-              </NavLink>
-            </li>
-
-            <li>
-              <Link to="/cart">
-                <AiOutlineShopping size="22" color="var(--primary)" />
-              </Link>
-              {amountOfItemsInCart > 0 && (
-                <p className={styled.amount}>{amountOfItemsInCart}</p>
-              )}
-            </li>
-          </ul>
-        </nav>
-      </Container>
-    </div>
+              <li onClick={handleMenu}>
+                <RiMenuLine size="22" color="var(--primary)" />
+              </li>
+            </ul>
+          </nav>
+        </Container>
+      </div>
+      {isOpen && <Menu setIsOpen={setIsOpen} />}
+    </>
   );
 };
 
