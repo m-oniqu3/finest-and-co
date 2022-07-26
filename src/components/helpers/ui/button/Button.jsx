@@ -5,7 +5,10 @@ const Button = (props) => {
   const handleClick = () => props.onClick();
 
   return (
-    <button className={styled.button} onClick={handleClick}>
+    <button
+      className={`${styled.button} ${styled[props.className]}`}
+      onClick={handleClick}
+    >
       {props.children}
     </button>
   );

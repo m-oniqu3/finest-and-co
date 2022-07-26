@@ -3,9 +3,9 @@ import styled from "./ProductList.module.css";
 import Container from "../helpers/wrapper/Container";
 import { useGetProductsQuery } from "../../store/features/api/apiSlice";
 import Product from "./Product";
-import Button from "../helpers/ui/button/Button";
 import Error from "../helpers/error/Error";
 import Loading from "../helpers/loading/Loading";
+import Filters from "../filters/Filters";
 
 const ProductList = () => {
   const results = useGetProductsQuery();
@@ -28,10 +28,7 @@ const ProductList = () => {
 
   return (
     <Container>
-      <div className={styled.list__header}>
-        <h3>Products</h3>
-        <Button>Filter</Button>
-      </div>
+      <Filters />
       <section className={styled.list}>{content}</section>
     </Container>
   );

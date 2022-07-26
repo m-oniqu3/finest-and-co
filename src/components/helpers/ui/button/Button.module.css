@@ -1,16 +1,34 @@
 .button {
     padding: 10px 20px;
     margin-top: 1rem;
-    background-color: var(--primary);
-    color: var(--primary-neutral);
     font-size: clamp(1rem, 3vw, 1.1rem);
     font-weight: 400;
     border: none;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
+.primary {
+    background-color: var(--primary);
+    color: var(--primary-neutral);
+}
 
-.button:hover {
+.primary:hover {
     background-color: #b92804
+}
+
+.secondary {
+    border: 1px solid black;
+    background-color: white;
+    color: black;
+    font-size: clamp(.875rem, 3vw, 1rem);
+}
+
+.secondary:hover {
+    background-color: black;
+    color: white;
+
 }

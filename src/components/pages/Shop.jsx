@@ -1,23 +1,36 @@
 import React from "react";
+import styled from "../shop/Shop.module.css";
+import Arrivals from "../arrival/Arrivals";
+import Button from "../helpers/ui/button/Button";
 import Navbar from "../navbar/Navbar";
-import ProductDetails from "../products/ProductDetails";
 import ProductList from "../products/ProductList";
+import Container from "../helpers/wrapper/Container";
 
-const product = {
-  img: "https://images.unsplash.com/photo-1618221710640-c0eaaa2adb49?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1332&q=80",
-  alt: "A living room set with a couch, two chairs and a coffee table",
-  company: "Ikea",
-  category: "Living Room",
-  name: "New Arrival",
-  description:
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime, quia iste quaerat asperiores dolores earum culpa! Deleniti obcaecati quae ut. Quisquam, quidem. Lorem ipsum dolor sit amet consectetur adipisicing elit. ",
-};
-
+const categories = [
+  "dining",
+  "living room",
+  "office",
+  "kitchen",
+  "kids",
+  "bedroom",
+];
 const Shop = () => {
+  // map over categories and return a button for each room
+  const buttons = categories.map((item) => {
+    return (
+      <Button key={item} className="secondary">
+        {item}
+      </Button>
+    );
+  });
+
   return (
     <>
       <Navbar />
-      <ProductDetails product={product} />
+      <Container>
+        <div className={styled.shop__buttons}>{buttons}</div>
+      </Container>
+      <Arrivals />
       <ProductList />
     </>
   );
