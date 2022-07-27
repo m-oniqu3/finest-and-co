@@ -8,4 +8,5 @@
      gap: .5rem;
      font-weight: 400;
      color: var(--secondary-neutral);
+     cursor: pointer;
  }
