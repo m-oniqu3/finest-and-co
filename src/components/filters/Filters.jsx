@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "./Filters.module.css";
 import Button from "../helpers/ui/button/Button";
 import { BiSortAlt2 } from "react-icons/bi";
@@ -9,10 +9,17 @@ const Filters = () => {
   const [openSortMenu, setOpenSortMenu] = useState(false);
 
   const handleSortMenu = () => setOpenSortMenu((state) => !state);
-  console.log(openSortMenu);
+
+  useEffect(() => {
+    if (openSortMenu) {
+      document.body.style.overflow = "hidden";
+    } else if (!openSortMenu) {
+      document.body.style.overflow = "auto";
+    }
+  }, [openSortMenu]);
 
   return (
-    <>
+    <div>
       <div className={styled.filters}>
         <Button className="secondary" onClick={handleSortMenu}>
           Sort
@@ -34,7 +41,7 @@ const Filters = () => {
           setOpenSortMenu={setOpenSortMenu}
         />
       )}
-    </>
+    </div>
   );
 };
 
