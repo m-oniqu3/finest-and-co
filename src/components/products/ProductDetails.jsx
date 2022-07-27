@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "./ProductDetails.module.css";
 import Container from "../helpers/wrapper/Container";
 import Color from "../helpers/ui/colour/Color";
