@@ -14,9 +14,7 @@ const Ratings = (props) => {
    * use underscore in place of parameter name
    */
   const fullStars = [...Array(stars)].map((_, index) => {
-    return (
-      <RiStarFill key={index} size="20" color="var(--secondary-neutral)" />
-    );
+    return <RiStarFill key={index} size="20" />;
   });
 
   return (

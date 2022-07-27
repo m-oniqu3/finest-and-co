@@ -43,6 +43,13 @@
 
 /* Media Queries */
 
+@media (min-width: 360px) {
+  .hero {
+    height: 20rem;
+  }
+}
+
+
 @media (min-width: 768px) {
   .hero {
     border-radius: 0px 300px 0px 0px;

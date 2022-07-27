@@ -35,7 +35,7 @@ const Product = (props) => {
         <div className={styled.product__group}>
           <p className={styled.product__price}>$ {nf.format(product.price)}</p>
           <div className={styled.product__icons}>
-            <CgHeart size="22" color="white" />
+            <CgHeart size="22" />
           </div>
         </div>
       </div>
