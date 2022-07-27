@@ -4,22 +4,14 @@ import Container from "../helpers/wrapper/Container";
 import Color from "../helpers/ui/colour/Color";
 import ProductDetailsButtons from "./ProductDetailsButtons";
 import Ratings from "../helpers/ui/rating/Ratings";
+import Button from "../helpers/ui/button/Button";
 
 const ProductDetails = (props) => {
-  const { product, showDetails } = props;
-  const [image, setImage] = useState();
+  const { product } = props;
+  const [image, setImage] = useState(product.images[0]);
 
   //format for price
   const nf = new Intl.NumberFormat("en-US");
-
-  // if showDetails is false, set the image with img prop
-  useEffect(() => {
-    if (!showDetails && !product.images) {
-      setImage(product.img);
-    } else if (showDetails && product.images) {
-      setImage(product.images[0]);
-    }
-  }, [product, showDetails]);
 
   //update the image when the user clicks on a different image
   const handleImage = (image) => setImage(image);
@@ -28,7 +20,7 @@ const ProductDetails = (props) => {
   const smallImages = product.images?.map((image) => {
     return (
       <figure key={image.id} onClick={() => handleImage(image)}>
-        <img src={image.thumbnails.small.url} alt={image.alt} />
+        <img src={image.thumbnails.large.url} alt={image.alt} />
       </figure>
     );
   });
@@ -44,37 +36,31 @@ const ProductDetails = (props) => {
         <div className={styled.details__group}>
           <div className={styled.details__image__group}>
             <figure className={styled.details__image}>
-              <img
-                src={showDetails ? image?.thumbnails?.full?.url : image}
-                alt={showDetails ? product.name : product.alt}
-              />
-              {showDetails && (
-                <div className={styled.product__colours}>{colours} </div>
-              )}
+              <img src={image?.thumbnails?.full?.url} alt={product.name} />
+
+              <div className={styled.product__colours}>{colours} </div>
             </figure>
 
-            {showDetails && (
-              <div className={styled.details__images}>{smallImages}</div>
-            )}
+            <div className={styled.details__images}>{smallImages}</div>
           </div>
 
           <article className={styled.details__info}>
             <h1 className={styled.details__info__title}>{product.name}</h1>
+
             <div className={styled.details__info__filters}>
-              <p>{product.category}</p>
-              <p>{product.company}</p>
+              <Button className="secondary">{product.category}</Button>
+              <Button className="secondary">{product.company}</Button>
             </div>
 
-            {showDetails && <Ratings product={product} />}
+            <Ratings product={product} />
 
-            <p className={styled.product__desc}>{product.description}</p>
-            {showDetails && (
-              <p className={styled.product__price}>
-                $ {nf.format(product.price)}
-              </p>
-            )}
+            <p className="text">{product.description}</p>
 
-            {showDetails && <ProductDetailsButtons product={product} />}
+            <p className={styled.product__price}>
+              $ {nf.format(product.price)}
+            </p>
+
+            <ProductDetailsButtons product={product} />
           </article>
         </div>
       </Container>

@@ -8,6 +8,7 @@ import Error from "../helpers/error/Error";
 import { IoIosArrowDropleftCircle } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import Container from "../helpers/wrapper/Container";
+import Navbar from "../navbar/Navbar";
 
 const ProductInfo = () => {
   // Get the product id from the url
@@ -21,7 +22,7 @@ const ProductInfo = () => {
   let content;
 
   if (results.isSuccess) {
-    content = <ProductDetails product={results.data} showDetails={true} />;
+    content = <ProductDetails product={results.data} />;
   }
 
   if (results.isLoading) {
@@ -33,15 +34,18 @@ const ProductInfo = () => {
   }
 
   return (
-    <section className={styled.info}>
-      <Container>
-        <span onClick={handlePrevious}>
-          <IoIosArrowDropleftCircle size="25" /> Back to Shop
-        </span>
-      </Container>
+    <>
+      <Navbar />
+      <section className={styled.info}>
+        <Container>
+          <span onClick={handlePrevious}>
+            <IoIosArrowDropleftCircle size="25" /> Back to Shop
+          </span>
+        </Container>
 
-      <>{content}</>
-    </section>
+        <>{content}</>
+      </section>
+    </>
   );
 };
 
