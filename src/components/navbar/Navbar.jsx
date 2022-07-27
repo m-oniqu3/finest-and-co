@@ -13,10 +13,10 @@ const Navbar = () => {
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
-    } else {
+    } else if (!isOpen) {
       document.body.style.overflow = "auto";
     }
-  });
+  }, [isOpen]);
 
   //function to change isOpen state
   const handleMenu = () => setIsOpen((state) => !state);

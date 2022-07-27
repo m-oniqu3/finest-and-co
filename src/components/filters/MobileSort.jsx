@@ -10,6 +10,7 @@ const MobileSort = (props) => {
       document.body.style.overflow = "auto";
     }
   }, [props]);
+
   return ReactDOM.createPortal(
     <section className={styled.sort}>MobileSort</section>,
     document.querySelector("#filters")
