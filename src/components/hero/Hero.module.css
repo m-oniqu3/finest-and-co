@@ -1,5 +1,5 @@
 .background {
-  background-image: url("https://images.unsplash.com/photo-1618220179428-22790b461013?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1854&q=80");
+  background-image: url("https://images.unsplash.com/photo-1615876063860-d971f6dca5dc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1332&q=80");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -42,13 +42,6 @@
 }
 
 /* Media Queries */
-
-@media (min-width: 360px) {
-  .hero {
-    height: 20rem;
-  }
-}
-
 
 @media (min-width: 768px) {
   .hero {

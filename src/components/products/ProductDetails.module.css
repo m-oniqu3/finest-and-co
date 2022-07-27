@@ -97,20 +97,22 @@
         gap: 2rem;
     }
 
-    .details__image img {
-        width: 450px;
-        /* height: 350px !important; */
-    }
-
     .details__info {
         padding: 0;
     }
 
 }
 
-@media (min-width:1204px) {
+@media (min-width:1024px) {
     .details__info {
         width: 80%;
-        margin-right: auto;
+    }
+
+    .details__images {
+        gap: 1rem;
+    }
+
+    .details__images figure {
+        height: 5rem;
     }
 }
