@@ -1,34 +1,41 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "./MobileSort.module.css";
 import ReactDOM from "react-dom";
 import Container from "../helpers/wrapper/Container";
 import { VscClose } from "react-icons/vsc";
 import Button from "../helpers/ui/button/Button";
-
-const sortOptions = [
-  { name: "Name: A-Z", value: "ascending" },
-  { name: "Name: Z-A", value: "descending" },
-  { name: "Price: Low to High", value: "lowToHigh" },
-  { name: "Price: High to Low", value: "highToLow" },
-];
+import { useDispatch } from "react-redux";
+import { sortProducts } from "../../store/features/products/productsSlice";
+import { sortOptions } from "./sortOptions";
 
 const MobileSort = (props) => {
-  const handleClose = () => {
-    props.setOpenSortMenu((state) => !state);
-  };
-  const [option, setOption] = useState(null);
+  const dispatch = useDispatch();
 
-  // clear the sort paramter, and the url then close the menu
+  //close the menu
+  const handleClose = () => props.setOpenSortMenu((state) => !state);
+
+  //clear the sort option in local storage and set the option to the default
   const handleClear = () => {
-    console.log("clearing sort");
-    setOption(null);
+    props.setOption("ascending");
+    localStorage.removeItem("sortOption");
     props.setOpenSortMenu(false);
   };
 
+  //set the option then store it in local storage
   const handleChange = (e) => {
-    setOption(e.target.value);
+    props.setOption(e.target.value);
+    localStorage.setItem("sortOption", e.target.value);
   };
 
+  //dispatch the action to sort the products based on option
+  const handleSort = () => {
+    if (props.option) {
+      dispatch(sortProducts(props.option));
+      props.setOpenSortMenu(false);
+    }
+  };
+
+  //map over the sort options and input for each option
   const options = sortOptions.map((item, index) => {
     return (
       <div key={index} className={styled.item}>
@@ -37,7 +44,7 @@ const MobileSort = (props) => {
           name="sort"
           id={index}
           value={item.value}
-          checked={item.value === option}
+          checked={item.value === props.option}
           onChange={(e) => handleChange(e)}
         />
         <label htmlFor={item.name}>{item.name}</label>
@@ -45,7 +52,7 @@ const MobileSort = (props) => {
     );
   });
 
-  return (
+  return ReactDOM.createPortal(
     <section className={styled.sort__container}>
       <Container>
         <div className={styled.sort}>
@@ -62,11 +69,14 @@ const MobileSort = (props) => {
             <Button className="secondary" onClick={() => handleClear()}>
               Clear
             </Button>
-            <Button className="primary">Sort</Button>
+            <Button className="primary" onClick={handleSort}>
+              Sort
+            </Button>
           </div>
         </div>
       </Container>
-    </section>
+    </section>,
+    document.querySelector("#filters")
   );
 };
 

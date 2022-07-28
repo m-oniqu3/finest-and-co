@@ -5,13 +5,13 @@ export const apiSlice = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: "https://course-api.com",
   }),
+  refetchOnMountOrArgChange: 3600,
   endpoints: (builder) => ({
     getProducts: builder.query({
       query: () => "/react-store-products",
     }),
     getProductInfo: builder.query({
       query: (productId) => `/react-store-single-product?id=${productId}`,
-      refetchOnMountOrArgChange: 3600,
     }),
   }),
 });
