@@ -4,7 +4,6 @@ import ReactDOM from "react-dom";
 import Container from "../helpers/wrapper/Container";
 import { VscClose } from "react-icons/vsc";
 import Button from "../helpers/ui/button/Button";
-import { useSearchParams } from "react-router-dom";
 
 const sortOptions = [
   { name: "Name: A-Z", value: "ascending" },
@@ -16,22 +15,19 @@ const sortOptions = [
 const MobileSort = (props) => {
   const handleClose = () => {
     props.setOpenSortMenu((state) => !state);
-    //go to previous position after closing
-    // window.history.back();
   };
-  const [selectedSort, setSelectedSort] = useState();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [option, setOption] = useState(null);
 
-  //   useEffect(() => {
-  //     setSearchParams({ sort: selectedSort });
-  //   }, [setSearchParams, selectedSort]);
+  // clear the sort paramter, and the url then close the menu
+  const handleClear = () => {
+    console.log("clearing sort");
+    setOption(null);
+    props.setOpenSortMenu(false);
+  };
 
-  //clear the sort paramter, and the url then close the menu
-  //   const handleClear = () => {
-  //     setSelectedSort(null);
-  //     setSearchParams({});
-  //     props.setOpenSortMenu(false);
-  //   };
+  const handleChange = (e) => {
+    setOption(e.target.value);
+  };
 
   const options = sortOptions.map((item, index) => {
     return (
@@ -41,8 +37,8 @@ const MobileSort = (props) => {
           name="sort"
           id={index}
           value={item.value}
-          checked={item.value === selectedSort}
-          onChange={(e) => setSelectedSort(e.target.value)}
+          checked={item.value === option}
+          onChange={(e) => handleChange(e)}
         />
         <label htmlFor={item.name}>{item.name}</label>
       </div>
@@ -63,7 +59,9 @@ const MobileSort = (props) => {
           <form>{options}</form>
 
           <div className={styled["sort__button-group"]}>
-            <Button className="secondary">Clear</Button>
+            <Button className="secondary" onClick={() => handleClear()}>
+              Clear
+            </Button>
             <Button className="primary">Sort</Button>
           </div>
         </div>
