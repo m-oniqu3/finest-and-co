@@ -1,0 +1,39 @@
+.filter {
+    margin: 1rem 0;
+    position: relative;
+    height: 100%;
+}
+
+.filter__group {
+    margin: 1.5rem 0;
+}
+
+.filter h4 {
+    font-weight: 400;
+    padding-bottom: .5rem;
+}
+
+.filter__option {
+    margin: .3rem 0;
+    display: flex;
+    align-items: center;
+}
+
+.filter__option label {
+    text-transform: capitalize;
+    padding-left: .5rem;
+}
+
+.filter__option input {
+    cursor: pointer;
+}
+
+.filter__button-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    position: absolute;
+    left: 0;
+    bottom: 10%;
+    width: 100%;
+}

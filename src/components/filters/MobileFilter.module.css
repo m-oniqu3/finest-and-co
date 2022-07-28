@@ -22,3 +22,7 @@
     font-weight: 500;
     font-size: clamp(1.1rem, 3vw, 1.3rem);
 }
+
+.filter__heading span {
+    cursor: pointer;
+}
