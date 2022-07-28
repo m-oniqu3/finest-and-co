@@ -1,29 +1,31 @@
 import React from "react";
 import styled from "./ProductList.module.css";
 import Container from "../helpers/wrapper/Container";
-import { useGetProductsQuery } from "../../store/features/api/apiSlice";
 import Product from "./Product";
 import Error from "../helpers/error/Error";
 import Loading from "../helpers/loading/Loading";
 import Filters from "../filters/Filters";
+import { useSelector } from "react-redux";
 
 const ProductList = () => {
-  const results = useGetProductsQuery();
+  const { products, isLoading, isError, error, isSuccess } = useSelector(
+    (state) => state.products
+  );
 
   let content;
 
-  if (results.isLoading) {
+  if (isLoading) {
     content = <Loading />;
   }
 
-  if (results.isSuccess) {
-    content = results.data?.map((product) => {
+  if (isSuccess) {
+    content = products?.map((product) => {
       return <Product key={product.id} product={product} />;
     });
   }
 
-  if (results.isError) {
-    content = <Error error={results.error} />;
+  if (isError) {
+    content = <Error error={error} />;
   }
 
   return (

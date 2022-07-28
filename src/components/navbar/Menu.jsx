@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "./Menu.module.css";
+import ReactDOM from "react-dom";
 import Container from "../helpers/wrapper/Container";
 import { VscClose } from "react-icons/vsc";
 import { Link } from "react-router-dom";
@@ -8,7 +9,7 @@ import { AiOutlineUser } from "react-icons/ai";
 const Menu = (props) => {
   const handleClose = () => props.setIsOpen((state) => !state);
 
-  return (
+  return ReactDOM.createPortal(
     <div className={styled.menu}>
       <Container>
         <div className={styled.menu__header}>
@@ -39,7 +40,8 @@ const Menu = (props) => {
           </li>
         </ul>
       </Container>
-    </div>
+    </div>,
+    document.querySelector("#menu")
   );
 };
 

@@ -1,0 +1,54 @@
+.sort__container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(226, 220, 220, 0.43);
+    backdrop-filter: blur(30px);
+    width: 100%;
+    height: 100vh;
+    z-index: 10;
+    padding: 2rem 0;
+    display: block;
+}
+
+.sort__heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 500;
+    font-size: clamp(1.1rem, 3vw, 1.3rem);
+}
+
+.sort__heading span {
+    cursor: pointer;
+}
+
+.sort form {
+    margin: 2rem 0;
+}
+
+.item {
+    padding: .5rem 0;
+    display: flex;
+    align-items: center;
+}
+
+.item input {
+    width: 1.2rem;
+    height: 1.8rem;
+    cursor: pointer;
+}
+
+.item label {
+    padding-left: 1rem;
+}
+
+.sort__button-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    /* position: absolute; */
+    bottom: 5%;
+    width: 100%;
+
+}
