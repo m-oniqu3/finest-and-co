@@ -24,8 +24,8 @@ function App() {
       dispatch(setError({ error: results.error }));
     }
 
-    if (results.isLoading || results.isFetching) {
-      dispatch(setLoading({ isLoading: true }));
+    if (results.isLoading) {
+      dispatch(setLoading({ isLoading: results.isLoading }));
     }
   }, [dispatch, results]);
 
