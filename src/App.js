@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import "./App.css";
 import Pages from "./components/pages/Pages";
@@ -24,8 +24,8 @@ function App() {
       dispatch(setError({ error: results.error }));
     }
 
-    if (results.isLoading) {
-      dispatch(setLoading({ isLoading: results.isLoading }));
+    if (results.isLoading || results.isFetching) {
+      dispatch(setLoading({ isLoading: true }));
     }
   }, [dispatch, results]);
 

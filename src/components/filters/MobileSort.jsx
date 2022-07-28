@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "./MobileSort.module.css";
 import ReactDOM from "react-dom";
 import Container from "../helpers/wrapper/Container";
 import { VscClose } from "react-icons/vsc";
 import Button from "../helpers/ui/button/Button";
+import { useDispatch } from "react-redux";
+import { sortProducts } from "../../store/features/products/productsSlice";
 
 const sortOptions = [
   { name: "Name: A-Z", value: "ascending" },
@@ -13,20 +15,24 @@ const sortOptions = [
 ];
 
 const MobileSort = (props) => {
-  const handleClose = () => {
-    props.setOpenSortMenu((state) => !state);
-  };
-  const [option, setOption] = useState(null);
+  const dispatch = useDispatch();
+  //close the menu
+  const handleClose = () => props.setOpenSortMenu((state) => !state);
 
-  // clear the sort paramter, and the url then close the menu
+  const [option, setOption] = useState(sortOptions[0].value);
+
   const handleClear = () => {
-    console.log("clearing sort");
     setOption(null);
     props.setOpenSortMenu(false);
   };
 
-  const handleChange = (e) => {
-    setOption(e.target.value);
+  const handleChange = (e) => setOption(e.target.value);
+
+  const handleSort = () => {
+    if (option) {
+      dispatch(sortProducts(option));
+      props.setOpenSortMenu(false);
+    }
   };
 
   const options = sortOptions.map((item, index) => {
@@ -45,7 +51,7 @@ const MobileSort = (props) => {
     );
   });
 
-  return (
+  return ReactDOM.createPortal(
     <section className={styled.sort__container}>
       <Container>
         <div className={styled.sort}>
@@ -62,11 +68,14 @@ const MobileSort = (props) => {
             <Button className="secondary" onClick={() => handleClear()}>
               Clear
             </Button>
-            <Button className="primary">Sort</Button>
+            <Button className="primary" onClick={handleSort}>
+              Sort
+            </Button>
           </div>
         </div>
       </Container>
-    </section>
+    </section>,
+    document.querySelector("#filters")
   );
 };
 

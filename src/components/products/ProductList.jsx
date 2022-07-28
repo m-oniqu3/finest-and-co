@@ -10,8 +10,6 @@ import { useSelector } from "react-redux";
 const ProductList = () => {
   const { products, isLoading, error } = useSelector((state) => state.products);
 
-  console.log(products);
-
   let content;
 
   if (isLoading) {
