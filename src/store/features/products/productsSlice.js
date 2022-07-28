@@ -4,8 +4,6 @@ const initialState = {
   products: [],
   isLoading: false,
   error: null,
-  isError: false,
-  isSuccess: false,
 };
 
 const productsSlice = createSlice({
@@ -14,14 +12,18 @@ const productsSlice = createSlice({
   reducers: {
     updateProducts: (state, action) => {
       const data = action.payload;
-      state.products = data.products;
-      state.isLoading = data.isLoading;
+      state.products = data.data;
+    },
+    setError: (state, action) => {
+      const data = action.payload;
       state.error = data.error;
-      state.isError = data.isError;
-      state.isSuccess = data.isSuccess;
+    },
+    setLoading: (state, action) => {
+      const data = action.payload;
+      state.isLoading = data.isLoading;
     },
   },
 });
 
-export const { updateProducts } = productsSlice.actions;
+export const { updateProducts, setError, setLoading } = productsSlice.actions;
 export default productsSlice.reducer;

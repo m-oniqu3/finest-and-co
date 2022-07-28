@@ -3,37 +3,31 @@ import { useDispatch } from "react-redux";
 import "./App.css";
 import Pages from "./components/pages/Pages";
 import { useGetProductsQuery } from "./store/features/api/apiSlice";
-import { updateProducts } from "./store/features/products/productsSlice";
+import {
+  setError,
+  setLoading,
+  updateProducts,
+} from "./store/features/products/productsSlice";
 
 function App() {
   const dispatch = useDispatch();
   //get data from the api
-  const { data, isError, error, isLoading, isSuccess } = useGetProductsQuery();
-  const [products, setProducts] = useState([]);
-
-  /**
-   * check if the data is in LS, if not, fetch it from the API
-   * if the data is in LS, set the products to the data in LS
-   * if there is no data in LS, set the products to the data from the API
-   */
-  useEffect(() => {
-    const storedData = localStorage.getItem("products");
-    if (storedData) {
-      setProducts(JSON.parse(storedData));
-    } else if (!storedData && data) {
-      localStorage.setItem("products", JSON.stringify(data));
-      setProducts(data);
-    }
-  }, [data]);
+  const results = useGetProductsQuery();
 
   //update the products in the store
   useEffect(() => {
-    if (products.length > 0) {
-      dispatch(
-        updateProducts({ products, error, isError, isLoading, isSuccess })
-      );
+    if (results.isSuccess) {
+      dispatch(updateProducts({ data: results.data }));
     }
-  }, [products, error, isError, isLoading, isSuccess, dispatch]);
+
+    if (results.isError) {
+      dispatch(setError({ error: results.error }));
+    }
+
+    if (results.isLoading) {
+      dispatch(setLoading({ isLoading: results.isLoading }));
+    }
+  }, [dispatch, results]);
 
   return (
     <>

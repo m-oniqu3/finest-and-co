@@ -8,9 +8,9 @@ import Filters from "../filters/Filters";
 import { useSelector } from "react-redux";
 
 const ProductList = () => {
-  const { products, isLoading, isError, error, isSuccess } = useSelector(
-    (state) => state.products
-  );
+  const { products, isLoading, error } = useSelector((state) => state.products);
+
+  console.log(products);
 
   let content;
 
@@ -18,13 +18,13 @@ const ProductList = () => {
     content = <Loading />;
   }
 
-  if (isSuccess) {
+  if (products) {
     content = products?.map((product) => {
       return <Product key={product.id} product={product} />;
     });
   }
 
-  if (isError) {
+  if (error) {
     content = <Error error={error} />;
   }
 
