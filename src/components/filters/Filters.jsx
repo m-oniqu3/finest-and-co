@@ -10,16 +10,16 @@ const Filters = () => {
 
   const handleSortMenu = () => setOpenSortMenu((state) => !state);
 
-  useEffect(() => {
-    if (openSortMenu) {
-      document.body.style.overflow = "hidden";
-    } else if (!openSortMenu) {
-      document.body.style.overflow = "auto";
-    }
-  }, [openSortMenu]);
+  // useEffect(() => {
+  //   if (openSortMenu) {
+  //     document.body.style.overflow = "hidden";
+  //   } else if (!openSortMenu) {
+  //     document.body.style.overflow = "auto";
+  //   }
+  // }, [openSortMenu]);
 
   return (
-    <div>
+    <>
       <div className={styled.filters}>
         <Button className="secondary" onClick={handleSortMenu}>
           Sort
@@ -33,15 +33,14 @@ const Filters = () => {
             <MdFilterListAlt size="20" />
           </span>
         </Button>
+        {openSortMenu && (
+          <MobileSort
+            openSortMenu={openSortMenu}
+            setOpenSortMenu={setOpenSortMenu}
+          />
+        )}
       </div>
-
-      {openSortMenu && (
-        <MobileSort
-          openSortMenu={openSortMenu}
-          setOpenSortMenu={setOpenSortMenu}
-        />
-      )}
-    </div>
+    </>
   );
 };
 
