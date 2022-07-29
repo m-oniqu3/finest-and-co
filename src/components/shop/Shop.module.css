@@ -13,3 +13,17 @@
     text-transform: capitalize;
     min-width: fit-content;
 }
+
+/* Media Queries */
+
+@media (min-width:768px) {
+    .shop__buttons {
+        margin: 2rem 0;
+    }
+}
+
+@media (min-width:1024px) {
+    .shop__buttons {
+        gap: 0;
+    }
+}
