@@ -1,17 +1,19 @@
 import React, { useState } from "react";
 import styled from "./FilterOptions.module.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Button from "../helpers/ui/button/Button";
+import { filterProducts } from "../../store/features/products/productsSlice";
 
 const FilterOptions = (props) => {
+  const dispatch = useDispatch();
   const { products } = useSelector((state) => state.products);
   const [checkedCategory, setCheckedCategory] = useState([]);
   const [checkedCompany, setCheckedCompany] = useState([]);
 
   const handleCategory = (e) => {
     //destructure the value and the checked status of the checkbox from the event object
-    const { value, checked } = e.target;
-
+    let { value, checked } = e.target;
+    console.log(e.target);
     //if the checkbox is checked, add the value to the checkedCategory array
     //if the checkbox is unchecked, remove the value
 
@@ -42,6 +44,20 @@ const FilterOptions = (props) => {
     setCheckedCategory([]);
     setCheckedCompany([]);
     props.setOpenFilterMenu(false);
+    dispatch(
+      filterProducts({ category: checkedCategory, company: checkedCompany })
+    );
+  };
+
+  const handleFilter = (e) => {
+    e.preventDefault();
+    console.log("submit");
+    dispatch(
+      filterProducts({
+        category: checkedCategory,
+        company: checkedCompany,
+      })
+    );
   };
 
   //get catgories and companies from the products array and create an array of unique values
@@ -80,7 +96,7 @@ const FilterOptions = (props) => {
   });
 
   return (
-    <form className={styled.filter}>
+    <form className={styled.filter} onSubmit={handleFilter}>
       <div className={styled.filter__group}>
         <h4>Category</h4>
         {categoryOptions}
@@ -90,6 +106,8 @@ const FilterOptions = (props) => {
         <h4>Company</h4>
         {companyOptions}
       </div>
+
+      <button type="submit"> submit</button>
 
       <div className={styled["filter__button-group"]}>
         <Button className="secondary" onClick={handleClear}>
