@@ -8,9 +8,13 @@ import Filters from "../filters/Filters";
 import { useSelector } from "react-redux";
 
 const ProductList = () => {
-  const { products, filteredProducts, isLoading, error } = useSelector(
-    (state) => state.products
-  );
+  const {
+    products,
+    filteredProducts,
+    filteredProductsMessage,
+    isLoading,
+    error,
+  } = useSelector((state) => state.products);
 
   //set the products to the filtered products if there are any
   const productsToDisplay =
@@ -28,6 +32,11 @@ const ProductList = () => {
     content = productsToDisplay?.map((product) => {
       return <Product key={product.id} product={product} />;
     });
+  }
+
+  //when to show filter message
+  if (filteredProductsMessage && filteredProducts.length === 0) {
+    content = filteredProductsMessage;
   }
 
   if (error) {

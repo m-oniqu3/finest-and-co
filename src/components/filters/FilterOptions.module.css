@@ -1,7 +1,7 @@
 .filter {
     margin: 1rem 0;
-    position: relative;
     height: 100%;
+
 }
 
 .filter__group {
@@ -32,8 +32,5 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
-    position: absolute;
-    left: 0;
-    bottom: 10%;
-    width: 100%;
+
 }

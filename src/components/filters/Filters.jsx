@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "./Filters.module.css";
 import Button from "../helpers/ui/button/Button";
-import { BiSortAlt2 } from "react-icons/bi";
 import { MdFilterListAlt } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { filterProducts } from "../../store/features/products/productsSlice";
@@ -20,6 +19,7 @@ const Filters = () => {
 
     //if there are values in local storage, dispatch the action to filter the products
     if (checkedCategory || checkedCompany || option) {
+      //wait till products are available
       if (products.length > 0) {
         dispatch(
           filterProducts({
@@ -47,14 +47,8 @@ const Filters = () => {
   return (
     <>
       <div className={styled.filters}>
-        <Button className="secondary">
-          Sort
-          <span>
-            <BiSortAlt2 size="20" />
-          </span>
-        </Button>
         <Button className="secondary" onClick={handleFilterMenu}>
-          Filter
+          Filter & Sort
           <span>
             <MdFilterListAlt size="20" />
           </span>

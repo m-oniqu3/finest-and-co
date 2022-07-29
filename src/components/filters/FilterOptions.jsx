@@ -2,7 +2,10 @@ import React, { useState } from "react";
 import styled from "./FilterOptions.module.css";
 import { useDispatch } from "react-redux";
 import Button from "../helpers/ui/button/Button";
-import { filterProducts } from "../../store/features/products/productsSlice";
+import {
+  clearFilters,
+  filterProducts,
+} from "../../store/features/products/productsSlice";
 import CategoryOptions from "./CategoryOptions";
 import CompanyOptions from "./CompanyOptions";
 import SortOptions from "./SortOptions.jsx";
@@ -18,13 +21,8 @@ const FilterOptions = (props) => {
     setCheckedCompany([]);
     setOption("");
 
-    dispatch(
-      filterProducts({
-        category: checkedCategory,
-        company: checkedCompany,
-        sortBy: option,
-      })
-    );
+    //dispatch the action to clear the filters
+    dispatch(clearFilters());
 
     //remove values from local store
     localStorage.removeItem("checkedCategory");

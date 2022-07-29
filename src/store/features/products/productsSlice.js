@@ -5,6 +5,7 @@ const initialState = {
   isLoading: false,
   error: null,
   filteredProducts: [],
+  filteredProductsMessage: "",
 };
 
 const productsSlice = createSlice({
@@ -61,11 +62,31 @@ const productsSlice = createSlice({
         });
       }
 
+      //if no filters are applied, return the original products array
+      if (category.length === 0 && company.length === 0 && sortBy === "") {
+        temp = [...state.products];
+        state.filteredProductsMessage = "";
+      }
+
+      //if there are no products that match the filters, show a message
+      if (temp.length === 0) {
+        state.filteredProductsMessage = "No products found";
+      }
+
       state.filteredProducts = temp;
+    },
+    clearFilters: (state, action) => {
+      state.filteredProducts = [];
+      state.filteredProductsMessage = "";
     },
   },
 });
 
-export const { updateProducts, setError, setLoading, filterProducts } =
-  productsSlice.actions;
+export const {
+  updateProducts,
+  setError,
+  setLoading,
+  filterProducts,
+  clearFilters,
+} = productsSlice.actions;
 export default productsSlice.reducer;
