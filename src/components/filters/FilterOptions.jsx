@@ -13,10 +13,6 @@ const FilterOptions = (props) => {
   const [checkedCompany, setCheckedCompany] = useState([]);
   const [option, setOption] = useState("");
 
-  console.log(checkedCategory);
-  console.log(checkedCompany);
-  console.log(option);
-
   const handleClear = () => {
     setCheckedCategory([]);
     setCheckedCompany([]);
@@ -28,11 +24,12 @@ const FilterOptions = (props) => {
 
   const handleFilter = (e) => {
     e.preventDefault();
-    console.log("submit");
+
     dispatch(
       filterProducts({
         category: checkedCategory,
         company: checkedCompany,
+        sortBy: option,
       })
     );
   };
@@ -62,7 +59,7 @@ const FilterOptions = (props) => {
           Clear
         </Button>
         <Button type="submit" className="primary">
-          Filter
+          Apply
         </Button>
       </div>
     </form>
