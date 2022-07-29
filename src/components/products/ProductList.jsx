@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "./ProductList.module.css";
 import Container from "../helpers/wrapper/Container";
 import Product from "./Product";
@@ -12,13 +12,12 @@ const ProductList = () => {
     (state) => state.products
   );
 
-  //display the products or the filtered products
   const productsToDisplay =
     filteredProducts.length > 0 ? filteredProducts : products;
 
   let content;
 
-  if (isLoading) {
+  if (isLoading || !productsToDisplay) {
     content = <Loading />;
   }
 

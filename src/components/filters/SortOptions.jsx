@@ -5,7 +5,6 @@ const SortOptions = (props) => {
   //set the option then store it in local storage
   const handleChange = (e) => {
     props.setOption(e.target.value);
-    localStorage.setItem("sortOption", e.target.value);
   };
 
   //map over the sort options and input for each option

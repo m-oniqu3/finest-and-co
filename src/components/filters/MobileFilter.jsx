@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "./MobileFilter.module.css";
 import ReactDOM from "react-dom";
 import Container from "../helpers/wrapper/Container";

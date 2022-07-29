@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "./FilterOptions.module.css";
 import { useDispatch } from "react-redux";
 import Button from "../helpers/ui/button/Button";
@@ -8,6 +8,10 @@ import CompanyOptions from "./CompanyOptions";
 import SortOptions from "./SortOptions.jsx";
 
 const FilterOptions = (props) => {
+  useEffect(() => {
+    console.log("mount");
+  }, []);
+
   const dispatch = useDispatch();
   const [checkedCategory, setCheckedCategory] = useState([]);
   const [checkedCompany, setCheckedCompany] = useState([]);
@@ -16,14 +20,7 @@ const FilterOptions = (props) => {
   const handleClear = () => {
     setCheckedCategory([]);
     setCheckedCompany([]);
-    props.setOpenFilterMenu(false);
-    dispatch(
-      filterProducts({ category: checkedCategory, company: checkedCompany })
-    );
-  };
-
-  const handleFilter = (e) => {
-    e.preventDefault();
+    setOption("");
 
     dispatch(
       filterProducts({
@@ -32,6 +29,28 @@ const FilterOptions = (props) => {
         sortBy: option,
       })
     );
+    props.setOpenFilterMenu(false);
+  };
+
+  const handleFilter = (e) => {
+    e.preventDefault();
+
+    //dispatch the action to filter the products based on values
+    dispatch(
+      filterProducts({
+        category: checkedCategory,
+        company: checkedCompany,
+        sortBy: option,
+      })
+    );
+
+    //store values in local storage
+    localStorage.setItem("checkedCategory", JSON.stringify(checkedCategory));
+    localStorage.setItem("checkedCompany", JSON.stringify(checkedCompany));
+    localStorage.setItem("option", JSON.stringify(option));
+
+    //close the filter menu
+    props.setOpenFilterMenu(false);
   };
 
   //get catgories and companies from the products array and create an array of unique values

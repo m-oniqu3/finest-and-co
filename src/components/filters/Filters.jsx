@@ -4,20 +4,33 @@ import Button from "../helpers/ui/button/Button";
 import { BiSortAlt2 } from "react-icons/bi";
 import { MdFilterListAlt } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import { sortProducts } from "../../store/features/products/productsSlice";
+import { filterProducts } from "../../store/features/products/productsSlice";
 import MobileFilter from "./MobileFilter";
 
 const Filters = () => {
+  const [openFilterMenu, setOpenFilterMenu] = useState(false);
   const dispatch = useDispatch();
   const { products } = useSelector((state) => state.products);
-  const [openFilterMenu, setOpenFilterMenu] = useState(false);
 
-  //dispatch the action to sort the products based on option
-  // useEffect(() => {
-  //   if (option) {
-  //     dispatch(sortProducts(option));
-  //   }
-  // }, [option, dispatch, products]);
+  useEffect(() => {
+    //get the values from local storage
+    const checkedCategory = JSON.parse(localStorage.getItem("checkedCategory"));
+    const checkedCompany = JSON.parse(localStorage.getItem("checkedCompany"));
+    const option = JSON.parse(localStorage.getItem("option"));
+
+    //if there are values in local storage, dispatch the action to filter the products
+    if (checkedCategory || checkedCompany || option) {
+      if (products.length > 0) {
+        dispatch(
+          filterProducts({
+            category: checkedCategory,
+            company: checkedCompany,
+            sortBy: option,
+          })
+        );
+      }
+    }
+  }, [dispatch, products]);
 
   //when the sort/filter menu is open, prevent scrolling
   useEffect(() => {
