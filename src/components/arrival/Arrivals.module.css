@@ -17,12 +17,52 @@
     padding-bottom: 1rem;
 }
 
-.arrivals article {
+.arrivals__details {
     background-color: #f6f6f6;
     padding: 2rem 0;
 }
 
+
 .arrivals article h1 {
-    font-size: clamp(1.8rem, 3vw, 2rem);
+    font-size: clamp(1.8rem, 3vw, 2.2rem);
     font-weight: 600;
+}
+
+/* Media Queries */
+@media (min-width: 768px) {
+    .arrivals {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        place-items: center;
+        max-width: 1200px;
+        margin: 3rem auto;
+    }
+
+    .arrivals__details {
+        order: -1;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .arrivals figure {
+        width: 100%;
+        height: 100%;
+    }
+
+    .arrivals figure img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+
+@media (min-width: 1024px) {
+    .arrivals article {
+        width: 70%;
+
+    }
 }

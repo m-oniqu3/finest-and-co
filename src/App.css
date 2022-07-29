@@ -21,9 +21,16 @@
 }
 
 .text {
-    font-size: clamp(.9rem, 3vw, 1.1rem);
+    font-size: clamp(.9rem, 3vw, 1rem);
     line-height: 20px;
     padding: .5rem 0;
 }
 
 /* Media Queries */
+
+@media (min-width:768px) {
+    .text {
+        line-height: 25px;
+    }
+
+}
