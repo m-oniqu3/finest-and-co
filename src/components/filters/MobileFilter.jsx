@@ -13,39 +13,13 @@ const MobileFilter = (props) => {
       <Container>
         <div className={styled.filter}>
           <p className={styled.filter__heading}>
-            Filter by:
+            Filter and Sort
             <span onClick={handleClose}>
               <VscClose size="20" />
             </span>
           </p>
 
           <FilterOptions setOpenFilterMenu={props.setOpenFilterMenu} />
-          <p>nkml,;.</p>
-          <p>nkml,;.</p>
-          <p>nkml,;.</p>
-          <p>nkml,;.</p>
-          <p>nkml,;.</p>
-          <p>nkml,;.</p>
-          <p>nkml,;.</p>
-          <p>nkml,;.</p>
-          <p>nkml,;.</p>
-          <p>nkml,;.</p>
-          <p>nkml,;.</p>
-          <p>nkml,;.</p>
-          <p>nkml,;.</p>
-          <p>nkml,;.</p>
-          <p>nkml,;.</p>
-          <p>nkml,;.</p>
-          <p>nkml,;.</p>
-          <p>nkml,;.</p>
-          <p>nkml,;.</p>
-          <p>nkml,;.</p>
-          <p>nkml,;.</p>
-          <p>nkml,;.</p>
-          <p>nkml,;.</p>
-          <p>nkml,;.</p>
-          <p>nkml,;.</p>
-          <p>nkml,;.</p>
         </div>
       </Container>
     </section>,

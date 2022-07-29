@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import "./App.css";
+import Loading from "./components/helpers/loading/Loading";
 import Pages from "./components/pages/Pages";
 import { useGetProductsQuery } from "./store/features/api/apiSlice";
 import {

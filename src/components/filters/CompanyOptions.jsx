@@ -37,7 +37,7 @@ const CompanyOptions = (props) => {
 
   const companyOptions = Array.from(productCompanies).map((company) => {
     return (
-      <div key={company} className={styled.filter__option}>
+      <div key={company} className={styled.company__option}>
         <input
           type="checkbox"
           id={company}
@@ -50,7 +50,7 @@ const CompanyOptions = (props) => {
   });
 
   return (
-    <div>
+    <div className={styled.company}>
       <h4>Company</h4>
       {companyOptions}
     </div>

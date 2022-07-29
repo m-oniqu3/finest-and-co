@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import styled from "./SortOptions.module.css";
 import { sortOptions } from "./sortOptions.js";
 
 const SortOptions = (props) => {
@@ -19,7 +20,7 @@ const SortOptions = (props) => {
   //map over the sort options and input for each option
   const options = sortOptions.map((item, index) => {
     return (
-      <div key={index}>
+      <div key={index} className={styled.sort__option}>
         <input
           type="radio"
           name="sort"
@@ -34,7 +35,7 @@ const SortOptions = (props) => {
   });
 
   return (
-    <div>
+    <div className={styled.sort}>
       <h4>Sort by</h4>
       {options}
     </div>

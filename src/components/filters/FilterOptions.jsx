@@ -57,16 +57,16 @@ const FilterOptions = (props) => {
 
   return (
     <form className={styled.filter} onSubmit={handleFilter}>
+      <h4>Sort</h4>
       <SortOptions option={option} setOption={setOption} />
 
       <div className={styled.filter__group}>
+        <h4>Filter by</h4>
         <CategoryOptions
           checkedCategory={checkedCategory}
           setCheckedCategory={setCheckedCategory}
         />
-      </div>
 
-      <div className={styled.filter__group}>
         <CompanyOptions
           checkedCompany={checkedCompany}
           setCheckedCompany={setCheckedCompany}
