@@ -5,11 +5,17 @@ import Button from "../helpers/ui/button/Button";
 import { filterProducts } from "../../store/features/products/productsSlice";
 import CategoryOptions from "./CategoryOptions";
 import CompanyOptions from "./CompanyOptions";
+import SortOptions from "./SortOptions.jsx";
 
 const FilterOptions = (props) => {
   const dispatch = useDispatch();
   const [checkedCategory, setCheckedCategory] = useState([]);
   const [checkedCompany, setCheckedCompany] = useState([]);
+  const [option, setOption] = useState("");
+
+  console.log(checkedCategory);
+  console.log(checkedCompany);
+  console.log(option);
 
   const handleClear = () => {
     setCheckedCategory([]);
@@ -35,6 +41,8 @@ const FilterOptions = (props) => {
 
   return (
     <form className={styled.filter} onSubmit={handleFilter}>
+      <SortOptions option={option} setOption={setOption} />
+
       <div className={styled.filter__group}>
         <CategoryOptions
           checkedCategory={checkedCategory}
