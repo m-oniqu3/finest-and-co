@@ -4,9 +4,11 @@ import styled from "./Button.module.css";
 const Button = (props) => {
   const handleClick = () => props.onClick();
 
+  const buttonType = props.type ? props.type : "button";
   return (
     <button
       className={`${styled.button} ${styled[props.className]}`}
+      type={buttonType}
       onClick={handleClick}
     >
       {props.children}
