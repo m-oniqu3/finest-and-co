@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "./ProductList.module.css";
 import Container from "../helpers/wrapper/Container";
 import Product from "./Product";
@@ -8,18 +8,7 @@ import Filters from "../filters/Filters";
 import { useSelector } from "react-redux";
 
 const ProductList = () => {
-  const { products, filteredProducts, isLoading, error } = useSelector(
-    (state) => state.products
-  );
-  const [displayProducts, setDisplayProducts] = useState(products);
-
-  useEffect(() => {
-    if (filteredProducts.length > 0) {
-      setDisplayProducts(filteredProducts);
-    } else {
-      setDisplayProducts(products);
-    }
-  }, [filteredProducts, products]);
+  const { products, isLoading, error } = useSelector((state) => state.products);
 
   let content;
 
@@ -27,8 +16,8 @@ const ProductList = () => {
     content = <Loading />;
   }
 
-  if (displayProducts) {
-    content = displayProducts?.map((product) => {
+  if (products) {
+    content = products?.map((product) => {
       return <Product key={product.id} product={product} />;
     });
   }

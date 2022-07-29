@@ -3,7 +3,6 @@ import styled from "./Filters.module.css";
 import Button from "../helpers/ui/button/Button";
 import { BiSortAlt2 } from "react-icons/bi";
 import { MdFilterListAlt } from "react-icons/md";
-import MobileSort from "./MobileSort";
 import { useDispatch, useSelector } from "react-redux";
 import { sortProducts } from "../../store/features/products/productsSlice";
 import MobileFilter from "./MobileFilter";
@@ -11,7 +10,6 @@ import MobileFilter from "./MobileFilter";
 const Filters = () => {
   const dispatch = useDispatch();
   const { products } = useSelector((state) => state.products);
-  const [openSortMenu, setOpenSortMenu] = useState(false);
   const [openFilterMenu, setOpenFilterMenu] = useState(false);
   const [option, setOption] = useState("ascending");
 
@@ -33,21 +31,20 @@ const Filters = () => {
 
   //when the sort/filter menu is open, prevent scrolling
   useEffect(() => {
-    if (openSortMenu || openFilterMenu) {
+    if (openFilterMenu) {
       document.body.style.overflow = "hidden";
-    } else if (!openSortMenu) {
+    } else if (!openFilterMenu) {
       document.body.style.overflow = "auto";
     }
-  }, [openSortMenu, openFilterMenu]);
+  }, [openFilterMenu]);
 
-  //set the sort menu to open or closed
-  const handleSortMenu = () => setOpenSortMenu((state) => !state);
+  //set the  menu to open or closed
   const handleFilterMenu = () => setOpenFilterMenu((state) => !state);
 
   return (
     <>
       <div className={styled.filters}>
-        <Button className="secondary" onClick={handleSortMenu}>
+        <Button className="secondary">
           Sort
           <span>
             <BiSortAlt2 size="20" />
@@ -60,15 +57,6 @@ const Filters = () => {
           </span>
         </Button>
       </div>
-
-      {openSortMenu && (
-        <MobileSort
-          openSortMenu={openSortMenu}
-          setOpenSortMenu={setOpenSortMenu}
-          option={option}
-          setOption={setOption}
-        />
-      )}
 
       {openFilterMenu && (
         <MobileFilter
