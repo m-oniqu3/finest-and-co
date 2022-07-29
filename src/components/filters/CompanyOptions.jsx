@@ -1,11 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "./CompanyOptions.module.css";
 import { useSelector } from "react-redux";
 
 const CompanyOptions = (props) => {
+  const { setCheckedCompany, checkedCompany } = props;
   const { products } = useSelector((state) => state.products);
 
+  //get companies from the products array and create an array of unique values
   const productCompanies = new Set(products.map((product) => product.company));
+
+  //when the component mounts, get the values from local storage and set the state, and checkboxes
+  useEffect(() => {
+    const storedCompany = JSON.parse(localStorage.getItem("checkedCompany"));
+    if (storedCompany) {
+      setCheckedCompany(storedCompany);
+      //set the checkbox to checked
+      storedCompany.forEach((company) => {
+        document.getElementById(company).checked = true;
+      });
+    }
+  }, [setCheckedCompany]);
 
   const handleCompany = (e) => {
     //destructure the value and the checked status of the checkbox from the event object
@@ -15,11 +29,9 @@ const CompanyOptions = (props) => {
     //if the checkbox is unchecked, remove the value
 
     if (checked) {
-      props.setCheckedCompany((previous) => [...previous, value]);
+      setCheckedCompany((previous) => [...previous, value]);
     } else {
-      props.setCheckedCompany(
-        props.checkedCompany.filter((company) => company !== value)
-      );
+      setCheckedCompany(checkedCompany.filter((company) => company !== value));
     }
   };
 
@@ -36,6 +48,7 @@ const CompanyOptions = (props) => {
       </div>
     );
   });
+
   return (
     <div>
       <h4>Company</h4>
