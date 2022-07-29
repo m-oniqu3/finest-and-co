@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { sortOptions } from "./sortOptions.js";
 
 const SortOptions = (props) => {
@@ -6,6 +6,10 @@ const SortOptions = (props) => {
   const handleChange = (e) => {
     props.setOption(e.target.value);
   };
+
+  /**check is the option is set in local storage
+   * if it is, set the option to the value of the local storage
+   */
 
   //map over the sort options and input for each option
   const options = sortOptions.map((item, index) => {
@@ -23,6 +27,7 @@ const SortOptions = (props) => {
       </div>
     );
   });
+
   return (
     <div>
       <h4>Sort by</h4>

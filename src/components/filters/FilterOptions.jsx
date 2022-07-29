@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "./FilterOptions.module.css";
 import { useDispatch } from "react-redux";
 import Button from "../helpers/ui/button/Button";
@@ -8,10 +8,6 @@ import CompanyOptions from "./CompanyOptions";
 import SortOptions from "./SortOptions.jsx";
 
 const FilterOptions = (props) => {
-  useEffect(() => {
-    console.log("mount");
-  }, []);
-
   const dispatch = useDispatch();
   const [checkedCategory, setCheckedCategory] = useState([]);
   const [checkedCompany, setCheckedCompany] = useState([]);
@@ -29,6 +25,12 @@ const FilterOptions = (props) => {
         sortBy: option,
       })
     );
+
+    //remove values from local store
+    localStorage.removeItem("checkedCategory");
+    localStorage.removeItem("checkedCompany");
+    localStorage.removeItem("option");
+
     props.setOpenFilterMenu(false);
   };
 

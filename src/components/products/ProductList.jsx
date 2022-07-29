@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "./ProductList.module.css";
 import Container from "../helpers/wrapper/Container";
 import Product from "./Product";
@@ -24,7 +24,7 @@ const ProductList = () => {
     content = <Loading />;
   }
 
-  if (products) {
+  if (productsToDisplay) {
     content = productsToDisplay?.map((product) => {
       return <Product key={product.id} product={product} />;
     });
