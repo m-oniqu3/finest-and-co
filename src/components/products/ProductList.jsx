@@ -27,8 +27,6 @@ const ProductList = () => {
     content = <Loading />;
   }
 
-  console.log(displayProducts);
-
   if (displayProducts) {
     content = displayProducts?.map((product) => {
       return <Product key={product.id} product={product} />;

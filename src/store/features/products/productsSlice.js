@@ -26,9 +26,9 @@ const productsSlice = createSlice({
     sortProducts: (state, action) => {
       const option = action.payload;
 
-      let temp = [];
+      let temp = [...state.products];
 
-      if (state.filteredProducts) {
+      if (state.filteredProducts.length > 0) {
         temp = [...state.filteredProducts];
       } else {
         temp = [...state.products];
