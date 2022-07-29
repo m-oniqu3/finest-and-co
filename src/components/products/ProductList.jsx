@@ -12,12 +12,15 @@ const ProductList = () => {
     (state) => state.products
   );
 
+  //set the products to the filtered products if there are any
   const productsToDisplay =
     filteredProducts.length > 0 ? filteredProducts : products;
 
   let content;
 
-  if (isLoading || !productsToDisplay) {
+  const empty = isLoading || productsToDisplay.length === 0;
+
+  if (empty) {
     content = <Loading />;
   }
 
