@@ -1,9 +1,10 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, current } from "@reduxjs/toolkit";
 
 const initialState = {
   products: [],
   isLoading: false,
   error: null,
+  filteredProducts: [],
 };
 
 const productsSlice = createSlice({
@@ -25,25 +26,63 @@ const productsSlice = createSlice({
     sortProducts: (state, action) => {
       const option = action.payload;
 
+      let temp = [...state.products];
+
+      if (state.filteredProducts.length > 0) {
+        temp = [...state.filteredProducts];
+      } else {
+        temp = [...state.products];
+      }
+
       if (option === "ascending") {
-        state.products.sort((a, b) => a.name.localeCompare(b.name));
+        temp.sort((a, b) => a.name.localeCompare(b.name));
       }
 
       if (option === "descending") {
-        state.products.sort((a, b) => b.name.localeCompare(a.name));
+        temp.sort((a, b) => b.name.localeCompare(a.name));
       }
 
       if (option === "lowToHigh") {
-        state.products.sort((a, b) => a.price - b.price);
+        temp.sort((a, b) => a.price - b.price);
       }
 
       if (option === "highToLow") {
-        state.products.sort((a, b) => b.price - a.price);
+        temp.sort((a, b) => b.price - a.price);
       }
+
+      if (state.filteredProducts) {
+        state.filteredProducts = temp;
+      } else {
+        state.products = temp;
+      }
+    },
+    filterProducts: (state, action) => {
+      const filters = action.payload; //{category:[], company:[]}
+
+      let temp = [...state.products];
+
+      if (filters.category.length > 0) {
+        temp = temp.filter((product) =>
+          filters.category.includes(product.category)
+        );
+      }
+      if (filters.company.length > 0) {
+        temp = temp.filter((product) =>
+          filters.company.includes(product.company)
+        );
+      }
+      state.filteredProducts = temp;
+
+      console.log(state.filteredProducts);
     },
   },
 });
 
-export const { updateProducts, setError, setLoading, sortProducts } =
-  productsSlice.actions;
+export const {
+  updateProducts,
+  setError,
+  setLoading,
+  sortProducts,
+  filterProducts,
+} = productsSlice.actions;
 export default productsSlice.reducer;

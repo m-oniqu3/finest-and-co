@@ -6,11 +6,13 @@ import { MdFilterListAlt } from "react-icons/md";
 import MobileSort from "./MobileSort";
 import { useDispatch, useSelector } from "react-redux";
 import { sortProducts } from "../../store/features/products/productsSlice";
+import MobileFilter from "./MobileFilter";
 
 const Filters = () => {
   const dispatch = useDispatch();
   const { products } = useSelector((state) => state.products);
   const [openSortMenu, setOpenSortMenu] = useState(false);
+  const [openFilterMenu, setOpenFilterMenu] = useState(false);
   const [option, setOption] = useState("ascending");
 
   /** check if there is a sort option in local storage
@@ -29,17 +31,18 @@ const Filters = () => {
     }
   }, [option, dispatch, products]);
 
-  //set the sort menu to open or closed
-  const handleSortMenu = () => setOpenSortMenu((state) => !state);
-
-  //when the sort menu is open, prevent scrolling
+  //when the sort/filter menu is open, prevent scrolling
   useEffect(() => {
-    if (openSortMenu) {
+    if (openSortMenu || openFilterMenu) {
       document.body.style.overflow = "hidden";
     } else if (!openSortMenu) {
       document.body.style.overflow = "auto";
     }
-  }, [openSortMenu]);
+  }, [openSortMenu, openFilterMenu]);
+
+  //set the sort menu to open or closed
+  const handleSortMenu = () => setOpenSortMenu((state) => !state);
+  const handleFilterMenu = () => setOpenFilterMenu((state) => !state);
 
   return (
     <>
@@ -50,7 +53,7 @@ const Filters = () => {
             <BiSortAlt2 size="20" />
           </span>
         </Button>
-        <Button className="secondary">
+        <Button className="secondary" onClick={handleFilterMenu}>
           Filter
           <span>
             <MdFilterListAlt size="20" />
@@ -64,6 +67,13 @@ const Filters = () => {
           setOpenSortMenu={setOpenSortMenu}
           option={option}
           setOption={setOption}
+        />
+      )}
+
+      {openFilterMenu && (
+        <MobileFilter
+          openFilterMenu={openFilterMenu}
+          setOpenFilterMenu={setOpenFilterMenu}
         />
       )}
     </>
