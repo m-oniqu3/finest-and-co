@@ -1,7 +1,7 @@
 .button {
     padding: 10px 20px;
     margin-top: 1rem;
-    font-size: clamp(.9rem, 3vw, 1.1rem);
+    font-size: clamp(.9rem, 3vw, 1rem);
     font-weight: 400;
     border: none;
     cursor: pointer;

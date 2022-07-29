@@ -1,6 +1,36 @@
 .filters {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.filters__btn {
     display: grid;
-    /* grid-template-columns: 1fr 1fr; */
+    grid-template-columns: 1fr 1fr;
     gap: 1rem;
     margin-bottom: 1rem;
+    width: 100%;
+}
+
+.filters h2 {
+    display: none;
+}
+
+/* Media Queries */
+
+@media (min-width:768px) {
+    .filters {
+        margin: 2rem 0;
+    }
+
+    .filters__btn {
+        width: fit-content;
+    }
+
+    .filters h2 {
+        display: grid;
+        font-weight: 500;
+        font-size: clamp(1.1rem, 2vw, 1.3rem);
+    }
+
 }
