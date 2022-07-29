@@ -11,10 +11,9 @@ const CategoryOptions = (props) => {
   const handleCategory = (e) => {
     //destructure the value and the checked status of the checkbox from the event object
     let { value, checked } = e.target;
-    console.log(e.target);
+
     //if the checkbox is checked, add the value to the checkedCategory array
     //if the checkbox is unchecked, remove the value
-
     if (checked) {
       props.setCheckedCategory((previous) => [...previous, value]);
     } else {
