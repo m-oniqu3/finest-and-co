@@ -1,11 +1,10 @@
 .filter {
-    margin: 1rem 0;
-    position: relative;
+    padding: 1.5rem 0;
     height: 100%;
 }
 
 .filter__group {
-    margin: 1.5rem 0;
+    padding: 1.5rem 0;
 }
 
 .filter h4 {
@@ -32,8 +31,6 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
-    position: absolute;
-    left: 0;
-    bottom: 10%;
-    width: 100%;
+    padding-bottom: 1rem;
+
 }

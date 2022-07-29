@@ -1,119 +1,85 @@
 import React, { useState } from "react";
 import styled from "./FilterOptions.module.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import Button from "../helpers/ui/button/Button";
-import { filterProducts } from "../../store/features/products/productsSlice";
+import {
+  clearFilters,
+  filterProducts,
+} from "../../store/features/products/productsSlice";
+import CategoryOptions from "./CategoryOptions";
+import CompanyOptions from "./CompanyOptions";
+import SortOptions from "./SortOptions.jsx";
 
 const FilterOptions = (props) => {
   const dispatch = useDispatch();
-  const { products } = useSelector((state) => state.products);
   const [checkedCategory, setCheckedCategory] = useState([]);
   const [checkedCompany, setCheckedCompany] = useState([]);
-
-  const handleCategory = (e) => {
-    //destructure the value and the checked status of the checkbox from the event object
-    let { value, checked } = e.target;
-    console.log(e.target);
-    //if the checkbox is checked, add the value to the checkedCategory array
-    //if the checkbox is unchecked, remove the value
-
-    if (checked) {
-      setCheckedCategory((previous) => [...previous, value]);
-    } else {
-      setCheckedCategory(
-        checkedCategory.filter((category) => category !== value)
-      );
-    }
-  };
-
-  const handleCompany = (e) => {
-    //destructure the value and the checked status of the checkbox from the event object
-    const { value, checked } = e.target;
-
-    //if the checkbox is checked, add the value to the checkedCompany array
-    //if the checkbox is unchecked, remove the value
-
-    if (checked) {
-      setCheckedCompany((previous) => [...previous, value]);
-    } else {
-      setCheckedCompany(checkedCompany.filter((company) => company !== value));
-    }
-  };
+  const [option, setOption] = useState("");
 
   const handleClear = () => {
     setCheckedCategory([]);
     setCheckedCompany([]);
+    setOption("");
+
+    //dispatch the action to clear the filters
+    dispatch(clearFilters());
+
+    //remove values from local store
+    localStorage.removeItem("checkedCategory");
+    localStorage.removeItem("checkedCompany");
+    localStorage.removeItem("option");
+
     props.setOpenFilterMenu(false);
-    dispatch(
-      filterProducts({ category: checkedCategory, company: checkedCompany })
-    );
   };
 
   const handleFilter = (e) => {
     e.preventDefault();
-    console.log("submit");
+
+    //dispatch the action to filter the products based on values
     dispatch(
       filterProducts({
         category: checkedCategory,
         company: checkedCompany,
+        sortBy: option,
       })
     );
+
+    //store values in local storage
+    localStorage.setItem("checkedCategory", JSON.stringify(checkedCategory));
+    localStorage.setItem("checkedCompany", JSON.stringify(checkedCompany));
+    localStorage.setItem("option", JSON.stringify(option));
+
+    //close the filter menu
+    props.setOpenFilterMenu(false);
   };
 
   //get catgories and companies from the products array and create an array of unique values
-  const productCategories = new Set(
-    products.map((product) => product.category)
-  );
-
-  const productCompanies = new Set(products.map((product) => product.company));
-
-  const categoryOptions = Array.from(productCategories).map((category) => {
-    return (
-      <div key={category} className={styled.filter__option}>
-        <input
-          type="checkbox"
-          id={category}
-          value={category}
-          onChange={handleCategory}
-        />
-        <label htmlFor={category}>{category}</label>
-      </div>
-    );
-  });
-
-  const companyOptions = Array.from(productCompanies).map((company) => {
-    return (
-      <div key={company} className={styled.filter__option}>
-        <input
-          type="checkbox"
-          id={company}
-          value={company}
-          onChange={handleCompany}
-        />
-        <label htmlFor={company}>{company}</label>
-      </div>
-    );
-  });
 
   return (
     <form className={styled.filter} onSubmit={handleFilter}>
-      <div className={styled.filter__group}>
-        <h4>Category</h4>
-        {categoryOptions}
-      </div>
+      <h4>Sort</h4>
+      <SortOptions option={option} setOption={setOption} />
 
       <div className={styled.filter__group}>
-        <h4>Company</h4>
-        {companyOptions}
-      </div>
+        <h4>Filter by</h4>
+        <CategoryOptions
+          checkedCategory={checkedCategory}
+          setCheckedCategory={setCheckedCategory}
+        />
 
-      <button type="submit"> submit</button>
+        <CompanyOptions
+          checkedCompany={checkedCompany}
+          setCheckedCompany={setCheckedCompany}
+        />
+      </div>
 
       <div className={styled["filter__button-group"]}>
         <Button className="secondary" onClick={handleClear}>
           Clear
         </Button>
-        <Button className="primary">Filter</Button>
+        <Button type="submit" className="primary">
+          Apply
+        </Button>
       </div>
     </form>
   );

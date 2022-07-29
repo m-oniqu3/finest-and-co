@@ -1,0 +1,19 @@
+.company {
+    position: relative;
+    left: 5%;
+    margin-top: 1rem;
+}
+
+.company__option {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    text-transform: capitalize;
+    padding-bottom: .2rem;
+}
+
+.company__option input {
+    cursor: pointer;
+    width: 1rem;
+    height: 1rem;
+}
