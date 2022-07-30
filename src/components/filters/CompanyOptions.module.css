@@ -4,6 +4,13 @@
     margin-top: 1rem;
 }
 
+.companies {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: .5rem;
+    padding: 1rem 0;
+}
+
 .company__option {
     display: flex;
     align-items: center;

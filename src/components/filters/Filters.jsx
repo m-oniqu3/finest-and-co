@@ -47,12 +47,16 @@ const Filters = () => {
   return (
     <>
       <div className={styled.filters}>
-        <Button className="secondary" onClick={handleFilterMenu}>
-          Filter & Sort
-          <span>
-            <MdFilterListAlt size="20" />
-          </span>
-        </Button>
+        <h2>Products</h2>
+        <div className={styled.filters__btn}>
+          <Button className="secondary">Search</Button>
+          <Button className="secondary" onClick={handleFilterMenu}>
+            Filter & Sort
+            <span>
+              <MdFilterListAlt size="20" />
+            </span>
+          </Button>
+        </div>
       </div>
 
       {openFilterMenu && (

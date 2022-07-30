@@ -13,6 +13,10 @@ const categories = [
   "kitchen",
   "kids",
   "bedroom",
+  "ikea",
+  "liddy",
+  "marcos",
+  "caressa",
 ];
 const Shop = () => {
   // map over categories and return a button for each room

@@ -29,14 +29,23 @@ const ProductList = () => {
   }
 
   if (productsToDisplay) {
-    content = productsToDisplay?.map((product) => {
-      return <Product key={product.id} product={product} />;
-    });
+    content = (
+      <div className={styled.list}>
+        {productsToDisplay?.map((product) => {
+          return <Product key={product.id} product={product} />;
+        })}
+      </div>
+    );
   }
 
   //when to show filter message
   if (filteredProductsMessage && filteredProducts.length === 0) {
-    content = filteredProductsMessage;
+    content = (
+      <div className={styled.empty}>
+        <h2>{filteredProductsMessage}.</h2>
+        <p className="text">Try changing the filters to see more products.</p>
+      </div>
+    );
   }
 
   if (error) {
@@ -46,7 +55,7 @@ const ProductList = () => {
   return (
     <Container>
       <Filters />
-      <section className={styled.list}>{content}</section>
+      <section>{content}</section>
     </Container>
   );
 };

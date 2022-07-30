@@ -34,12 +34,7 @@ const SortOptions = (props) => {
     );
   });
 
-  return (
-    <div className={styled.sort}>
-      <h4>Sort by</h4>
-      {options}
-    </div>
-  );
+  return <div className={styled.sort}>{options}</div>;
 };
 
 export default SortOptions;

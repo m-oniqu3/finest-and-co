@@ -13,22 +13,24 @@ const Arrivals = () => {
             alt="A kitchen with an island with 4 barstools"
           />
         </figure>
-        <article>
-          <Container>
-            <h1>New Arrival</h1>
-            <div className={styled["arrivals__btn-group"]}>
-              <Button className="secondary">Kitchen</Button>
-              <Button className="secondary">Ikea</Button>
-            </div>
+        <div className={styled.arrivals__details}>
+          <article>
+            <Container>
+              <h1>New Arrival</h1>
+              <div className={styled["arrivals__btn-group"]}>
+                <Button className="secondary">Kitchen</Button>
+                <Button className="secondary">Ikea</Button>
+              </div>
 
-            <p className="text">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime,
-              quia iste quaerat asperiores dolores earum culpa! Deleniti
-              obcaecati quae ut. Quisquam, quidem. Lorem ipsum dolor sit amet
-              consectetur adipisicing elit.
-            </p>
-          </Container>
-        </article>
+              <p className="text">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime,
+                quia iste quaerat asperiores dolores earum culpa! Deleniti
+                obcaecati quae ut. Quisquam, quidem. Lorem ipsum dolor sit amet
+                consectetur adipisicing elit.
+              </p>
+            </Container>
+          </article>
+        </div>
       </section>
     </Container>
   );
