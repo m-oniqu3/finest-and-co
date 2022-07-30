@@ -8,7 +8,6 @@
 }
 
 .nav__group,
-.nav__links,
 .nav__icons {
     display: flex;
     justify-content: space-between;
@@ -16,23 +15,7 @@
     cursor: pointer;
 }
 
-.nav__links {
-    list-style: none;
-    gap: .5rem;
-}
 
-.nav__links a {
-    text-decoration: none;
-    color: var(--secondary-neutral);
-    font-size: clamp(1rem, 3vw, 1.1rem);
-    font-weight: 400;
-    transition: all .3s ease-in-out;
-    cursor: pointer;
-}
-
-.nav__links a:hover {
-    color: rgb(77, 76, 76);
-}
 
 .nav__icons {
     list-style: none;
@@ -50,4 +33,30 @@
     font-size: .875rem;
     color: var(--secondary-neutral);
     font-weight: 500;
+}
+
+.nav__items,
+.nav__shop__icons {
+    display: none;
+}
+
+
+
+
+/* Media Queries */
+
+@media (min-width:600px) {
+    .nav__items {
+        display: grid;
+    }
+
+    .nav__menu {
+        display: none;
+    }
+
+    .nav__shop__icons {
+        display: flex;
+        align-items: center;
+        gap: .5rem;
+    }
 }

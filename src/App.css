@@ -14,10 +14,9 @@
 }
 
 .logo {
-    font-size: clamp(1.4rem, 3vw, 1.8rem);
+    font-size: clamp(1.2rem, 3vw, 1.5rem);
     font-weight: 500;
     color: var(--primary);
-    font-family: 'Arial Rounded MT Bold';
 }
 
 .text {

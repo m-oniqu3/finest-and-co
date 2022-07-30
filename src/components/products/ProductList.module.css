@@ -33,7 +33,21 @@
 
 @media (min-width:768px) {
     .list {
-        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-columns: repeat(3, 1fr);
         gap: 2rem;
+    }
+}
+
+@media (min-width:1024px) {
+    .list {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 3rem;
+    }
+}
+
+@media (min-width:1200px) {
+    .list {
+        grid-template-columns: repeat(5, 1fr);
+        gap: 4rem;
     }
 }
