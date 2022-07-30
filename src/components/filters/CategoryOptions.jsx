@@ -54,7 +54,7 @@ const CategoryOptions = (props) => {
   return (
     <div className={styled.category}>
       <h4>Category</h4>
-      {categoryOptions}
+      <div className={styled.categories}>{categoryOptions}</div>
     </div>
   );
 };

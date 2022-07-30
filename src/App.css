@@ -14,7 +14,7 @@
 }
 
 .logo {
-    font-size: clamp(1.2rem, 3vw, 1.5rem);
+    font-size: clamp(1.3rem, 3vw, 1.5rem);
     font-weight: 500;
     color: var(--primary);
 }

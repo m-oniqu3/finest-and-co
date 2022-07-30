@@ -9,7 +9,7 @@
     align-items: center;
     gap: .5rem;
     text-transform: capitalize;
-    padding-bottom: .2rem;
+    padding: .5rem 0;
 }
 
 .sort__option input {

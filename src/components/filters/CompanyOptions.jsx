@@ -52,7 +52,7 @@ const CompanyOptions = (props) => {
   return (
     <div className={styled.company}>
       <h4>Company</h4>
-      {companyOptions}
+      <div className={styled.companies}>{companyOptions}</div>
     </div>
   );
 };
