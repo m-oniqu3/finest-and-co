@@ -18,7 +18,7 @@
 
 /* Media Queries */
 
-@media (min-width:768px) {
+@media (min-width:600px) {
     .filters {
         margin: 2rem 0;
     }

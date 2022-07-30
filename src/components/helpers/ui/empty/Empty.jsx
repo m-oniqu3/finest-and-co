@@ -18,7 +18,7 @@ const Empty = (props) => {
       <div>
         <h2>{props.heading}</h2>
         <p>{props.text}</p>
-        <Button onClick={handleClick}>{props.button}</Button>
+        {props.button && <Button onClick={handleClick}>{props.button}</Button>}
       </div>
     </section>
   );

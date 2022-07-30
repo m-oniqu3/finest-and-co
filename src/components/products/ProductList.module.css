@@ -2,7 +2,7 @@
     padding: 1rem 0 2rem;
     display: grid;
     gap: 1rem;
-    min-height: 100vh;
+
 
 }
 
@@ -21,6 +21,27 @@
 .list__header button {
     margin: 0;
 }
+
+
+.empty {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
+    height: 40vh;
+    width: min(100%, 300px);
+    margin: 0 auto;
+
+}
+
+.empty h2 {
+    font-weight: 500;
+    font-size: clamp(1.3rem, 2vw, 1.8rem);
+}
+
+
 
 /* Media Queries */
 
