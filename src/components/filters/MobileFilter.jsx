@@ -10,8 +10,8 @@ const MobileFilter = (props) => {
 
   return ReactDOM.createPortal(
     <section className={styled.filter__container}>
-      <Container>
-        <div className={styled.filter}>
+      <div className={styled.filter}>
+        <Container>
           <p className={styled.filter__heading}>
             Filter and Sort
             <span onClick={handleClose}>
@@ -20,8 +20,8 @@ const MobileFilter = (props) => {
           </p>
 
           <FilterOptions setOpenFilterMenu={props.setOpenFilterMenu} />
-        </div>
-      </Container>
+        </Container>
+      </div>
     </section>,
     document.querySelector("#filters")
   );
