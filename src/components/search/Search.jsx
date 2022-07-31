@@ -6,49 +6,50 @@ import {
   clearFilters,
   filterProducts,
 } from "../../store/features/products/productsSlice";
+import useLocalStorage from "../../hooks/useLocalStorage";
 
 const Search = () => {
   const dispatch = useDispatch();
   const [searchTerm, setSearchTerm] = useState("");
+  const storedValues = useLocalStorage();
 
   //update the search term
-  const handleSearch = (e) => setSearchTerm(e.target.value);
+  const handleSearch = (e) => {
+    setSearchTerm(e.target.value);
+  };
 
-  useEffect(() => {
-    //get values from local store
-    const checkedCategory = JSON.parse(localStorage.getItem("checkedCategory"));
-    const checkedCompany = JSON.parse(localStorage.getItem("checkedCompany"));
-    const option = JSON.parse(localStorage.getItem("option"));
+  const handleSubmit = (e) => {
+    //store term in local storage
+    localStorage.setItem(
+      "values",
+      JSON.stringify({ ...storedValues, search: searchTerm })
+    );
+    e.preventDefault();
 
-    const exists = checkedCategory || checkedCompany || option;
+    console.log(storedValues);
     if (searchTerm !== "") {
-      localStorage.setItem("searchTerm", JSON.stringify(searchTerm));
-      dispatch(
-        filterProducts({
-          category: checkedCategory,
-          company: checkedCompany,
-          sortBy: option,
-
-          search: searchTerm,
-        })
-      );
-    } else if (searchTerm === "" && exists) {
-      dispatch(
-        filterProducts({
-          category: checkedCategory,
-          company: checkedCompany,
-          sortBy: option,
-        })
-      );
+      dispatch(filterProducts({ ...storedValues, search: searchTerm }));
     }
-    //clean up
-    return () => {
-      dispatch(clearFilters());
-    };
-  }, [searchTerm, dispatch]);
+
+    //clear the search term
+    setSearchTerm("");
+  };
+
+  //   useEffect(() => {
+  //     if (searchTerm) {
+  //       dispatch(
+  //         filterProducts({
+  //           ...storedValues,
+  //           search: searchTerm,
+  //         })
+  //       );
+  //     } else if (searchTerm === "") {
+  //       dispatch(filterProducts({ ...storedValues }));
+  //     }
+  //   }, [searchTerm, dispatch, storedValues]);
 
   return (
-    <form className={styled.search}>
+    <form className={styled.search} onSubmit={handleSubmit}>
       <input
         type="text"
         name=""

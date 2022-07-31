@@ -13,11 +13,12 @@ const CompanyOptions = (props) => {
 
   //when the component mounts, get the values from local storage and set the state, and checkboxes
   useEffect(() => {
-    if (storedValues) {
-      setCheckedCompany(storedValues?.company);
+    const { company } = storedValues;
+    if (company) {
+      setCheckedCompany(company);
 
       //set the checkbox to checked
-      storedValues?.company?.forEach((company) => {
+      company?.forEach((company) => {
         document.getElementById(company).checked = true;
       });
     }

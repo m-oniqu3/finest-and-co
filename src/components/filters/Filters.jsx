@@ -15,8 +15,8 @@ const Filters = () => {
   const { products } = useSelector((state) => state.products);
 
   useEffect(() => {
-    // const isEmpty = Object.keys(storedValues).length === 0;
-    if (storedValues && products.length > 0) {
+    const isEmpty = Object.keys(storedValues).length === 0;
+    if (!isEmpty && products.length > 0) {
       dispatch(filterProducts(storedValues));
     }
   }, [storedValues, dispatch, products]);

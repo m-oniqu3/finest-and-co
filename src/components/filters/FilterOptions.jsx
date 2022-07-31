@@ -9,18 +9,23 @@ import {
 import CategoryOptions from "./CategoryOptions";
 import CompanyOptions from "./CompanyOptions";
 import SortOptions from "./SortOptions.jsx";
+import useLocalStorage from "../../hooks/useLocalStorage";
 
 const FilterOptions = (props) => {
   const dispatch = useDispatch();
   const [checkedCategory, setCheckedCategory] = useState([]);
   const [checkedCompany, setCheckedCompany] = useState([]);
   const [option, setOption] = useState("");
+  const storedValues = useLocalStorage();
 
+  console.log(checkedCategory);
   const values = {
     category: checkedCategory,
     company: checkedCompany,
     sortBy: option,
   };
+
+  console.log(storedValues);
 
   const handleClear = () => {
     setCheckedCategory([]);
@@ -40,7 +45,12 @@ const FilterOptions = (props) => {
     e.preventDefault();
 
     //dispatch the action to filter the products based on values
-    dispatch(filterProducts({ ...values }));
+    dispatch(
+      filterProducts({
+        ...storedValues,
+        ...values,
+      })
+    );
 
     //set values in local store as object
     localStorage.setItem("values", JSON.stringify(values));

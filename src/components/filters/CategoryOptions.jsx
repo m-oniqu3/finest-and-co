@@ -12,12 +12,16 @@ const CategoryOptions = (props) => {
     products.map((product) => product.category)
   );
 
+  console.log(checkedCategory);
+
   useEffect(() => {
-    if (storedValues) {
-      setCheckedCategory(storedValues?.category);
+    const { category } = storedValues;
+    if (category) {
+      setCheckedCategory(category);
+      console.log(storedValues);
 
       //set the checkboxes
-      storedValues?.category?.forEach((category) => {
+      category?.forEach((category) => {
         document.getElementById(category).checked = true;
       });
     }
