@@ -25,22 +25,22 @@ const productsSlice = createSlice({
       state.isLoading = data.isLoading;
     },
     filterProducts: (state, action) => {
-      const filters = action.payload; //{category:[], company:[], sortBy:"" }
+      const filters = action.payload; //{category:[], company:[], sortBy:"", search:""} }
 
-      const { category, company, sortBy } = filters;
+      const { category, company, sortBy, search } = filters;
 
       //copy the products array
       let temp = [...state.products];
 
       //filter by category
-      if (category.length > 0) {
+      if (category?.length > 0) {
         temp = temp.filter((item) => {
           return category.includes(item.category);
         });
       }
 
       //filter by company
-      if (company.length > 0) {
+      if (company?.length > 0) {
         temp = temp.filter((item) => {
           return company.includes(item.company);
         });
@@ -62,8 +62,20 @@ const productsSlice = createSlice({
         });
       }
 
+      //filter by search
+      if (search) {
+        temp = temp.filter((item) => {
+          return item.name.toLowerCase().includes(search.toLowerCase());
+        });
+      }
+
       //if no filters are applied, return the original products array
-      if (category.length === 0 && company.length === 0 && sortBy === "") {
+      if (
+        category?.length === 0 &&
+        company?.length === 0 &&
+        sortBy === "" &&
+        search === ""
+      ) {
         temp = [...state.products];
         state.filteredProductsMessage = "";
       }

@@ -35,6 +35,12 @@ const FilterOptions = (props) => {
   const handleFilter = (e) => {
     e.preventDefault();
 
+    //store values in local storage
+    localStorage.setItem("checkedCategory", JSON.stringify(checkedCategory));
+    localStorage.setItem("checkedCompany", JSON.stringify(checkedCompany));
+    localStorage.setItem("option", JSON.stringify(option));
+    localStorage.setItem("searchTerm", JSON.stringify(""));
+
     //dispatch the action to filter the products based on values
     dispatch(
       filterProducts({
@@ -43,11 +49,6 @@ const FilterOptions = (props) => {
         sortBy: option,
       })
     );
-
-    //store values in local storage
-    localStorage.setItem("checkedCategory", JSON.stringify(checkedCategory));
-    localStorage.setItem("checkedCompany", JSON.stringify(checkedCompany));
-    localStorage.setItem("option", JSON.stringify(option));
 
     //close the filter menu
     props.setOpenFilterMenu(false);
