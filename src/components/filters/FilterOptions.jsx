@@ -16,6 +16,12 @@ const FilterOptions = (props) => {
   const [checkedCompany, setCheckedCompany] = useState([]);
   const [option, setOption] = useState("");
 
+  const values = {
+    category: checkedCategory,
+    company: checkedCompany,
+    sortBy: option,
+  };
+
   const handleClear = () => {
     setCheckedCategory([]);
     setCheckedCompany([]);
@@ -25,9 +31,7 @@ const FilterOptions = (props) => {
     dispatch(clearFilters());
 
     //remove values from local store
-    localStorage.removeItem("checkedCategory");
-    localStorage.removeItem("checkedCompany");
-    localStorage.removeItem("option");
+    localStorage.removeItem("values");
 
     props.setOpenFilterMenu(false);
   };
@@ -35,26 +39,15 @@ const FilterOptions = (props) => {
   const handleFilter = (e) => {
     e.preventDefault();
 
-    //store values in local storage
-    localStorage.setItem("checkedCategory", JSON.stringify(checkedCategory));
-    localStorage.setItem("checkedCompany", JSON.stringify(checkedCompany));
-    localStorage.setItem("option", JSON.stringify(option));
-    localStorage.setItem("searchTerm", JSON.stringify(""));
-
     //dispatch the action to filter the products based on values
-    dispatch(
-      filterProducts({
-        category: checkedCategory,
-        company: checkedCompany,
-        sortBy: option,
-      })
-    );
+    dispatch(filterProducts({ ...values }));
+
+    //set values in local store as object
+    localStorage.setItem("values", JSON.stringify(values));
 
     //close the filter menu
     props.setOpenFilterMenu(false);
   };
-
-  //get catgories and companies from the products array and create an array of unique values
 
   return (
     <form className={styled.filter} onSubmit={handleFilter}>

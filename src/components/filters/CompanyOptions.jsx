@@ -1,25 +1,27 @@
 import React, { useEffect } from "react";
 import styled from "./CompanyOptions.module.css";
 import { useSelector } from "react-redux";
+import useLocalStorage from "../../hooks/useLocalStorage";
 
 const CompanyOptions = (props) => {
   const { setCheckedCompany, checkedCompany } = props;
   const { products } = useSelector((state) => state.products);
+  const storedValues = useLocalStorage();
 
   //get companies from the products array and create an array of unique values
   const productCompanies = new Set(products.map((product) => product.company));
 
   //when the component mounts, get the values from local storage and set the state, and checkboxes
   useEffect(() => {
-    const storedCompany = JSON.parse(localStorage.getItem("checkedCompany"));
-    if (storedCompany) {
-      setCheckedCompany(storedCompany);
+    if (storedValues) {
+      setCheckedCompany(storedValues?.company);
+
       //set the checkbox to checked
-      storedCompany.forEach((company) => {
+      storedValues?.company?.forEach((company) => {
         document.getElementById(company).checked = true;
       });
     }
-  }, [setCheckedCompany]);
+  }, [setCheckedCompany, storedValues]);
 
   const handleCompany = (e) => {
     //destructure the value and the checked status of the checkbox from the event object

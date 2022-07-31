@@ -1,9 +1,11 @@
 import React, { useEffect } from "react";
 import styled from "./SortOptions.module.css";
 import { sortOptions } from "./sortOptions.js";
+import useLocalStorage from "../../hooks/useLocalStorage";
 
 const SortOptions = (props) => {
   const { setOption, option } = props;
+  const storedValues = useLocalStorage();
 
   const handleChange = (e) => setOption(e.target.value);
 
@@ -11,11 +13,10 @@ const SortOptions = (props) => {
    * if it is, set the option to the value of the local storage
    */
   useEffect(() => {
-    const storedOption = JSON.parse(localStorage.getItem("option"));
-    if (storedOption) {
-      setOption(storedOption);
+    if (storedValues) {
+      setOption(storedValues.sortBy);
     }
-  }, [setOption]);
+  }, [storedValues, setOption]);
 
   //map over the sort options and input for each option
   const options = sortOptions.map((item, index) => {
