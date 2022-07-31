@@ -5,6 +5,7 @@ import { MdFilterListAlt } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { filterProducts } from "../../store/features/products/productsSlice";
 import MobileFilter from "./MobileFilter";
+import Search from "../search/Search";
 
 const Filters = () => {
   const [openFilterMenu, setOpenFilterMenu] = useState(false);
@@ -49,7 +50,7 @@ const Filters = () => {
       <div className={styled.filters}>
         <h2>Products</h2>
         <div className={styled.filters__btn}>
-          <Button className="secondary">Search</Button>
+          <Search />
           <Button className="secondary" onClick={handleFilterMenu}>
             Filter & Sort
             <span>
