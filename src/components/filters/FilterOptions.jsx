@@ -23,6 +23,7 @@ const FilterOptions = (props) => {
     category: checkedCategory,
     company: checkedCompany,
     sortBy: option,
+    search: storedValues?.search ?? "",
   };
 
   console.log(storedValues);

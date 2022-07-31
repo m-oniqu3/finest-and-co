@@ -21,27 +21,6 @@ const Filters = () => {
     }
   }, [storedValues, dispatch, products]);
 
-  // useEffect(() => {
-  //   //get the values from local storage
-  //   const checkedCategory = JSON.parse(localStorage.getItem("checkedCategory"));
-  //   const checkedCompany = JSON.parse(localStorage.getItem("checkedCompany"));
-  //   const option = JSON.parse(localStorage.getItem("option"));
-
-  //   //if there are values in local storage, dispatch the action to filter the products
-  //   if (checkedCategory || checkedCompany || option) {
-  //     //wait till products are available
-  //     if (products.length > 0) {
-  //       dispatch(
-  //         filterProducts({
-  //           category: checkedCategory,
-  //           company: checkedCompany,
-  //           sortBy: option,
-  //         })
-  //       );
-  //     }
-  //   }
-  // }, [dispatch, products]);
-
   //when the sort/filter menu is open, prevent scrolling
   useEffect(() => {
     if (openFilterMenu) {
@@ -53,6 +32,18 @@ const Filters = () => {
 
   //set the  menu to open or closed
   const handleFilterMenu = () => setOpenFilterMenu((state) => !state);
+
+  const handleSearch = () => {
+    //clear search term
+    localStorage.setItem(
+      "values",
+      JSON.stringify({
+        ...storedValues,
+        search: "",
+      })
+    );
+    dispatch(filterProducts({ ...storedValues, search: "" }));
+  };
 
   return (
     <>
@@ -74,6 +65,10 @@ const Filters = () => {
           openFilterMenu={openFilterMenu}
           setOpenFilterMenu={setOpenFilterMenu}
         />
+      )}
+
+      {storedValues.length > 0 && (
+        <p onClick={handleSearch}>{storedValues?.search}</p>
       )}
     </>
   );

@@ -6,6 +6,12 @@ const initialState = {
   error: null,
   filteredProducts: [],
   filteredProductsMessage: "",
+  filters: {
+    category: [],
+    company: [],
+    sortBy: "",
+    search: "",
+  },
 };
 
 const productsSlice = createSlice({
@@ -90,6 +96,11 @@ const productsSlice = createSlice({
     clearFilters: (state, action) => {
       state.filteredProducts = [];
       state.filteredProductsMessage = "";
+    },
+    updateFilters: (state, action) => {
+      const filters = action.payload; //{category:[], company:[], sortBy:"", search:""} }
+
+      state.filters = filters;
     },
   },
 });
