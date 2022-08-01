@@ -13,28 +13,28 @@ const Search = () => {
   const dispatch = useDispatch();
   const storedValues = useLocalStorage();
 
-  //update the search term
-  const handleSearch = (e) => setSearchTerm(e.target.value);
-  const values = { ...storedValues, search: searchTerm };
-
-  const handleSubmit = (e) => {
+  const handleSearchTerm = (e) => {
     e.preventDefault();
-    dispatch(filterProducts(values));
-    dispatch(updateSearch(searchTerm));
-    localStorage.setItem("values", JSON.stringify(values));
-
-    //clear the search term
-    setSearchTerm("");
+    setSearchTerm(e.target.value);
   };
 
+  useEffect(() => {
+    const values = { ...storedValues, search: searchTerm };
+
+    dispatch(filterProducts(values));
+    dispatch(updateSearch(searchTerm));
+
+    localStorage.setItem("values", JSON.stringify(values));
+  }, [searchTerm, dispatch, storedValues]);
+
   return (
-    <form className={styled.search} onSubmit={handleSubmit}>
+    <form className={styled.search}>
       <input
         type="text"
         name=""
         id=""
         placeholder="Search"
-        onChange={handleSearch}
+        onChange={handleSearchTerm}
         value={searchTerm}
       />
       <label htmlFor="search">
