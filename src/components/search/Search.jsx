@@ -2,7 +2,10 @@ import React, { useEffect, useState } from "react";
 import styled from "./Search.module.css";
 import { BiSearch } from "react-icons/bi";
 import { useDispatch } from "react-redux";
-import { filterProducts } from "../../store/features/products/productsSlice";
+import {
+  filterProducts,
+  updateSearch,
+} from "../../store/features/products/productsSlice";
 import useLocalStorage from "../../hooks/useLocalStorage";
 
 const Search = () => {
@@ -17,11 +20,8 @@ const Search = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(filterProducts(values));
-
-    localStorage.setItem(
-      "values",
-      JSON.stringify({ ...storedValues, search: searchTerm })
-    );
+    dispatch(updateSearch(searchTerm));
+    localStorage.setItem("values", JSON.stringify(values));
 
     //clear the search term
     setSearchTerm("");

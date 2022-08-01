@@ -18,7 +18,6 @@ const FilterOptions = (props) => {
   const [option, setOption] = useState("");
   const storedValues = useLocalStorage();
 
-  console.log(checkedCategory);
   const values = {
     category: checkedCategory,
     company: checkedCompany,
@@ -26,37 +25,26 @@ const FilterOptions = (props) => {
     search: storedValues?.search ?? "",
   };
 
-  console.log(storedValues);
+  //clear all filters and remove from local storage
 
   const handleClear = () => {
     setCheckedCategory([]);
     setCheckedCompany([]);
     setOption("");
 
-    //dispatch the action to clear the filters
     dispatch(clearFilters());
-
-    //remove values from local store
     localStorage.removeItem("values");
-
     props.setOpenFilterMenu(false);
   };
 
+  /**dispatch the action to filter the products based on values
+   * set the values in local store
+   * close the filter menu
+   */
   const handleFilter = (e) => {
     e.preventDefault();
-
-    //dispatch the action to filter the products based on values
-    dispatch(
-      filterProducts({
-        ...storedValues,
-        ...values,
-      })
-    );
-
-    //set values in local store as object
+    dispatch(filterProducts({ ...storedValues, ...values }));
     localStorage.setItem("values", JSON.stringify(values));
-
-    //close the filter menu
     props.setOpenFilterMenu(false);
   };
 

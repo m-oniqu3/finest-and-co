@@ -7,6 +7,7 @@ import { filterProducts } from "../../store/features/products/productsSlice";
 import MobileFilter from "./MobileFilter";
 import Search from "../search/Search";
 import useLocalStorage from "../../hooks/useLocalStorage";
+import CurrentSearch from "../search/CurrentSearch";
 
 const Filters = () => {
   const [openFilterMenu, setOpenFilterMenu] = useState(false);
@@ -33,17 +34,13 @@ const Filters = () => {
   //set the  menu to open or closed
   const handleFilterMenu = () => setOpenFilterMenu((state) => !state);
 
-  const handleSearch = () => {
-    //clear search term
-    localStorage.setItem(
-      "values",
-      JSON.stringify({
-        ...storedValues,
-        search: "",
-      })
-    );
-    dispatch(filterProducts({ ...storedValues, search: "" }));
-  };
+  //check if all the values in the storedvalues are empty
+  const isEmpty = (() => {
+    const values = Object.values(storedValues);
+    return values.every((value) => value === "" || value === []);
+  })();
+
+  console.log(isEmpty);
 
   return (
     <>
@@ -51,6 +48,7 @@ const Filters = () => {
         <h2>Products</h2>
         <div className={styled.filters__btn}>
           <Search />
+
           <Button className="secondary" onClick={handleFilterMenu}>
             Filter & Sort
             <span>
@@ -60,15 +58,13 @@ const Filters = () => {
         </div>
       </div>
 
+      {!isEmpty && <CurrentSearch />}
+
       {openFilterMenu && (
         <MobileFilter
           openFilterMenu={openFilterMenu}
           setOpenFilterMenu={setOpenFilterMenu}
         />
-      )}
-
-      {storedValues.length > 0 && (
-        <p onClick={handleSearch}>{storedValues?.search}</p>
       )}
     </>
   );
