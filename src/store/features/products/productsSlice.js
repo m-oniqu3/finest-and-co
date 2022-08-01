@@ -27,29 +27,27 @@ const productsSlice = createSlice({
     },
     filterProducts: (state, action) => {
       const filters = action.payload; //{category:[], company:[], sortBy:"", search:""} }
-
       const { category, company, sortBy, search } = filters;
 
-      //copy the products array
-      let temp = [...state.products];
+      // Check if there are any filters or search values
+      const searchAndFilter =
+        category?.length || company?.length || !!sortBy || !!search;
 
-      //filter by category
-      if (category?.length > 0) {
-        temp = temp.filter((item) => {
-          return category.includes(item.category);
-        });
-      }
+      // If no search or filter, clear filteredProductsMessage value
+      if (!searchAndFilter) state.filteredProductsMessage = "";
 
-      //filter by company
-      if (company?.length > 0) {
-        temp = temp.filter((item) => {
-          return company.includes(item.company);
-        });
-      }
-
-      //sort by given field
-      if (sortBy) {
-        temp.sort((a, b) => {
+      state.filteredProducts = [...state.products]
+        // filter category or return full array
+        .filter((item) => {
+          if (category?.length) return category.includes(item.category);
+          else return item;
+        })
+        // filter company or return full array
+        .filter((item) => {
+          if (company?.length) return company.includes(item.company);
+          else return item;
+        })
+        .sort((a, b) => {
           if (sortBy === "lowToHigh") {
             return a.price - b.price;
           } else if (sortBy === "highToLow") {
@@ -59,34 +57,17 @@ const productsSlice = createSlice({
           } else if (sortBy === "descending") {
             return b.name.localeCompare(a.name);
           }
-          return temp;
-        });
-      }
-
-      //filter by search
-      if (search) {
-        temp = temp.filter((item) => {
-          return item.name.toLowerCase().includes(search.toLowerCase());
-        });
-      }
-
-      //if no filters are applied, return the original products array
-      if (
-        category?.length === 0 &&
-        company?.length === 0 &&
-        sortBy === "" &&
-        search === ""
-      ) {
-        temp = [...state.products];
-        state.filteredProductsMessage = "";
-      }
+          return a - b;
+        })
+        // filter name
+        .filter(({ name }) =>
+          name.toLowerCase().includes(search.toLowerCase())
+        );
 
       //if there are no products that match the filters, show a message
-      if (temp.length === 0) {
+      if (!state.filteredProducts) {
         state.filteredProductsMessage = "No products found";
       }
-
-      state.filteredProducts = temp;
     },
     clearFilters: (state, action) => {
       state.filteredProducts = [];
