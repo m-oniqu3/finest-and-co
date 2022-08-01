@@ -60,9 +60,10 @@ const productsSlice = createSlice({
           return a - b;
         })
         // filter name
-        .filter(({ name }) =>
-          name.toLowerCase().includes(search.toLowerCase())
-        );
+        .filter(({ name }) => {
+          if (search) return name.toLowerCase().includes(search.toLowerCase());
+          return (state.filteredProductsMessage = "No results found");
+        });
 
       //if there are no products that match the filters, show a message
       if (!state.filteredProducts) {

@@ -7,7 +7,6 @@ import { filterProducts } from "../../store/features/products/productsSlice";
 import MobileFilter from "./MobileFilter";
 import Search from "../search/Search";
 import useLocalStorage from "../../hooks/useLocalStorage";
-import CurrentSearch from "../search/CurrentSearch";
 
 const Filters = () => {
   const [openFilterMenu, setOpenFilterMenu] = useState(false);
@@ -34,14 +33,6 @@ const Filters = () => {
   //set the  menu to open or closed
   const handleFilterMenu = () => setOpenFilterMenu((state) => !state);
 
-  //check if all the values in the storedvalues are empty
-  const isEmpty = (() => {
-    const values = Object.values(storedValues);
-    return values.every((value) => value === "" || value === []);
-  })();
-
-  console.log(isEmpty);
-
   return (
     <>
       <div className={styled.filters}>
@@ -57,8 +48,6 @@ const Filters = () => {
           </Button>
         </div>
       </div>
-
-      {!isEmpty && <CurrentSearch />}
 
       {openFilterMenu && (
         <MobileFilter
