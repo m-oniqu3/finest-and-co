@@ -4,6 +4,11 @@ import Button from "../helpers/ui/button/Button";
 import { MdFilterListAlt } from "react-icons/md";
 import MobileFilter from "./MobileFilter";
 import Search from "../search/Search";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  filterProducts,
+  updateFilters,
+} from "../../store/features/products/productsSlice";
 
 const Filters = () => {
   const [openFilterMenu, setOpenFilterMenu] = useState(false);

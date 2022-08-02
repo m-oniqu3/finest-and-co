@@ -79,20 +79,22 @@ const productsSlice = createSlice({
     clearFilters: (state, action) => {
       state.filteredProducts = [];
       state.filteredProductsMessage = "";
-      state.filters = {
-        category: [],
-        company: [],
-        sortBy: "",
-        search: "",
-      };
+      state.filters = initialState.filters;
+      localStorage.removeItem("filters");
     },
     updateSearch: (state, action) => {
       state.currentSearch = action.payload;
     },
     updateFilters: (state, action) => {
       const filter = action.payload;
+      if (filter.type === "search") state.filters.search = filter.value;
 
-      state.filters[filter.type] = filter.value;
+      state.filters = { ...state.filters, ...filter };
+    },
+    loadFilters: (state, action) => {
+      //load from local storage
+      const filters = JSON.parse(localStorage.getItem("filters"));
+      if (filters) state.filters = filters;
     },
   },
 });
@@ -105,5 +107,6 @@ export const {
   clearFilters,
   updateSearch,
   updateFilters,
+  loadFilters,
 } = productsSlice.actions;
 export default productsSlice.reducer;

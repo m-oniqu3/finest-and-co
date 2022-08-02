@@ -29,15 +29,23 @@ const FilterOptions = (props) => {
     props.setOpenFilterMenu(false);
   };
 
+  const allFilters = {
+    category: checkedCategory,
+    company: checkedCompany,
+    sortBy: option,
+  };
+
   const handleFilter = (e) => {
     e.preventDefault();
 
     //update the filters in the store then filter the products
 
-    dispatch(updateFilters({ type: "category", value: checkedCategory }));
-    dispatch(updateFilters({ type: "company", value: checkedCompany }));
-    dispatch(updateFilters({ type: "sortBy", value: option }));
+    dispatch(updateFilters(allFilters));
 
+    localStorage.setItem(
+      "filters",
+      JSON.stringify({ ...filters, ...allFilters })
+    );
     dispatch(filterProducts());
 
     props.setOpenFilterMenu(false);
