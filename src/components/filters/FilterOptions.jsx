@@ -35,13 +35,11 @@ const FilterOptions = (props) => {
     sortBy: option,
   };
 
+  //update the filters, filter the products
   const handleFilter = (e) => {
     e.preventDefault();
 
-    //update the filters in the store then filter the products
-
     dispatch(updateFilters(allFilters));
-
     localStorage.setItem(
       "filters",
       JSON.stringify({ ...filters, ...allFilters })

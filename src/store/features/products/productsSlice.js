@@ -26,10 +26,7 @@ const productsSlice = createSlice({
       const data = action.payload;
       state.error = data.error;
     },
-    setLoading: (state, action) => {
-      const data = action.payload;
-      state.isLoading = data.isLoading;
-    },
+
     filterProducts: (state, action) => {
       const filters = state.filters; //{category:[], company:[], sortBy:"", search:""} }
       const { category, company, sortBy, search } = filters;
@@ -67,12 +64,12 @@ const productsSlice = createSlice({
         // filter name
         .filter(({ name }) => {
           if (search) return name.toLowerCase().includes(search.toLowerCase());
-          return (state.filteredProductsMessage = "No results found");
+          return (state.filteredProductsMessage = "No products found.");
         });
 
       //if there are no products that match the filters, show a message
       if (!state.filteredProducts) {
-        state.filteredProductsMessage = "No products found";
+        state.filteredProductsMessage = "No products found.";
       }
     },
     clearFilters: (state, action) => {
@@ -81,14 +78,12 @@ const productsSlice = createSlice({
       state.filters = initialState.filters;
       localStorage.removeItem("filters");
     },
-    updateSearch: (state, action) => {
-      state.currentSearch = action.payload;
-    },
+
     updateFilters: (state, action) => {
       const filter = action.payload;
       if (filter.type === "search") state.filters.search = filter.value;
 
-      state.filters = { ...state.filters, ...filter };
+      if (!filter.type) state.filters = { ...state.filters, ...filter };
     },
   },
 });
@@ -99,8 +94,6 @@ export const {
   setLoading,
   filterProducts,
   clearFilters,
-  updateSearch,
   updateFilters,
-  loadFilters,
 } = productsSlice.actions;
 export default productsSlice.reducer;

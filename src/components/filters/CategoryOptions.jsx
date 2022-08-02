@@ -1,13 +1,12 @@
 import React, { useEffect } from "react";
 import styled from "./CategoryOptions.module.css";
-import { useDispatch, useSelector } from "react-redux";
-import { updateFilters } from "../../store/features/products/productsSlice";
+import { useSelector } from "react-redux";
 
 const CategoryOptions = (props) => {
   const { setCheckedCategory, checkedCategory } = props;
   const { products, filters } = useSelector((state) => state.products);
-  const dispatch = useDispatch();
 
+  //array of unique categories
   const productCategories = new Set(products.map(({ category }) => category));
 
   //when the component mounts, set the checkedCategory to the filters.category
@@ -16,6 +15,7 @@ const CategoryOptions = (props) => {
     if (category) setCheckedCategory(filters?.category);
   }, [setCheckedCategory, filters]);
 
+  //check the category, update the array
   const handleCategory = (e) => {
     let { value, checked } = e.target;
 
@@ -25,16 +25,6 @@ const CategoryOptions = (props) => {
         checkedCategory.filter((category) => category !== value)
       );
   };
-
-  //update the filters with the checked categories
-  // useEffect(() => {
-  //   const data = { type: "category", value: checkedCategory };
-
-  //   //if the checkedCategory is empty, don't update the filters
-  //   if (checkedCategory.length === 0)
-  //     dispatch(updateFilters({ type: "category", value: [] }));
-  //   dispatch(updateFilters(data));
-  // }, [dispatch, checkedCategory]);
 
   const categoryOptions = Array.from(productCategories).map((category) => {
     return (

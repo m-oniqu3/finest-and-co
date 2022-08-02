@@ -11,8 +11,10 @@ const Search = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const dispatch = useDispatch();
 
+  //update search term
   const handleSearchTerm = (e) => setSearchTerm(e.target.value);
 
+  //update the filters, filter the products
   useEffect(() => {
     dispatch(updateFilters({ type: "search", value: searchTerm }));
     dispatch(filterProducts());

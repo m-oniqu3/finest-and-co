@@ -1,16 +1,15 @@
 import React, { useEffect } from "react";
 import styled from "./CompanyOptions.module.css";
-import { useDispatch, useSelector } from "react-redux";
-import { updateFilters } from "../../store/features/products/productsSlice";
+import { useSelector } from "react-redux";
 
 const CompanyOptions = (props) => {
   const { setCheckedCompany, checkedCompany } = props;
   const { products, filters } = useSelector((state) => state.products);
-  const dispatch = useDispatch();
 
-  //get companies from the products array and create an array of unique values
-  const productCompanies = new Set(products.map((product) => product.company));
+  //create an array of unique companies
+  const productCompanies = new Set(products.map(({ company }) => company));
 
+  //update the checkedCompany array
   const handleCompany = (e) => {
     const { value, checked } = e.target;
 
@@ -19,6 +18,7 @@ const CompanyOptions = (props) => {
       setCheckedCompany(checkedCompany.filter((company) => company !== value));
   };
 
+  //when the component mounts, set the checkedCompany to the filters.company
   useEffect(() => {
     const { company } = filters;
     if (company) setCheckedCompany(filters?.company);

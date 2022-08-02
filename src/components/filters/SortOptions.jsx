@@ -1,23 +1,19 @@
 import React, { useEffect } from "react";
 import styled from "./SortOptions.module.css";
 import { sortOptions } from "./sortOptions.js";
-import { useDispatch, useSelector } from "react-redux";
-import { updateFilters } from "../../store/features/products/productsSlice";
+import { useSelector } from "react-redux";
 
 const SortOptions = (props) => {
   const { setOption, option } = props;
   const { filters } = useSelector((state) => state.products);
-  const dispatch = useDispatch();
 
-  const handleChange = (e) => {
-    setOption(e.target.value);
-    // dispatch(updateFilters({ type: "sortBy", value: e.target.value }));
-  };
+  //update the option
+  const handleChange = (e) => setOption(e.target.value);
 
   //when the component mounts, set the option to the filters.sortBy
   useEffect(() => {
     const { sortBy } = filters;
-    if (sortBy) setOption(filters?.sortBy);
+    if (sortBy) setOption(sortBy);
   }, [setOption, filters]);
 
   //map over the sort options and input for each option
