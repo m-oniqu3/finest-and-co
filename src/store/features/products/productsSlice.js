@@ -2,7 +2,6 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   products: [],
-  isLoading: false,
   error: null,
   filters: {
     category: [],
@@ -90,11 +89,6 @@ const productsSlice = createSlice({
       if (filter.type === "search") state.filters.search = filter.value;
 
       state.filters = { ...state.filters, ...filter };
-    },
-    loadFilters: (state, action) => {
-      //load from local storage
-      const filters = JSON.parse(localStorage.getItem("filters"));
-      if (filters) state.filters = filters;
     },
   },
 });

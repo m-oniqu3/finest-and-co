@@ -6,7 +6,6 @@ import Pages from "./components/pages/Pages";
 import { useGetProductsQuery } from "./store/features/api/apiSlice";
 import {
   setError,
-  setLoading,
   updateProducts,
 } from "./store/features/products/productsSlice";
 
@@ -17,24 +16,13 @@ function App() {
 
   //update the products in the store
   useEffect(() => {
-    if (results.isSuccess) {
-      dispatch(updateProducts({ data: results.data }));
-    }
+    const { data, error, isSuccess, isError } = results;
 
-    if (results.isError) {
-      dispatch(setError({ error: results.error }));
-    }
-
-    if (results.isLoading) {
-      dispatch(setLoading({ isLoading: results.isLoading }));
-    }
+    if (isSuccess) dispatch(updateProducts({ data: data }));
+    if (isError) dispatch(setError({ error: error }));
   }, [dispatch, results]);
 
-  return (
-    <>
-      <Pages />
-    </>
-  );
+  return <>{results.isLoading ? <Loading /> : <Pages />}</>;
 }
 
 export default App;

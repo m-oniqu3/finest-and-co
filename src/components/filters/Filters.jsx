@@ -12,6 +12,18 @@ import {
 
 const Filters = () => {
   const [openFilterMenu, setOpenFilterMenu] = useState(false);
+  const { products } = useSelector((state) => state.products);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const filters = JSON.parse(localStorage.getItem("filters"));
+
+    if (!!filters) {
+      dispatch(updateFilters(filters));
+      if (!!products) dispatch(filterProducts(filters));
+    }
+  }, [dispatch, products]);
 
   //when the sort/filter menu is open, prevent scrolling
   useEffect(() => {

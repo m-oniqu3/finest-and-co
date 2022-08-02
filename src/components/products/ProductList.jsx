@@ -1,34 +1,15 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "./ProductList.module.css";
 import Container from "../helpers/wrapper/Container";
 import Product from "./Product";
 import Error from "../helpers/error/Error";
 import Loading from "../helpers/loading/Loading";
 import Filters from "../filters/Filters";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  filterProducts,
-  updateFilters,
-} from "../../store/features/products/productsSlice";
+import { useSelector } from "react-redux";
 
 const ProductList = () => {
-  const {
-    products,
-    filteredProducts,
-    filteredProductsMessage,
-    isLoading,
-    error,
-  } = useSelector((state) => state.products);
-
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    const filters = JSON.parse(localStorage.getItem("filters"));
-    if (!!filters) {
-      dispatch(updateFilters(filters));
-      if (!!products) dispatch(filterProducts(filters));
-    }
-  }, [dispatch, products]);
+  const { products, filteredProducts, filteredProductsMessage, error } =
+    useSelector((state) => state.products);
 
   //set the products to the filtered products if there are any
   const productsToDisplay =
@@ -36,9 +17,10 @@ const ProductList = () => {
 
   let content;
 
-  const empty = isLoading || productsToDisplay.length === 0;
+  const empty = productsToDisplay.length === 0;
 
   if (empty) content = <Loading />;
+  if (error) content = <Error error={error} />;
 
   if (productsToDisplay) {
     content = (
@@ -59,8 +41,6 @@ const ProductList = () => {
       </div>
     );
   }
-
-  if (error) content = <Error error={error} />;
 
   return (
     <Container>
