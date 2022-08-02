@@ -9,6 +9,7 @@ import { IoIosArrowDropleftCircle } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import Container from "../helpers/wrapper/Container";
 import Navbar from "../navbar/Navbar";
+import Recs from "../recs/Recs";
 
 const ProductInfo = () => {
   // Get the product id from the url
@@ -22,7 +23,12 @@ const ProductInfo = () => {
   let content;
 
   if (results.isSuccess) {
-    content = <ProductDetails product={results.data} />;
+    content = (
+      <>
+        <ProductDetails product={results.data} />
+        <Recs product={results.data} />
+      </>
+    );
   }
 
   if (results.isLoading) {
