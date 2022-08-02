@@ -4,37 +4,26 @@ import { useSelector } from "react-redux";
 
 const CategoryOptions = (props) => {
   const { setCheckedCategory, checkedCategory } = props;
-  const { products } = useSelector((state) => state.products);
+  const { products, filters } = useSelector((state) => state.products);
 
-  const productCategories = new Set(
-    products.map((product) => product.category)
-  );
+  //array of unique categories
+  const productCategories = new Set(products.map(({ category }) => category));
 
-  //when the component mounts, get the values from local storage and set the state, and checkboxes
+  //when the component mounts, set the checkedCategory to the filters.category
   useEffect(() => {
-    const storedCategory = JSON.parse(localStorage.getItem("checkedCategory"));
-    if (storedCategory) {
-      setCheckedCategory(storedCategory);
-      //set the checkbox to checked
-      storedCategory.forEach((category) => {
-        document.getElementById(category).checked = true;
-      });
-    }
-  }, [setCheckedCategory]);
+    const { category } = filters;
+    if (category) setCheckedCategory(filters?.category);
+  }, [setCheckedCategory, filters]);
 
+  //check the category, update the array
   const handleCategory = (e) => {
-    //destructure the value and the checked status of the checkbox from the event object
     let { value, checked } = e.target;
 
-    //if the checkbox is checked, add the value to the checkedCategory array
-    //if the checkbox is unchecked, remove the value
-    if (checked) {
-      setCheckedCategory((previous) => [...previous, value]);
-    } else {
+    if (checked) setCheckedCategory((previous) => [...previous, value]);
+    else
       setCheckedCategory(
         checkedCategory.filter((category) => category !== value)
       );
-    }
   };
 
   const categoryOptions = Array.from(productCategories).map((category) => {
@@ -45,6 +34,7 @@ const CategoryOptions = (props) => {
           id={category}
           value={category}
           onChange={handleCategory}
+          checked={checkedCategory.includes(category)}
         />
         <label htmlFor={category}>{category}</label>
       </div>

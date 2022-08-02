@@ -4,36 +4,25 @@ import { useSelector } from "react-redux";
 
 const CompanyOptions = (props) => {
   const { setCheckedCompany, checkedCompany } = props;
-  const { products } = useSelector((state) => state.products);
+  const { products, filters } = useSelector((state) => state.products);
 
-  //get companies from the products array and create an array of unique values
-  const productCompanies = new Set(products.map((product) => product.company));
+  //create an array of unique companies
+  const productCompanies = new Set(products.map(({ company }) => company));
 
-  //when the component mounts, get the values from local storage and set the state, and checkboxes
-  useEffect(() => {
-    const storedCompany = JSON.parse(localStorage.getItem("checkedCompany"));
-    if (storedCompany) {
-      setCheckedCompany(storedCompany);
-      //set the checkbox to checked
-      storedCompany.forEach((company) => {
-        document.getElementById(company).checked = true;
-      });
-    }
-  }, [setCheckedCompany]);
-
+  //update the checkedCompany array
   const handleCompany = (e) => {
-    //destructure the value and the checked status of the checkbox from the event object
     const { value, checked } = e.target;
 
-    //if the checkbox is checked, add the value to the checkedCompany array
-    //if the checkbox is unchecked, remove the value
-
-    if (checked) {
-      setCheckedCompany((previous) => [...previous, value]);
-    } else {
+    if (checked) setCheckedCompany((previous) => [...previous, value]);
+    else
       setCheckedCompany(checkedCompany.filter((company) => company !== value));
-    }
   };
+
+  //when the component mounts, set the checkedCompany to the filters.company
+  useEffect(() => {
+    const { company } = filters;
+    if (company) setCheckedCompany(filters?.company);
+  }, [setCheckedCompany, filters]);
 
   const companyOptions = Array.from(productCompanies).map((company) => {
     return (
@@ -43,6 +32,7 @@ const CompanyOptions = (props) => {
           id={company}
           value={company}
           onChange={handleCompany}
+          checked={checkedCompany.includes(company)}
         />
         <label htmlFor={company}>{company}</label>
       </div>

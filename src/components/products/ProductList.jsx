@@ -8,13 +8,8 @@ import Filters from "../filters/Filters";
 import { useSelector } from "react-redux";
 
 const ProductList = () => {
-  const {
-    products,
-    filteredProducts,
-    filteredProductsMessage,
-    isLoading,
-    error,
-  } = useSelector((state) => state.products);
+  const { products, filteredProducts, filteredProductsMessage, error } =
+    useSelector((state) => state.products);
 
   //set the products to the filtered products if there are any
   const productsToDisplay =
@@ -22,11 +17,10 @@ const ProductList = () => {
 
   let content;
 
-  const empty = isLoading || productsToDisplay.length === 0;
+  const empty = productsToDisplay.length === 0;
 
-  if (empty) {
-    content = <Loading />;
-  }
+  if (empty) content = <Loading />;
+  if (error) content = <Error error={error} />;
 
   if (productsToDisplay) {
     content = (
@@ -46,10 +40,6 @@ const ProductList = () => {
         <p className="text">Try changing the filters to see more products.</p>
       </div>
     );
-  }
-
-  if (error) {
-    content = <Error error={error} />;
   }
 
   return (

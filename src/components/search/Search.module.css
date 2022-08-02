@@ -1,0 +1,27 @@
+.search {
+    position: relative;
+}
+
+.search input {
+    padding: 12px 40px 12px 20px;
+
+    border: 1px solid black;
+    font-size: clamp(.9rem, 3vw, 1rem);
+    font-weight: 400;
+    width: 100%;
+}
+
+.search input::placeholder {
+    color: black;
+    opacity: 1;
+}
+
+.search input:focus {
+    outline: none;
+}
+
+.search label {
+    position: absolute;
+    top: 25%;
+    right: 10px;
+}

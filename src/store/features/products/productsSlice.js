@@ -2,10 +2,16 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   products: [],
-  isLoading: false,
   error: null,
+  filters: {
+    category: [],
+    company: [],
+    sortBy: "",
+    search: "",
+  },
   filteredProducts: [],
   filteredProductsMessage: "",
+  currentSearch: "",
 };
 
 const productsSlice = createSlice({
@@ -20,35 +26,30 @@ const productsSlice = createSlice({
       const data = action.payload;
       state.error = data.error;
     },
-    setLoading: (state, action) => {
-      const data = action.payload;
-      state.isLoading = data.isLoading;
-    },
+
     filterProducts: (state, action) => {
-      const filters = action.payload; //{category:[], company:[], sortBy:"" }
+      const filters = state.filters; //{category:[], company:[], sortBy:"", search:""} }
+      const { category, company, sortBy, search } = filters;
 
-      const { category, company, sortBy } = filters;
+      // Check if there are any filters or search values
+      const searchAndFilter =
+        category?.length || company?.length || !!sortBy || !!search;
 
-      //copy the products array
-      let temp = [...state.products];
+      // If no search or filter, clear filteredProductsMessage value
+      if (!searchAndFilter) state.filteredProductsMessage = "";
 
-      //filter by category
-      if (category.length > 0) {
-        temp = temp.filter((item) => {
-          return category.includes(item.category);
-        });
-      }
-
-      //filter by company
-      if (company.length > 0) {
-        temp = temp.filter((item) => {
-          return company.includes(item.company);
-        });
-      }
-
-      //sort by given field
-      if (sortBy) {
-        temp.sort((a, b) => {
+      state.filteredProducts = [...state.products]
+        // filter category or return full array
+        .filter((item) => {
+          if (category?.length) return category.includes(item.category);
+          else return item;
+        })
+        // filter company or return full array
+        .filter((item) => {
+          if (company?.length) return company.includes(item.company);
+          else return item;
+        })
+        .sort((a, b) => {
           if (sortBy === "lowToHigh") {
             return a.price - b.price;
           } else if (sortBy === "highToLow") {
@@ -58,26 +59,31 @@ const productsSlice = createSlice({
           } else if (sortBy === "descending") {
             return b.name.localeCompare(a.name);
           }
-          return temp;
+          return a - b;
+        })
+        // filter name
+        .filter(({ name }) => {
+          if (search) return name.toLowerCase().includes(search.toLowerCase());
+          return (state.filteredProductsMessage = "No products found.");
         });
-      }
-
-      //if no filters are applied, return the original products array
-      if (category.length === 0 && company.length === 0 && sortBy === "") {
-        temp = [...state.products];
-        state.filteredProductsMessage = "";
-      }
 
       //if there are no products that match the filters, show a message
-      if (temp.length === 0) {
-        state.filteredProductsMessage = "No products found";
+      if (!state.filteredProducts) {
+        state.filteredProductsMessage = "No products found.";
       }
-
-      state.filteredProducts = temp;
     },
     clearFilters: (state, action) => {
       state.filteredProducts = [];
       state.filteredProductsMessage = "";
+      state.filters = initialState.filters;
+      localStorage.removeItem("filters");
+    },
+
+    updateFilters: (state, action) => {
+      const filter = action.payload;
+      if (filter.type === "search") state.filters.search = filter.value;
+
+      if (!filter.type) state.filters = { ...state.filters, ...filter };
     },
   },
 });
@@ -88,5 +94,6 @@ export const {
   setLoading,
   filterProducts,
   clearFilters,
+  updateFilters,
 } = productsSlice.actions;
 export default productsSlice.reducer;

@@ -6,9 +6,8 @@
 
 .filters__btn {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: 1rem;
-    margin-bottom: 1rem;
     width: 100%;
 }
 
@@ -17,15 +16,31 @@
 }
 
 /* Media Queries */
+@media (min-width:360px) {
+    .filters__btn {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .filters__btn button {
+        margin: 0;
+    }
+
+}
 
 @media (min-width:600px) {
     .filters {
-        margin: 2rem 0;
+        margin: 3rem 0 4rem;
     }
 
     .filters__btn {
         width: fit-content;
     }
+
+
+}
+
+@media (min-width:768px) {
+
 
     .filters h2 {
         display: grid;
