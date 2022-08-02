@@ -5,6 +5,7 @@ import Button from "../helpers/ui/button/Button";
 import {
   clearFilters,
   filterProducts,
+  updateFilters,
 } from "../../store/features/products/productsSlice";
 import CategoryOptions from "./CategoryOptions";
 import CompanyOptions from "./CompanyOptions";
@@ -25,13 +26,19 @@ const FilterOptions = (props) => {
     setOption("");
 
     dispatch(clearFilters());
-    localStorage.removeItem("values");
     props.setOpenFilterMenu(false);
   };
 
   const handleFilter = (e) => {
     e.preventDefault();
-    dispatch(filterProducts(filters));
+
+    //update the filters in the store then filter the products
+
+    dispatch(updateFilters({ type: "category", value: checkedCategory }));
+    dispatch(updateFilters({ type: "company", value: checkedCompany }));
+    dispatch(updateFilters({ type: "sortBy", value: option }));
+
+    dispatch(filterProducts());
 
     props.setOpenFilterMenu(false);
   };

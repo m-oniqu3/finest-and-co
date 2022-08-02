@@ -32,7 +32,7 @@ const productsSlice = createSlice({
       state.isLoading = data.isLoading;
     },
     filterProducts: (state, action) => {
-      const filters = action.payload; //{category:[], company:[], sortBy:"", search:""} }
+      const filters = state.filters; //{category:[], company:[], sortBy:"", search:""} }
       const { category, company, sortBy, search } = filters;
 
       // Check if there are any filters or search values
@@ -79,12 +79,19 @@ const productsSlice = createSlice({
     clearFilters: (state, action) => {
       state.filteredProducts = [];
       state.filteredProductsMessage = "";
+      state.filters = {
+        category: [],
+        company: [],
+        sortBy: "",
+        search: "",
+      };
     },
     updateSearch: (state, action) => {
       state.currentSearch = action.payload;
     },
     updateFilters: (state, action) => {
-      const filter = action.payload; // {type:"", value}
+      const filter = action.payload;
+
       state.filters[filter.type] = filter.value;
     },
   },

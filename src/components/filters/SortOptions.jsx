@@ -11,7 +11,7 @@ const SortOptions = (props) => {
 
   const handleChange = (e) => {
     setOption(e.target.value);
-    dispatch(updateFilters({ type: "sortBy", value: e.target.value }));
+    // dispatch(updateFilters({ type: "sortBy", value: e.target.value }));
   };
 
   //when the component mounts, set the option to the filters.sortBy

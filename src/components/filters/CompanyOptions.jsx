@@ -19,18 +19,10 @@ const CompanyOptions = (props) => {
       setCheckedCompany(checkedCompany.filter((company) => company !== value));
   };
 
-  console.log(checkedCompany);
-
-  // useEffect(() => {
-  //   const { company } = filters;
-  //   if (company) setCheckedCompany(filters?.company);
-  // }, [setCheckedCompany, filters]);
-
-  //update the filters with the checked companies
   useEffect(() => {
-    const data = { type: "company", value: checkedCompany };
-    dispatch(updateFilters(data));
-  }, [dispatch, checkedCompany]);
+    const { company } = filters;
+    if (company) setCheckedCompany(filters?.company);
+  }, [setCheckedCompany, filters]);
 
   const companyOptions = Array.from(productCompanies).map((company) => {
     return (

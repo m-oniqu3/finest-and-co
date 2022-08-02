@@ -18,19 +18,12 @@ const CategoryOptions = (props) => {
 
   const handleCategory = (e) => {
     let { value, checked } = e.target;
-    let categories;
-    if (checked) {
-      setCheckedCategory((previous) => [...previous, value]);
-      categories = [...checkedCategory, value];
-    } else {
+
+    if (checked) setCheckedCategory((previous) => [...previous, value]);
+    else
       setCheckedCategory(
         checkedCategory.filter((category) => category !== value)
       );
-
-      categories = checkedCategory.filter((category) => category !== value);
-    }
-
-    dispatch(updateFilters({ type: "category", value: categories }));
   };
 
   //update the filters with the checked categories
