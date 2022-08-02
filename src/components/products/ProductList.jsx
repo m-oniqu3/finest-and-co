@@ -45,7 +45,7 @@ const ProductList = () => {
   return (
     <Container>
       <Filters />
-      <section>{content}</section>
+      <section className={styled.product__list}>{content}</section>
     </Container>
   );
 };

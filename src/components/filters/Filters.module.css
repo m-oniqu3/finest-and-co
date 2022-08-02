@@ -32,15 +32,15 @@
         margin: 3rem 0 4rem;
     }
 
-    .filters__btn {
-        width: fit-content;
-    }
+
 
 
 }
 
 @media (min-width:768px) {
-
+    .filters__btn {
+        width: fit-content;
+    }
 
     .filters h2 {
         display: grid;
