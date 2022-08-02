@@ -4,6 +4,12 @@ const initialState = {
   products: [],
   isLoading: false,
   error: null,
+  filters: {
+    category: [],
+    company: [],
+    sortBy: "",
+    search: "",
+  },
   filteredProducts: [],
   filteredProductsMessage: "",
   currentSearch: "",
@@ -77,6 +83,10 @@ const productsSlice = createSlice({
     updateSearch: (state, action) => {
       state.currentSearch = action.payload;
     },
+    updateFilters: (state, action) => {
+      const filter = action.payload; // {type:"", value}
+      state.filters[filter.type] = filter.value;
+    },
   },
 });
 
@@ -87,5 +97,6 @@ export const {
   filterProducts,
   clearFilters,
   updateSearch,
+  updateFilters,
 } = productsSlice.actions;
 export default productsSlice.reducer;

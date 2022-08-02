@@ -1,22 +1,18 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "./SortOptions.module.css";
 import { sortOptions } from "./sortOptions.js";
-import useLocalStorage from "../../hooks/useLocalStorage";
+import { useDispatch, useSelector } from "react-redux";
+import { updateFilters } from "../../store/features/products/productsSlice";
 
 const SortOptions = (props) => {
   const { setOption, option } = props;
-  const storedValues = useLocalStorage();
+  const { filters } = useSelector((state) => state.products);
+  const dispatch = useDispatch();
 
-  const handleChange = (e) => setOption(e.target.value);
-
-  /**check is the option is set in local storage
-   * if it is, set the option to the value of the local storage
-   */
-  useEffect(() => {
-    if (storedValues) {
-      setOption(storedValues.sortBy);
-    }
-  }, [storedValues, setOption]);
+  const handleChange = (e) => {
+    setOption(e.target.value);
+    dispatch(updateFilters({ type: "sortBy", value: e.target.value }));
+  };
 
   //map over the sort options and input for each option
   const options = sortOptions.map((item, index) => {

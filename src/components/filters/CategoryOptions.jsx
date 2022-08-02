@@ -1,43 +1,32 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "./CategoryOptions.module.css";
-import { useSelector } from "react-redux";
-import useLocalStorage from "../../hooks/useLocalStorage";
+import { useDispatch, useSelector } from "react-redux";
+import { updateFilters } from "../../store/features/products/productsSlice";
 
 const CategoryOptions = (props) => {
   const { setCheckedCategory, checkedCategory } = props;
   const { products } = useSelector((state) => state.products);
-  const storedValues = useLocalStorage();
+  const dispatch = useDispatch();
 
   const productCategories = new Set(
     products.map((product) => product.category)
   );
 
-  useEffect(() => {
-    const { category } = storedValues;
-    if (category) {
-      setCheckedCategory(category);
-
-      //set the checkboxes
-      category?.forEach((category) => {
-        document.getElementById(category).checked = true;
-      });
-    }
-  }, [storedValues, setCheckedCategory]);
-
   const handleCategory = (e) => {
-    //destructure the value and the checked status of the checkbox from the event object
     let { value, checked } = e.target;
 
-    //if the checkbox is checked, add the value to the checkedCategory array
-    //if the checkbox is unchecked, remove the value
-    if (checked) {
-      setCheckedCategory((previous) => [...previous, value]);
-    } else {
+    if (checked) setCheckedCategory((previous) => [...previous, value]);
+    else
       setCheckedCategory(
         checkedCategory.filter((category) => category !== value)
       );
-    }
   };
+
+  //update the filters with the checked categories
+  useEffect(() => {
+    const data = { type: "category", value: checkedCategory };
+    if (checkedCategory) dispatch(updateFilters(data));
+  }, [dispatch, checkedCategory]);
 
   const categoryOptions = Array.from(productCategories).map((category) => {
     return (
