@@ -9,24 +9,16 @@ import {
 import CategoryOptions from "./CategoryOptions";
 import CompanyOptions from "./CompanyOptions";
 import SortOptions from "./SortOptions.jsx";
-import useLocalStorage from "../../hooks/useLocalStorage";
+import { useSelector } from "react-redux";
 
 const FilterOptions = (props) => {
   const dispatch = useDispatch();
+  const { filters } = useSelector((state) => state.products);
   const [checkedCategory, setCheckedCategory] = useState([]);
   const [checkedCompany, setCheckedCompany] = useState([]);
   const [option, setOption] = useState("");
-  const storedValues = useLocalStorage();
-
-  const values = {
-    category: checkedCategory,
-    company: checkedCompany,
-    sortBy: option,
-    search: storedValues?.search ?? "",
-  };
 
   //clear all filters and remove from local storage
-
   const handleClear = () => {
     setCheckedCategory([]);
     setCheckedCompany([]);
@@ -37,14 +29,10 @@ const FilterOptions = (props) => {
     props.setOpenFilterMenu(false);
   };
 
-  /**dispatch the action to filter the products based on values
-   * set the values in local store
-   * close the filter menu
-   */
   const handleFilter = (e) => {
     e.preventDefault();
-    dispatch(filterProducts({ ...storedValues, ...values }));
-    localStorage.setItem("values", JSON.stringify(values));
+    dispatch(filterProducts(filters));
+
     props.setOpenFilterMenu(false);
   };
 

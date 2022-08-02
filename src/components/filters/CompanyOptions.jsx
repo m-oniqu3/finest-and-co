@@ -5,7 +5,7 @@ import { updateFilters } from "../../store/features/products/productsSlice";
 
 const CompanyOptions = (props) => {
   const { setCheckedCompany, checkedCompany } = props;
-  const { products } = useSelector((state) => state.products);
+  const { products, filters } = useSelector((state) => state.products);
   const dispatch = useDispatch();
 
   //get companies from the products array and create an array of unique values
@@ -19,10 +19,17 @@ const CompanyOptions = (props) => {
       setCheckedCompany(checkedCompany.filter((company) => company !== value));
   };
 
+  console.log(checkedCompany);
+
+  // useEffect(() => {
+  //   const { company } = filters;
+  //   if (company) setCheckedCompany(filters?.company);
+  // }, [setCheckedCompany, filters]);
+
   //update the filters with the checked companies
   useEffect(() => {
     const data = { type: "company", value: checkedCompany };
-    if (checkedCompany) dispatch(updateFilters(data));
+    dispatch(updateFilters(data));
   }, [dispatch, checkedCompany]);
 
   const companyOptions = Array.from(productCompanies).map((company) => {
@@ -33,6 +40,7 @@ const CompanyOptions = (props) => {
           id={company}
           value={company}
           onChange={handleCompany}
+          checked={checkedCompany.includes(company)}
         />
         <label htmlFor={company}>{company}</label>
       </div>

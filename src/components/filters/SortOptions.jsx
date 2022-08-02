@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "./SortOptions.module.css";
 import { sortOptions } from "./sortOptions.js";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,6 +13,12 @@ const SortOptions = (props) => {
     setOption(e.target.value);
     dispatch(updateFilters({ type: "sortBy", value: e.target.value }));
   };
+
+  //when the component mounts, set the option to the filters.sortBy
+  useEffect(() => {
+    const { sortBy } = filters;
+    if (sortBy) setOption(filters?.sortBy);
+  }, [setOption, filters]);
 
   //map over the sort options and input for each option
   const options = sortOptions.map((item, index) => {
