@@ -6,6 +6,7 @@ import Error from "../helpers/error/Error";
 import Loading from "../helpers/loading/Loading";
 import Filters from "../filters/Filters";
 import { useSelector } from "react-redux";
+import Sidebar from "../sidebar/Sidebar";
 
 const ProductList = () => {
   const { products, filteredProducts, filteredProductsMessage, error } =
@@ -45,7 +46,14 @@ const ProductList = () => {
   return (
     <Container>
       <Filters />
-      <section className={styled.product__list}>{content}</section>
+
+      <div className={styled.product__grid}>
+        <aside>
+          <Sidebar />
+        </aside>
+
+        <section className={styled.product__list}>{content}</section>
+      </div>
     </Container>
   );
 };

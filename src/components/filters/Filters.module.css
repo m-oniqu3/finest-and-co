@@ -40,6 +40,11 @@
 @media (min-width:768px) {
     .filters__btn {
         width: fit-content;
+        grid-template-columns: 1fr;
+    }
+
+    .filters__btn button {
+        display: none;
     }
 
     .filters h2 {

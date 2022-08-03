@@ -27,6 +27,7 @@
     align-items: center;
     font-weight: 500;
     font-size: clamp(1.1rem, 3vw, 1.3rem);
+    padding-bottom: 1.5rem;
 }
 
 .filter__heading span {
@@ -35,10 +36,9 @@
 
 /* Media Queries */
 
-@media (min-width:500px) {
+@media (min-width:400px) {
     .filter {
-
-        width: 25rem;
+        width: 20rem;
         margin-left: auto;
         padding: 1rem;
     }
