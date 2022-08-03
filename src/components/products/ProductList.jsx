@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "./ProductList.module.css";
 import Container from "../helpers/wrapper/Container";
 import Product from "./Product";
@@ -9,7 +9,6 @@ import { useSelector } from "react-redux";
 import Sidebar from "../sidebar/Sidebar";
 
 const ProductList = () => {
-  const [showSidebar, setShowSidebar] = useState(false);
   const { products, filteredProducts, filteredProductsMessage, error } =
     useSelector((state) => state.products);
 
@@ -43,20 +42,6 @@ const ProductList = () => {
       </div>
     );
   }
-
-  //mount the sidebar at 768px
-  // useEffect(() => {
-  //   const makeVisible = () => {
-  //     if (window.innerWidth > 768) setShowSidebar(true);
-  //     else setShowSidebar(false);
-  //   };
-
-  //   window.addEventListener("resize", makeVisible);
-  //   makeVisible();
-
-  //   //cleanup
-  //   return () => window.removeEventListener("resize", makeVisible);
-  // }, []);
 
   return (
     <Container>
