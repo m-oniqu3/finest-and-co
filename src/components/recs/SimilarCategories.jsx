@@ -1,21 +1,25 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getSimilarCategories } from "../../store/features/products/productsSlice";
+import React from "react";
+import styled from "./SimilarCategories.module.css";
+import { useSelector } from "react-redux";
+import Product from "../products/Product";
+import Loading from "../helpers/loading/Loading";
 
 const SimilarCategories = (props) => {
-  const {
-    product: { id, category },
-  } = props;
-  const dispatch = useDispatch();
   const { similarCategories } = useSelector((state) => state.products);
 
-  useEffect(() => {
-    dispatch(getSimilarCategories({ category, id }));
-  }, [dispatch, category, id]);
+  //return products with similar categories
+  const categories = similarCategories?.map((product) => {
+    return <Product key={product.id} product={product} />;
+  });
 
   return (
-    <section>
-      <h1>Similar Categories</h1>
+    <section className={styled.similarCategories}>
+      <h1>Customers also viewed</h1>
+      {categories ? (
+        <div className={styled.categories}>{categories}</div>
+      ) : (
+        <Loading />
+      )}
     </section>
   );
 };

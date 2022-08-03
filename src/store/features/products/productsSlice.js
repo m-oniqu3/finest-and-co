@@ -90,11 +90,11 @@ const productsSlice = createSlice({
     getSimilarCategories: (state, action) => {
       const data = action.payload; // {category: "", id:""}
 
-      state.similarCategories = [...state.products].filter(
-        ({ category, id }) => {
+      state.similarCategories = [...state.products]
+        .filter(({ category, id }) => {
           return category === data.category && id !== data.id;
-        }
-      );
+        })
+        .slice(0, 4);
     },
   },
 });
