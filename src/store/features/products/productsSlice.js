@@ -81,10 +81,9 @@ const productsSlice = createSlice({
     },
 
     updateFilters: (state, action) => {
-      const filter = action.payload;
-      if (filter.type === "search") state.filters.search = filter.value;
-
-      if (!filter.type) state.filters = { ...state.filters, ...filter };
+      const filter = action.payload; //{type:"category", value:""}
+      const { type, value } = filter;
+      state.filters[type] = value;
     },
 
     getSimilarCategories: (state, action) => {

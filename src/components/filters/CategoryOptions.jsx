@@ -1,30 +1,40 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "./CategoryOptions.module.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  filterProducts,
+  updateFilters,
+} from "../../store/features/products/productsSlice";
 
-const CategoryOptions = (props) => {
-  const { setCheckedCategory, checkedCategory } = props;
+const CategoryOptions = () => {
   const { products, filters } = useSelector((state) => state.products);
+  const storedCategory = JSON.parse(localStorage.getItem("category"));
+  const [checkedCategory, setCheckedCategory] = useState(storedCategory || []);
+  const dispatch = useDispatch();
 
   //array of unique categories
   const productCategories = new Set(products.map(({ category }) => category));
-
-  //when the component mounts, set the checkedCategory to the filters.category
-  useEffect(() => {
-    const { category } = filters;
-    if (category) setCheckedCategory(filters?.category);
-  }, [setCheckedCategory, filters]);
 
   //check the category, update the array
   const handleCategory = (e) => {
     let { value, checked } = e.target;
 
-    if (checked) setCheckedCategory((previous) => [...previous, value]);
-    else
+    if (checked) {
+      setCheckedCategory((previous) => [...previous, value]);
+      //update local storage
+    } else {
       setCheckedCategory(
-        checkedCategory.filter((category) => category !== value)
+        checkedCategory?.filter((category) => category !== value)
       );
+    }
   };
+
+  //update local storage
+  useEffect(() => {
+    localStorage.setItem("category", JSON.stringify(checkedCategory));
+    dispatch(updateFilters({ type: "category", value: checkedCategory }));
+    dispatch(filterProducts());
+  }, [checkedCategory, dispatch]);
 
   const categoryOptions = Array.from(productCategories).map((category) => {
     return (

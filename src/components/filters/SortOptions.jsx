@@ -8,7 +8,9 @@ const SortOptions = (props) => {
   const { filters } = useSelector((state) => state.products);
 
   //update the option
-  const handleChange = (e) => setOption(e.target.value);
+  const handleChange = (e) => {
+    setOption(e.target.value);
+  };
 
   //when the component mounts, set the option to the filters.sortBy
   useEffect(() => {
