@@ -19,10 +19,7 @@ const MobileFilter = (props) => {
             </span>
           </p>
 
-          <FilterOptions
-            setOpenFilterMenu={props.setOpenFilterMenu}
-            showButtons={true}
-          />
+          <FilterOptions setOpenFilterMenu={props.setOpenFilterMenu} />
         </Container>
       </div>
     </section>,

@@ -5,15 +5,18 @@ import App from "./App";
 import { Provider } from "react-redux";
 import { store } from "./store";
 import ScrollToTop from "./components/helpers/wrapper/ScrollToTop";
+import FilterContextProvider from "./components/contexts/filterContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
-    <BrowserRouter>
-      <ScrollToTop>
-        <App />
-      </ScrollToTop>
-    </BrowserRouter>
+    <FilterContextProvider>
+      <BrowserRouter>
+        <ScrollToTop>
+          <App />
+        </ScrollToTop>
+      </BrowserRouter>
+    </FilterContextProvider>
   </Provider>
 );
 

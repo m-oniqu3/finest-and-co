@@ -45,29 +45,28 @@ const ProductList = () => {
   }
 
   //mount the sidebar at 768px
-  useEffect(() => {
-    const makeVisible = () => {
-      if (window.innerWidth > 768) setShowSidebar(true);
-      else setShowSidebar(false);
-    };
+  // useEffect(() => {
+  //   const makeVisible = () => {
+  //     if (window.innerWidth > 768) setShowSidebar(true);
+  //     else setShowSidebar(false);
+  //   };
 
-    window.addEventListener("resize", makeVisible);
-    makeVisible();
+  //   window.addEventListener("resize", makeVisible);
+  //   makeVisible();
 
-    //cleanup
-    return () => window.removeEventListener("resize", makeVisible);
-  }, []);
+  //   //cleanup
+  //   return () => window.removeEventListener("resize", makeVisible);
+  // }, []);
 
   return (
     <Container>
       <Filters />
 
       <div className={styled.product__grid}>
-        {showSidebar && (
-          <aside>
-            <Sidebar />
-          </aside>
-        )}
+        <aside>
+          <Sidebar />
+        </aside>
+
         <section className={styled.product__list}>{content}</section>
       </div>
     </Container>
