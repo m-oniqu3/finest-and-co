@@ -12,6 +12,7 @@ const initialState = {
   filteredProducts: [],
   filteredProductsMessage: "",
   currentSearch: "",
+  similarCategories: [],
 };
 
 const productsSlice = createSlice({
@@ -85,6 +86,16 @@ const productsSlice = createSlice({
 
       if (!filter.type) state.filters = { ...state.filters, ...filter };
     },
+
+    getSimilarCategories: (state, action) => {
+      const data = action.payload; // {category: "", id:""}
+
+      state.similarCategories = [...state.products]
+        .filter(({ category, id }) => {
+          return category === data.category && id !== data.id;
+        })
+        .slice(0, 4);
+    },
   },
 });
 
@@ -95,5 +106,6 @@ export const {
   filterProducts,
   clearFilters,
   updateFilters,
+  getSimilarCategories,
 } = productsSlice.actions;
 export default productsSlice.reducer;
