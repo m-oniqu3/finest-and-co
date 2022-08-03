@@ -40,7 +40,7 @@ const Filters = () => {
   return (
     <>
       <div className={styled.filters}>
-        <h2>Products</h2>
+        {/* <h2>Shop</h2> */}
         <div className={styled.filters__btn}>
           <Search />
 

@@ -34,7 +34,7 @@
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         place-items: center;
-        max-width: 1200px;
+        /* max-width: 1200px; */
         margin: 3rem auto;
     }
 

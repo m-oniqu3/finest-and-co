@@ -127,10 +127,12 @@ const FilterOptions = (props) => {
 
   return (
     <form className={styled.filter}>
-      <h4>Sort</h4>
-      <div className={styled.filter__group}>{options}</div>
+      <h3>Filters</h3>
+      <div className={styled.filter__group}>
+        <h4>Sort By</h4>
+        {options}
+      </div>
 
-      <h4>Filter by</h4>
       <div className={styled.filter__group}>
         <h4>category</h4>
         {categoryOptions}
