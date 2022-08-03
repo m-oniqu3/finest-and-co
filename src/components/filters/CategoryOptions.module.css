@@ -1,15 +1,13 @@
 .category {
-
     margin-top: 1rem;
 }
-
 
 .category__option {
     display: flex;
     align-items: center;
     gap: .5rem;
     text-transform: capitalize;
-    padding-bottom: .2rem;
+    padding: .2rem 0;
 }
 
 .category__option input {

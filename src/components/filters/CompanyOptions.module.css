@@ -2,14 +2,12 @@
     margin-top: 1rem;
 }
 
-
-
 .company__option {
     display: flex;
     align-items: center;
     gap: .5rem;
     text-transform: capitalize;
-    padding-bottom: .2rem;
+    padding: .2rem 0;
 }
 
 .company__option input {

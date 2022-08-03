@@ -1,14 +1,9 @@
-.sort {
-
-    margin-top: 1rem;
-}
-
 .sort__option {
     display: flex;
     align-items: center;
     gap: .5rem;
     text-transform: capitalize;
-    /* padding: .5rem 0; */
+    padding: .2rem 0;
 }
 
 .sort__option input {
