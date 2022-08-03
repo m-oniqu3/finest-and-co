@@ -1,6 +1,5 @@
 .sort {
-    position: relative;
-    left: 5%;
+
     margin-top: 1rem;
 }
 
@@ -9,7 +8,7 @@
     align-items: center;
     gap: .5rem;
     text-transform: capitalize;
-    padding: .5rem 0;
+    /* padding: .5rem 0; */
 }
 
 .sort__option input {

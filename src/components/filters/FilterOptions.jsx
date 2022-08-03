@@ -67,14 +67,16 @@ const FilterOptions = (props) => {
         />
       </div>
 
-      <div className={styled["filter__button-group"]}>
-        <Button className="secondary" onClick={handleClear}>
-          Clear
-        </Button>
-        <Button type="submit" className="primary">
-          Apply
-        </Button>
-      </div>
+      {props.showButtons && (
+        <div className={styled["filter__button-group"]}>
+          <Button className="secondary" onClick={handleClear}>
+            Clear
+          </Button>
+          <Button type="submit" className="primary">
+            Apply
+          </Button>
+        </div>
+      )}
     </form>
   );
 };

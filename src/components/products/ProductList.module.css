@@ -45,6 +45,14 @@
     font-size: clamp(1.4rem, 4vw, 2rem);
 }
 
+.product__grid {
+    display: grid;
+}
+
+.product__grid aside {
+    display: none
+}
+
 
 
 /* Media Queries */
@@ -62,6 +70,15 @@
         grid-template-columns: repeat(3, 1fr);
         place-content: center space-evenly;
         gap: 3rem;
+    }
+
+    .product__grid {
+        grid-template-columns: 25% 1fr;
+        gap: 2rem;
+    }
+
+    .product__grid aside {
+        display: block;
     }
 }
 

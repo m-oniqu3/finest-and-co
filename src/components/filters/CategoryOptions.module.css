@@ -1,15 +1,8 @@
 .category {
-    position: relative;
-    left: 5%;
+
     margin-top: 1rem;
 }
 
-.categories {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: .5rem;
-    padding: 1rem 0;
-}
 
 .category__option {
     display: flex;
