@@ -1,12 +1,13 @@
 .product__list {
     min-height: 35rem;
+
 }
 
 .list {
     padding: 1rem 0 2rem;
     display: grid;
     gap: 1rem;
-    width: 100%;
+
 }
 
 .list__header {
@@ -58,7 +59,7 @@
 
 @media (min-width:768px) {
     .list {
-        grid-template-columns: repeat(auto-fit, minmax(220px, 200px));
+        grid-template-columns: repeat(3, 1fr);
         place-content: center space-evenly;
         gap: 3rem;
     }
@@ -66,6 +67,8 @@
 
 @media (min-width:1024px) {
     .list {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 200px));
+        place-content: center space-evenly;
         gap: 4rem;
     }
 }
