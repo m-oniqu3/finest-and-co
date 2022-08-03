@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   filterProducts,
   updateFilters,
@@ -11,6 +11,7 @@ const FilterContextProvider = ({ children }) => {
   //get filters from local storage
   const storedFilters = JSON.parse(localStorage.getItem("filters"));
   const dispatch = useDispatch();
+  const { products } = useSelector((state) => state.products);
 
   //set filters to initial state if there are no filters in local storage
   const [filter, setFilter] = useState({
@@ -23,11 +24,13 @@ const FilterContextProvider = ({ children }) => {
 
   //update local storage, filter the products
   useEffect(() => {
-    dispatch(updateFilters({ type: "category", value: filter.category }));
-    dispatch(updateFilters({ type: "company", value: filter.company }));
-    dispatch(updateFilters({ type: "sortBy", value: filter.sortBy }));
-    dispatch(filterProducts());
-  }, [dispatch, filter]);
+    if (products.length > 0) {
+      dispatch(updateFilters({ type: "category", value: filter.category }));
+      dispatch(updateFilters({ type: "company", value: filter.company }));
+      dispatch(updateFilters({ type: "sortBy", value: filter.sortBy }));
+      dispatch(filterProducts());
+    }
+  }, [dispatch, filter, products]);
 
   return (
     <filterContext.Provider value={{ filter, setFilter }}>

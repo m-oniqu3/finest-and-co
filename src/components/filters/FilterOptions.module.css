@@ -4,18 +4,25 @@
 }
 
 .filter__group {
-    padding: 1.5rem 0;
+    padding: 1.2rem .5rem;
 }
 
 .filter h4 {
     font-weight: 400;
     padding-bottom: .5rem;
+    text-transform: capitalize;
 }
 
 .filter__option {
-    margin: .3rem 0;
     display: flex;
     align-items: center;
+    padding: .2rem 0;
+}
+
+.filter__option input {
+    min-width: 1rem;
+    width: 1rem;
+    height: 1rem;
 }
 
 .filter__option label {

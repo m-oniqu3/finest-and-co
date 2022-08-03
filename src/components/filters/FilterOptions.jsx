@@ -34,7 +34,7 @@ const FilterOptions = (props) => {
   //map over the sort options and input for each option
   const options = sortOptions.map((item, index) => {
     return (
-      <div key={index} className={styled.sort__option}>
+      <div key={index} className={styled.filter__option}>
         <input
           type="radio"
           name="sort"
@@ -73,7 +73,7 @@ const FilterOptions = (props) => {
   //map over the categories and crete an input for each option
   const categoryOptions = Array.from(productCategories).map((category) => {
     return (
-      <div key={category} className={styled.category__option}>
+      <div key={category} className={styled.filter__option}>
         <input
           type="checkbox"
           id={category}
@@ -112,7 +112,7 @@ const FilterOptions = (props) => {
   //map over the companies and create an input for each option
   const companyOptions = Array.from(productCompanies).map((company) => {
     return (
-      <div key={company} className={styled.company__option}>
+      <div key={company} className={styled.filter__option}>
         <input
           type="checkbox"
           id={company}
@@ -128,23 +128,21 @@ const FilterOptions = (props) => {
   return (
     <form className={styled.filter}>
       <h4>Sort</h4>
-      {options}
+      <div className={styled.filter__group}>{options}</div>
+
+      <h4>Filter by</h4>
+      <div className={styled.filter__group}>
+        <h4>category</h4>
+        {categoryOptions}
+      </div>
 
       <div className={styled.filter__group}>
-        <h4>Filter by</h4>
-        <div>
-          <p>category</p>
-          {categoryOptions}
-        </div>
-
-        <div>
-          <p>company</p>
-          {companyOptions}
-        </div>
+        <h4>company</h4>
+        {companyOptions}
       </div>
 
       <Button className="secondary" onClick={handleClear}>
-        Clear
+        Clear Filters
       </Button>
     </form>
   );
