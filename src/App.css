@@ -8,7 +8,8 @@
 
 
 :root {
-    --primary: #9F2C0F;
+    --primary: #000000;
+    --primary-light: #ffffff;
     --primary-neutral: #F2F0F0;
     --secondary-neutral: #a5a4a4;
 }

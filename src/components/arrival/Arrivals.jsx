@@ -9,8 +9,8 @@ const Arrivals = () => {
       <section className={styled.arrivals}>
         <figure>
           <img
-            src="https://images.unsplash.com/photo-1600585152220-90363fe7e115?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
-            alt="A kitchen with an island with 4 barstools"
+            src="https://images.pexels.com/photos/6316069/pexels-photo-6316069.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+            alt="A styling kitchen with modern funriture."
           />
         </figure>
         <div className={styled.arrivals__details}>
