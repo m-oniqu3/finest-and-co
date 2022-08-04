@@ -1,0 +1,48 @@
+.form {
+    margin: 3rem 0;
+}
+
+.form__heading {
+    padding-bottom: 1rem;
+}
+
+.form__heading h3 {
+    font-size: clamp(1.2rem, 3vw, 1.5rem);
+    font-weight: 500;
+}
+
+.form__group {
+    padding: .5rem 0;
+}
+
+.form__group input {
+    padding: 0.5rem 0;
+    margin-bottom: 1rem;
+    border: none;
+    border-bottom: 1px solid #777777;
+    width: 100%;
+
+}
+
+.form__group input:focus {
+    outline: none;
+}
+
+.form button {
+    width: 100%;
+}
+
+.form__prompt {
+    text-align: center;
+    padding-bottom: .5rem;
+}
+
+.form__prompt span {
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.form__prompt span:hover {
+    border-bottom: 1px solid var(--primary);
+}

@@ -14,20 +14,22 @@
 .primary {
     background-color: var(--primary);
     color: var(--primary-neutral);
+    border: 1px solid var(--primary);
 }
 
 .primary:hover {
-    background-color: #b92804
+    background: none;
+    color: var(--primary);
 }
 
 .secondary {
-    border: 1px solid black;
+    border: 1px solid var(--primary);
     background: none;
-    color: black;
+    color: var(--primary);
 }
 
 .secondary:hover {
-    background-color: black;
+    background-color: var(--primary);
     color: white;
 
 }
