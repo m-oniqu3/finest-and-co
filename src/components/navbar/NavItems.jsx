@@ -2,14 +2,19 @@ import React from "react";
 import styled from "./NavItems.module.css";
 import { NavLink } from "react-router-dom";
 
-const NavItems = () => {
+const NavItems = (props) => {
+  const { color } = props;
   return (
     <ul className={styled.items}>
       <li>
-        <NavLink to="/">Home</NavLink>
+        <NavLink to="/" style={{ color: `${color}` }}>
+          Home
+        </NavLink>
       </li>
       <li>
-        <NavLink to="/shop">Shop</NavLink>
+        <NavLink to="/shop" style={{ color: `${color}` }}>
+          Shop
+        </NavLink>
       </li>
     </ul>
   );

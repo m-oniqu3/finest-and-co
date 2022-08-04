@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "./Loading.module.css";
-import loading from "./loading.svg";
+import loading from "./blocks-wave.svg";
 
 const Loading = () => {
   return (
