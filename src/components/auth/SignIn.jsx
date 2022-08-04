@@ -1,14 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "./SignIn.module.css";
 import Button from "../helpers/ui/button/Button";
 import Container from "../helpers/wrapper/Container";
 
 const SignIn = () => {
+  const [userHasAccount, setUserHasAccount] = useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  //toggle userHasAccount
+  const toggleFormFields = () => setUserHasAccount((state) => !state);
+
+  //update field values
+  const handleName = (e) => setName(e.target.value);
+  const handleEmail = (e) => setEmail(e.target.value);
+  const handlePassword = (e) => setPassword(e.target.value);
+
+  //dynamic text
+  const text = userHasAccount ? "Sign In" : "Create Account";
+  const link = userHasAccount ? "Create Account" : "Sign In";
+  const prompt = userHasAccount
+    ? "Don't have an account?"
+    : "Already have an account?";
+
   return (
     <Container>
       <form className={styled.form}>
         <div className={styled.form__heading}>
-          <h3>Create Account</h3>
+          <h3>{text}</h3>
           <p className="text">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae
             tempora illum.
@@ -16,17 +36,40 @@ const SignIn = () => {
         </div>
 
         <div className={styled.form__group}>
-          <input type="text" id="name" placeholder="Name" />
+          {!userHasAccount && (
+            <input
+              type="text"
+              id="name"
+              placeholder="Name"
+              onChange={handleName}
+              value={name}
+            />
+          )}
 
-          <input type="email" id="email" placeholder="Email" />
+          <input
+            type="email"
+            id="email"
+            placeholder="Email"
+            onChange={handleEmail}
+            value={email}
+          />
 
-          <input type="password" id="password" placeholder="Password" />
+          <input
+            type="password"
+            id="password"
+            placeholder="Password"
+            onChange={handlePassword}
+            value={password}
+          />
         </div>
 
-        <Button className="primary">Create Account</Button>
+        <Button type="submit" className="primary">
+          {text}
+        </Button>
         <Button className="secondary">Continue as Guest</Button>
+
         <p className={`text ${styled.form__prompt}`}>
-          Already have an account? <span>Sign In</span>
+          {prompt} <span onClick={toggleFormFields}>{link}</span>
         </p>
       </form>
     </Container>
