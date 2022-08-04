@@ -5,6 +5,7 @@ import Shop from "./Shop";
 import ProductInfo from "../products/ProductInfo";
 import WishList from "./WishList";
 import Cart from "./Cart";
+import Account from "./Account";
 
 const Pages = () => {
   return (
@@ -15,6 +16,7 @@ const Pages = () => {
         <Route path="/shop/:productId" element={<ProductInfo />} />
         <Route path="/wishlist" element={<WishList />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/account" element={<Account />} />
       </Routes>
     </div>
   );

@@ -5,9 +5,15 @@ import Container from "../helpers/wrapper/Container";
 import { VscClose } from "react-icons/vsc";
 import { Link } from "react-router-dom";
 import { AiOutlineUser } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 
 const Menu = (props) => {
+  const navigate = useNavigate();
+
+  //close menu
   const handleClose = () => props.setIsOpen((state) => !state);
+
+  const handleAccount = () => navigate("/account");
 
   return ReactDOM.createPortal(
     <div className={styled.menu}>
@@ -16,7 +22,7 @@ const Menu = (props) => {
           <p className="logo">finest&co</p>
 
           <div className={styled.menu__icons}>
-            <span>
+            <span onClick={handleAccount}>
               <AiOutlineUser size="22" color="var(--primary)" />
             </span>
             <span onClick={handleClose}>
