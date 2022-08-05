@@ -1,0 +1,21 @@
+import { onAuthStateChanged } from "firebase/auth";
+import { useEffect, useState } from "react";
+import { auth } from "../components/firebase/firebase-config";
+
+const useAuth = () => {
+  const [currentUser, setCurrentUser] = useState(null);
+
+  // subscribe to auth state changes
+  useEffect(() => {
+    const unSub = onAuthStateChanged(auth, (user) => {
+      setCurrentUser(user?.uid ?? null);
+    });
+
+    // unsubscribe from auth state changes
+    return () => unSub();
+  }, []);
+
+  return currentUser;
+};
+
+export default useAuth;

@@ -11,7 +11,7 @@
     height: 90vh;
 }
 
-.account figure {
+.account__image {
     display: none;
 }
 
@@ -24,7 +24,7 @@
 
     }
 
-    .account figure {
+    .account__image {
         display: grid;
         position: absolute;
         top: 0;
@@ -34,9 +34,10 @@
         z-index: -1;
     }
 
-    .account figure img {
+    .account__image img {
         width: 100%;
         height: 100%;
+        max-height: 100vh;
         object-fit: cover;
     }
 }

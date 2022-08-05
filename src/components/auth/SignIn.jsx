@@ -2,18 +2,21 @@ import React, { useState } from "react";
 import styled from "./SignIn.module.css";
 import Button from "../helpers/ui/button/Button";
 import Container from "../helpers/wrapper/Container";
+import { createAccount, signInUser } from "../firebase/firebase-config";
+import Loading from "../helpers/loading/Loading";
+import { useSelector } from "react-redux";
 
 const SignIn = () => {
   const [userHasAccount, setUserHasAccount] = useState(false);
-  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const { user } = useSelector((state) => state.auth);
 
   //toggle userHasAccount
   const toggleFormFields = () => setUserHasAccount((state) => !state);
 
   //update field values
-  const handleName = (e) => setName(e.target.value);
   const handleEmail = (e) => setEmail(e.target.value);
   const handlePassword = (e) => setPassword(e.target.value);
 
@@ -24,9 +27,37 @@ const SignIn = () => {
     ? "Don't have an account?"
     : "Already have an account?";
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!userHasAccount) {
+      //create account
+      setLoading(true);
+      try {
+        await createAccount(email, password);
+      } catch (error) {
+        alert(error.message);
+      }
+      setLoading(false);
+    } else if (userHasAccount) {
+      //sign in
+      setLoading(true);
+      try {
+        await signInUser(email, password);
+      } catch (error) {
+        alert(error.message);
+      }
+      setLoading(false);
+    }
+  };
+
+  if (loading) {
+    return <Loading />;
+  }
+
   return (
     <Container>
-      <form className={styled.form}>
+      <form className={styled.form} onSubmit={handleSubmit}>
         <div className={styled.form__heading}>
           <h3>{text}</h3>
           <p className="text">
@@ -36,16 +67,6 @@ const SignIn = () => {
         </div>
 
         <div className={styled.form__group}>
-          {!userHasAccount && (
-            <input
-              type="text"
-              id="name"
-              placeholder="Name"
-              onChange={handleName}
-              value={name}
-            />
-          )}
-
           <input
             type="email"
             id="email"
@@ -63,14 +84,17 @@ const SignIn = () => {
           />
         </div>
 
-        <Button type="submit" className="primary">
+        <Button type="submit" disabled={loading} className="primary">
           {text}
         </Button>
-        <Button className="secondary">Continue as Guest</Button>
+        <Button disabled={loading} className="secondary">
+          Continue as Guest
+        </Button>
 
         <p className={`text ${styled.form__prompt}`}>
           {prompt} <span onClick={toggleFormFields}>{link}</span>
         </p>
+        {user && <p>You are logged in</p>}
       </form>
     </Container>
   );
