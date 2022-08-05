@@ -8,7 +8,6 @@ import {
   signInUserAnonymously,
 } from "../firebase/firebase-config";
 import Loading from "../helpers/loading/Loading";
-import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const SignIn = () => {
@@ -16,7 +15,6 @@ const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const { user } = useSelector((state) => state.auth);
   const navigate = useNavigate();
 
   //toggle userHasAccount
@@ -59,6 +57,7 @@ const SignIn = () => {
     }
   };
 
+  //login anonymously
   const handleGuest = async () => {
     setLoading(true);
     try {
@@ -111,7 +110,6 @@ const SignIn = () => {
         <p className={`text ${styled.form__prompt}`}>
           {prompt} <span onClick={toggleFormFields}>{link}</span>
         </p>
-        {user && <p>You are logged in</p>}
       </form>
     </Container>
   );

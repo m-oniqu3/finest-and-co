@@ -3,15 +3,21 @@ import styled from "./Navbar.module.css";
 import Container from "../helpers/wrapper/Container";
 import { AiOutlineUser } from "react-icons/ai";
 import { RiMenuLine } from "react-icons/ri";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import Menu from "./Menu";
 import NavItems from "./NavItems";
 import { IoCartOutline } from "react-icons/io5";
 import { CgHeart } from "react-icons/cg";
+import { useSelector } from "react-redux";
+import Logout from "../auth/Logout";
+import Modal from "../helpers/modal/Modal";
 
 const Navbar = (props) => {
-  const { light } = props;
+  const { user } = useSelector((state) => state.auth);
   const [isOpen, setIsOpen] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
+  const navigate = useNavigate();
+  const { light } = props;
 
   //if isOpen is true, prevent scrolling on body
   useEffect(() => {
@@ -25,7 +31,13 @@ const Navbar = (props) => {
   //function to change isOpen state
   const handleMenu = () => setIsOpen((state) => !state);
 
+  //change color of navbar depending on light prop
   const color = light ? "var(--primary-light)" : "var(--primary)";
+
+  const handleAccount = () => {
+    if (!user.id) navigate("/account");
+    setOpenModal((state) => !state);
+  };
 
   return (
     <>
@@ -41,10 +53,8 @@ const Navbar = (props) => {
             </div>
 
             <ul className={styled.nav__icons}>
-              <li>
-                <NavLink to="/account">
-                  <AiOutlineUser size="22" color={color} />
-                </NavLink>
+              <li onClick={handleAccount}>
+                <AiOutlineUser size="22" color={color} />
               </li>
 
               <li onClick={handleMenu} className={styled.nav__menu}>
@@ -67,7 +77,16 @@ const Navbar = (props) => {
           </nav>
         </Container>
       </div>
+
+      {/* open mobile Menu */}
       {isOpen && <Menu setIsOpen={setIsOpen} />}
+
+      {/* open modal */}
+      {openModal && (
+        <Modal setOpenModal={setOpenModal} openModal={openModal}>
+          <Logout setOpenModal={setOpenModal} />
+        </Modal>
+      )}
     </>
   );
 };

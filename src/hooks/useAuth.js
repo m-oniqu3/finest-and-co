@@ -8,7 +8,11 @@ const useAuth = () => {
   // subscribe to auth state changes
   useEffect(() => {
     const unSub = onAuthStateChanged(auth, (user) => {
-      setCurrentUser(user?.uid ?? null);
+      const userData = {
+        id: user?.uid ?? null,
+        isAnonymous: user?.isAnonymous ?? null,
+      };
+      setCurrentUser(userData);
     });
 
     // unsubscribe from auth state changes
