@@ -28,7 +28,7 @@ function App() {
 
   //set the user in the store
   useEffect(() => {
-    if (currentUser) dispatch(setUser({ user: currentUser }));
+    if (currentUser) dispatch(setUser(currentUser));
   }, [currentUser, dispatch]);
 
   return <>{results.isLoading ? <Loading /> : <Pages />}</>;

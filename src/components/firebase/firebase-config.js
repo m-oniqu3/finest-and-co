@@ -4,6 +4,7 @@ import {
   createUserWithEmailAndPassword,
   signOut,
   signInWithEmailAndPassword,
+  signInAnonymously,
 } from "firebase/auth";
 
 // Firebase configuration
@@ -27,9 +28,13 @@ export const createAccount = (email, password) => {
   return createUserWithEmailAndPassword(auth, email, password);
 };
 
+// Sign in with an email and password
 export const signInUser = (email, password) => {
   return signInWithEmailAndPassword(auth, email, password);
 };
+
+//Sign in anonymously
+export const signInUserAnonymously = () => signInAnonymously(auth);
 
 // Sign out the current user
 export const logOut = () => signOut(auth);

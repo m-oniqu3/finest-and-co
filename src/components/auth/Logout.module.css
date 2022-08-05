@@ -1,0 +1,60 @@
+.logout {
+    background-color: var(--primary-light);
+    padding: 1rem;
+    text-align: center;
+    max-width: 400px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.close {
+    position: absolute;
+    top: .5rem;
+    right: .5rem;
+    cursor: pointer;
+}
+
+.logout__icon {
+    display: flex;
+    justify-content: center;
+    margin: .5rem 0;
+}
+
+.logout__heading {
+    font-size: clamp(1rem, 3vw, 1.2rem);
+    font-weight: 500;
+}
+
+.logout__text {
+    max-width: 310px;
+    margin: 0 auto;
+}
+
+.logout__transfer {
+    font-weight: 500;
+    text-decoration: underline;
+}
+
+.logout__btns {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.logout__btns button {
+    width: 100%;
+}
+
+/* Media Queries */
+
+@media (min-width: 600px) {
+    .logout {
+        padding: 1.5rem;
+    }
+
+    .logout__icon * {
+        width: 2rem;
+        height: 2rem;
+    }
+}

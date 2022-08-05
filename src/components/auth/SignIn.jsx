@@ -2,16 +2,20 @@ import React, { useState } from "react";
 import styled from "./SignIn.module.css";
 import Button from "../helpers/ui/button/Button";
 import Container from "../helpers/wrapper/Container";
-import { createAccount, signInUser } from "../firebase/firebase-config";
+import {
+  createAccount,
+  signInUser,
+  signInUserAnonymously,
+} from "../firebase/firebase-config";
 import Loading from "../helpers/loading/Loading";
-import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const SignIn = () => {
   const [userHasAccount, setUserHasAccount] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const { user } = useSelector((state) => state.auth);
+  const navigate = useNavigate();
 
   //toggle userHasAccount
   const toggleFormFields = () => setUserHasAccount((state) => !state);
@@ -35,6 +39,7 @@ const SignIn = () => {
       setLoading(true);
       try {
         await createAccount(email, password);
+        navigate("/shop", { replace: true });
       } catch (error) {
         alert(error.message);
       }
@@ -44,6 +49,7 @@ const SignIn = () => {
       setLoading(true);
       try {
         await signInUser(email, password);
+        navigate("/shop", { replace: true });
       } catch (error) {
         alert(error.message);
       }
@@ -51,9 +57,19 @@ const SignIn = () => {
     }
   };
 
-  if (loading) {
-    return <Loading />;
-  }
+  //login anonymously
+  const handleGuest = async () => {
+    setLoading(true);
+    try {
+      await signInUserAnonymously();
+      navigate("/shop", { replace: true });
+    } catch (error) {
+      alert(error.message);
+    }
+    setLoading(false);
+  };
+
+  if (loading) return <Loading />;
 
   return (
     <Container>
@@ -87,14 +103,13 @@ const SignIn = () => {
         <Button type="submit" disabled={loading} className="primary">
           {text}
         </Button>
-        <Button disabled={loading} className="secondary">
+        <Button disabled={loading} className="secondary" onClick={handleGuest}>
           Continue as Guest
         </Button>
 
         <p className={`text ${styled.form__prompt}`}>
           {prompt} <span onClick={toggleFormFields}>{link}</span>
         </p>
-        {user && <p>You are logged in</p>}
       </form>
     </Container>
   );
