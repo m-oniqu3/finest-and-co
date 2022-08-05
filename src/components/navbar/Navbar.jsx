@@ -42,7 +42,7 @@ const Navbar = (props) => {
 
             <ul className={styled.nav__icons}>
               <li>
-                <NavLink to="/">
+                <NavLink to="/account">
                   <AiOutlineUser size="22" color={color} />
                 </NavLink>
               </li>
