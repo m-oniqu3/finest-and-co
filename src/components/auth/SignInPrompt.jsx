@@ -9,7 +9,9 @@ const SignInPrompt = (props) => {
   const navigate = useNavigate();
   const { page } = props;
 
-  const handleSignIn = () => navigate("/account");
+  //navigate to the account page and send state data
+  const handleSignIn = () =>
+    navigate("/account", { state: { redirect: `/${page}` } });
 
   return (
     <>

@@ -9,22 +9,17 @@ import {
 } from "../firebase/firebase-config";
 import Loading from "../helpers/loading/Loading";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../store/features/cart/cartSlice";
 
-const SignIn = () => {
+const SignIn = (props) => {
   const [userHasAccount, setUserHasAccount] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const location = useLocation();
-
-  //get the previous location before the account page
-  const previousLocation = location.state;
-  console.log(location);
-  console.log(previousLocation);
-
-  const redirect = JSON.parse(localStorage.getItem("redirect"));
-  console.log(redirect);
+  const { state } = useLocation();
+  const dispatch = useDispatch();
 
   //toggle userHasAccount
   const toggleFormFields = () => setUserHasAccount((state) => !state);
@@ -40,6 +35,22 @@ const SignIn = () => {
     ? "Don't have an account?"
     : "Already have an account?";
 
+  //redirect user after sign in and dispatch action if any
+  const redirectUser = () => {
+    if (state) {
+      //destructure the state data
+      const { redirect, action, payload } = state;
+
+      //navigate to the path in state
+      navigate(`${redirect}`, { replace: true });
+
+      if (action) {
+        //dispatch action with state.payload
+        if (action === "addToCart") dispatch(addToCart(payload));
+      }
+    } else navigate("/shop", { replace: true });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -48,7 +59,7 @@ const SignIn = () => {
       setLoading(true);
       try {
         await createAccount(email, password);
-        navigate("/shop", { replace: true });
+        redirectUser();
       } catch (error) {
         alert(error.message);
       }
@@ -58,7 +69,7 @@ const SignIn = () => {
       setLoading(true);
       try {
         await signInUser(email, password);
-        navigate("/shop", { replace: true });
+        redirectUser();
       } catch (error) {
         alert(error.message);
       }
@@ -71,13 +82,7 @@ const SignIn = () => {
     setLoading(true);
     try {
       await signInUserAnonymously();
-      if (redirect) {
-        //redirect to the page that was last visited and then remove the redirect from localStorage
-        navigate(`${redirect}`, { replace: true });
-        localStorage.removeItem("redirect");
-      } else {
-        navigate("/shop", { replace: true });
-      }
+      redirectUser();
     } catch (error) {
       alert(error.message);
     }
