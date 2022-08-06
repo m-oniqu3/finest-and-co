@@ -5,6 +5,7 @@
     background: rgba(226, 220, 220, 0.43);
     backdrop-filter: blur(30px);
     width: 100%;
+    min-height: 100vh;
     height: 100%;
     /* z-index: 1; */
 }

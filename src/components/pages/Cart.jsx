@@ -9,12 +9,15 @@ import Container from "../helpers/wrapper/Container";
 import CartSummary from "../cart/CartSummary";
 import Empty from "../helpers/ui/empty/Empty";
 import addToCart from "../../images/add-to-cart.svg";
+import Navbar from "../navbar/Navbar";
+import SignInPrompt from "../auth/SignInPrompt";
 
 const Cart = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   //get cartItems
   const { cartItems } = useSelector((state) => state.cart);
+  const { user } = useSelector((state) => state.auth);
 
   //calculate the total everytime the cartItems change
   useEffect(() => {
@@ -33,36 +36,40 @@ const Cart = () => {
   const emptyText =
     "Your cart is empty, but we can fix that. Visit the shop and start adding items to your cart.";
 
+  if (!user?.id) return <SignInPrompt page="cart" />;
+
   return (
-    <section className={styled.cart__container}>
-      <Container>
-        <div className={styled.cart__heading}>
-          <span onClick={handlePrevious}>
-            <IoIosArrowDropleftCircle
-              size="25"
-              color="var(--secondary-neutral)"
+    <div>
+      <Navbar />
+      <section className={styled.cart__container}>
+        <Container>
+          <div className={styled.cart__heading}>
+            <span onClick={handlePrevious}>
+              <IoIosArrowDropleftCircle
+                size="25"
+                color="var(--secondary-neutral)"
+              />
+            </span>
+            <h4>Your Shopping Cart</h4>
+          </div>
+
+          {/* if cart is empty then show message else show the cartitems */}
+          {emptyCart ? (
+            <Empty
+              heading="Your cart is empty."
+              text={emptyText}
+              button="Start shopping"
+              route="/shop"
             />
-          </span>
-          <h4>Your Shopping Cart</h4>
-        </div>
+          ) : (
+            cart
+          )}
 
-        {/* if cart is empty then show message else show the cartitems */}
-        {emptyCart ? (
-          <Empty
-            image={addToCart}
-            heading="Your cart is empty."
-            text={emptyText}
-            button="Start shopping"
-            route="/shop"
-          />
-        ) : (
-          cart
-        )}
-
-        {/* only show cart summary if the cart is not empty */}
-        {!emptyCart && <CartSummary />}
-      </Container>
-    </section>
+          {/* only show cart summary if the cart is not empty */}
+          {!emptyCart && <CartSummary />}
+        </Container>
+      </section>
+    </div>
   );
 };
 
