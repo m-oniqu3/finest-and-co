@@ -8,7 +8,6 @@ import { IoIosArrowDropleftCircle } from "react-icons/io";
 import Container from "../helpers/wrapper/Container";
 import CartSummary from "../cart/CartSummary";
 import Empty from "../helpers/ui/empty/Empty";
-import addToCart from "../../images/add-to-cart.svg";
 import Navbar from "../navbar/Navbar";
 import SignInPrompt from "../auth/SignInPrompt";
 

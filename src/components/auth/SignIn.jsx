@@ -8,7 +8,7 @@ import {
   signInUserAnonymously,
 } from "../firebase/firebase-config";
 import Loading from "../helpers/loading/Loading";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const SignIn = () => {
   const [userHasAccount, setUserHasAccount] = useState(false);
@@ -16,6 +16,15 @@ const SignIn = () => {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+
+  //get the previous location before the account page
+  const previousLocation = location.state;
+  console.log(location);
+  console.log(previousLocation);
+
+  const redirect = JSON.parse(localStorage.getItem("redirect"));
+  console.log(redirect);
 
   //toggle userHasAccount
   const toggleFormFields = () => setUserHasAccount((state) => !state);
@@ -62,7 +71,13 @@ const SignIn = () => {
     setLoading(true);
     try {
       await signInUserAnonymously();
-      navigate("/shop", { replace: true });
+      if (redirect) {
+        //redirect to the page that was last visited and then remove the redirect from localStorage
+        navigate(`${redirect}`, { replace: true });
+        localStorage.removeItem("redirect");
+      } else {
+        navigate("/shop", { replace: true });
+      }
     } catch (error) {
       alert(error.message);
     }
