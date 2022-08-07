@@ -56,5 +56,10 @@
         top: 1rem;
 
     }
+}
 
+@media (min-width:900px) {
+    .cart {
+        gap: 4rem;
+    }
 }

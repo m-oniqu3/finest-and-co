@@ -37,7 +37,7 @@ const Navbar = (props) => {
 
   const handleAccount = () => {
     if (!user.id) navigate("/account");
-    setOpenModal((state) => !state);
+    else setOpenModal((state) => !state);
   };
 
   return (
