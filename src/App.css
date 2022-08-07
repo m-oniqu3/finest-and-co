@@ -26,6 +26,28 @@
     padding: .5rem 0;
 }
 
+/* Scrollbar for Chrome */
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary)
+}
+
+
+/* Scrollbar for FireFox */
+@supports (scrollbar-color: red blue) {
+    * {
+        scrollbar-color: var(--primary) #f1f1f1;
+        scrollbar-width: thin;
+    }
+}
+
 /* Media Queries */
 
 @media (min-width:768px) {

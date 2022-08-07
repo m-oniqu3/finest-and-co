@@ -5,6 +5,7 @@
     background: rgba(226, 220, 220, 0.43);
     backdrop-filter: blur(30px);
     width: 100%;
+    min-height: 100vh;
     height: 100%;
     /* z-index: 1; */
 }
@@ -41,6 +42,6 @@
     text-decoration: none;
     color: inherit;
     color: var(--primary);
-    font-size: clamp(1.2rem, 3vw, 1.3rem);
+    font-size: clamp(1.1rem, 3vw, 1.3rem);
     font-weight: 400;
 }

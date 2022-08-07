@@ -15,8 +15,6 @@
     cursor: pointer;
 }
 
-
-
 .nav__icons {
     list-style: none;
     gap: .4rem;
@@ -26,21 +24,36 @@
     position: relative;
 }
 
-.nav__icons p {
+/* .nav__icons p {
     position: absolute;
     top: -.875rem;
     right: -4px;
     font-size: .875rem;
     color: var(--secondary-neutral);
     font-weight: 500;
-}
+} */
 
 .nav__items,
 .nav__shop__icons {
     display: none;
 }
 
-
+.nav__amount {
+    position: absolute;
+    top: -.8rem;
+    right: -.8rem;
+    font-size: .8rem;
+    background: var(--primary);
+    color: var(--primary-light);
+    font-weight: 400;
+    padding: 12px;
+    height: 6px;
+    width: 6px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 
 /* Media Queries */

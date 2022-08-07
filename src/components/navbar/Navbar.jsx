@@ -14,6 +14,7 @@ import Modal from "../helpers/modal/Modal";
 
 const Navbar = (props) => {
   const { user } = useSelector((state) => state.auth);
+  const { amountOfItemsInCart } = useSelector((state) => state.cart);
   const [isOpen, setIsOpen] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const navigate = useNavigate();
@@ -71,6 +72,12 @@ const Navbar = (props) => {
                   <NavLink to="/cart">
                     <IoCartOutline size="25" color={color} />
                   </NavLink>
+
+                  {!!amountOfItemsInCart && (
+                    <span className={styled.nav__amount}>
+                      {amountOfItemsInCart}
+                    </span>
+                  )}
                 </li>
               </div>
             </ul>

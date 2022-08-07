@@ -2,7 +2,7 @@ import React from "react";
 import styled from "./CartItem.module.css";
 import { useDispatch } from "react-redux";
 import { increase, decrease } from "../../store/features/cart/cartSlice";
-import { AiFillMinusCircle, AiFillPlusCircle } from "react-icons/ai";
+import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 
 function CartItem({ item }) {
   const dispatch = useDispatch();
@@ -26,22 +26,22 @@ function CartItem({ item }) {
         <div className={styled.item__calculate}>
           <div className={styled["item__quantity-group"]}>
             <div onClick={decreaseHandler}>
-              <AiFillMinusCircle color="#b5b5b5" size="25" />
+              <AiOutlineMinus size="15" />
             </div>
 
             <p>{item.quantity}</p>
 
             <div onClick={increaseHandler}>
-              <AiFillPlusCircle color="#b5b5b5" size="25" />
+              <AiOutlinePlus size="15" />
             </div>
           </div>
 
           <p>x</p>
 
-          <p>${nf.format(item.price)}</p>
+          <p>{nf.format(item.price)}</p>
         </div>
 
-        <p className={styled.item__price}>${nf.format(item.productTotal)}</p>
+        <p className={styled.item__price}>{nf.format(item.productTotal)}</p>
       </article>
     </section>
   );
