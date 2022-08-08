@@ -11,6 +11,7 @@ import Loading from "../helpers/loading/Loading";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../store/features/cart/cartSlice";
+import { addToWishList } from "../../store/features/wishlist/wishlistSlice";
 
 const SignIn = (props) => {
   const [userHasAccount, setUserHasAccount] = useState(false);
@@ -35,18 +36,20 @@ const SignIn = (props) => {
     ? "Don't have an account?"
     : "Already have an account?";
 
-  //redirect user after sign in and dispatch action if any
+  /**redirect user after sign in and dispatch action if any
+   * destructured state from location
+   * if state, navigate to state.redirect
+   * if action, dispatch action with state.payload
+   * if neither, navigate to shop
+   */
   const redirectUser = () => {
     if (state) {
-      //destructure the state data
       const { redirect, action, payload } = state;
-
-      //navigate to the path in state
       navigate(`${redirect}`, { replace: true });
 
       if (action) {
-        //dispatch action with state.payload
         if (action === "addToCart") dispatch(addToCart(payload));
+        if (action === "addToWishList") dispatch(addToWishList(payload));
       }
     } else navigate("/shop", { replace: true });
   };
@@ -55,7 +58,7 @@ const SignIn = (props) => {
     e.preventDefault();
 
     if (!userHasAccount) {
-      //create account
+      //create account then redirect user if successful
       setLoading(true);
       try {
         await createAccount(email, password);
@@ -65,7 +68,7 @@ const SignIn = (props) => {
       }
       setLoading(false);
     } else if (userHasAccount) {
-      //sign in
+      //sign in then redirect user if successful
       setLoading(true);
       try {
         await signInUser(email, password);
@@ -77,7 +80,7 @@ const SignIn = (props) => {
     }
   };
 
-  //login anonymously
+  //login anonymously then redirect user if successful
   const handleGuest = async () => {
     setLoading(true);
     try {
@@ -89,6 +92,7 @@ const SignIn = (props) => {
     setLoading(false);
   };
 
+  //render loading spinner
   if (loading) return <Loading />;
 
   return (

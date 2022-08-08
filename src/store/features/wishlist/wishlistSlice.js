@@ -3,7 +3,6 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   wishListItems: [],
   amountOfItemsInWishList: 0,
-  itemIsInList: false,
   feedback: {
     image: "",
     message: "",

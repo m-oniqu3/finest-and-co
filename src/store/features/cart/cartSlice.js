@@ -49,7 +49,7 @@ const cartSlice = createSlice({
       state.amountOfItemsInCart++;
 
       if (!itemToAddExists) {
-        state.cartItems.push({
+        state.cartItems.unshift({
           id: itemToAdd.id,
           name: itemToAdd.name,
           price: itemToAdd.price,
@@ -57,7 +57,6 @@ const cartSlice = createSlice({
           productTotal: itemToAdd.price,
           image: itemToAdd.imgSrc,
         });
-        console.log(current(state));
       } else {
         itemToAddExists.quantity++;
         itemToAddExists.productTotal += itemToAddExists.price;

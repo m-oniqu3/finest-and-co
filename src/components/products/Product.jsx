@@ -29,7 +29,17 @@ const Product = (props) => {
 
   //add the current product to the wishlist
   const wishListHandler = () => {
-    if (!user?.id) navigate("/account");
+    if (!user?.id) {
+      //navigate to the account page and send state data
+      navigate("/account", {
+        state: {
+          redirect: "/shop",
+          action: "addToWishList",
+          payload: product,
+        },
+      });
+    }
+    //dispatch the action to add the current item to the wishlist
     else dispatch(addToWishList(product));
   };
   const productData = {

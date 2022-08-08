@@ -41,15 +41,24 @@ const ProductDetailsButtons = (props) => {
           payload: productData,
         },
       });
-    } else {
-      //dispatch the action to add the current item to the cart
-      dispatch(addToCart(productData));
     }
+    //dispatch the action to add the current item to the cart
+    else dispatch(addToCart(productData));
   };
 
   //add current product to wishlist
   const handleWishlist = () => {
-    if (!user?.id) navigate("/account");
+    if (!user?.id) {
+      //navigate to the account page and send state data
+      navigate("/account", {
+        state: {
+          redirect: "/shop",
+          action: "addToWishList",
+          payload: product,
+        },
+      });
+    }
+    //if the user is logged in, dispatch the action to add the current item to the wishlist
     else dispatch(addToWishList(product));
   };
 
