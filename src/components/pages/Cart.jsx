@@ -8,11 +8,12 @@ import CartSummary from "../cart/CartSummary";
 import Empty from "../helpers/ui/empty/Empty";
 import Navbar from "../navbar/Navbar";
 import SignInPrompt from "../auth/SignInPrompt";
+import { addCartToFirebase } from "../firebase/firebase-config";
 
 const Cart = () => {
   const dispatch = useDispatch();
 
-  //get cartItems
+  //get cartItems and user
   const { cartItems, amountOfItemsInCart } = useSelector((state) => state.cart);
   const { user } = useSelector((state) => state.auth);
 

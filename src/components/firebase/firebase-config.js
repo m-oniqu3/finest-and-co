@@ -6,6 +6,7 @@ import {
   signInWithEmailAndPassword,
   signInAnonymously,
 } from "firebase/auth";
+import { getFirestore, collection, doc, setDoc } from "firebase/firestore";
 
 // Firebase configuration
 const firebaseConfig = {
@@ -33,8 +34,18 @@ export const signInUser = (email, password) => {
   return signInWithEmailAndPassword(auth, email, password);
 };
 
-//Sign in anonymously
+// Sign in anonymously
 export const signInUserAnonymously = () => signInAnonymously(auth);
 
 // Sign out the current user
 export const logOut = () => signOut(auth);
+
+const database = getFirestore(app);
+export const cartCollection = collection(database, "cart");
+
+export const addCartToFirebase = async (userID, cart) => {
+  const currentUserDocument = doc(database, "cart", `${userID}`);
+  await setDoc(currentUserDocument, { ...cart }, { merge: true });
+};
+
+// Add cart to firebase database

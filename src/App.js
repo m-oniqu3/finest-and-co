@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "./App.css";
+import { addCartToFirebase } from "./components/firebase/firebase-config";
 import Loading from "./components/helpers/loading/Loading";
 import Pages from "./components/pages/Pages";
 import useAuth from "./hooks/useAuth";
@@ -15,6 +16,13 @@ function App() {
   const dispatch = useDispatch();
   const currentUser = useAuth();
 
+  const { cartItems } = useSelector((state) => state.cart);
+  const { user } = useSelector((state) => state.auth);
+
+  //add to firebase
+  useEffect(() => {
+    if (user?.id) addCartToFirebase(user?.id, cartItems);
+  }, [cartItems, user]);
   //get data from the api
   const results = useGetProductsQuery();
 
