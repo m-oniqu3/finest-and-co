@@ -6,7 +6,7 @@ import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 
 function CartItem({ item }) {
   const dispatch = useDispatch();
-
+  console.log(item);
   //dispatch the increase and decrease action
   const increaseHandler = () => dispatch(increase(item));
   const decreaseHandler = () => dispatch(decrease(item));

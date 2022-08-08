@@ -48,10 +48,12 @@
     right: 10px;
 }
 
-.product__group {
+.product__group__info {
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+
     padding-top: .5rem;
 }
 
@@ -75,6 +77,11 @@
 }
 
 
+.product button {
+    width: 100%;
+
+}
+
 
 /* Media Queries */
 
@@ -83,8 +90,12 @@
         height: 10rem;
     }
 
-    .product {
+    .normal {
         height: 18rem;
+    }
+
+    .height {
+        height: 22rem;
     }
 
     .product__group {

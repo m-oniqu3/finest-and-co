@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "./ProductDetails.module.css";
 import Container from "../helpers/wrapper/Container";
 import Color from "../helpers/ui/colour/Color";
@@ -7,8 +7,12 @@ import Ratings from "../helpers/ui/rating/Ratings";
 import Button from "../helpers/ui/button/Button";
 
 const ProductDetails = (props) => {
+  const [image, setImage] = useState(null);
   const { product } = props;
-  const [image, setImage] = useState(product.images[0]);
+
+  useEffect(() => {
+    setImage(product.images[0]);
+  }, [product]);
 
   //format for price
   const nf = new Intl.NumberFormat("en-US");

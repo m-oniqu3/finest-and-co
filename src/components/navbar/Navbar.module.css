@@ -38,17 +38,19 @@
     display: none;
 }
 
+
+
 .nav__amount {
     position: absolute;
-    top: -.8rem;
+    top: -1rem;
     right: -.8rem;
     font-size: .8rem;
     background: var(--primary);
     color: var(--primary-light);
     font-weight: 400;
     padding: 12px;
-    height: 6px;
-    width: 6px;
+    height: 5px;
+    width: 5px;
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -71,5 +73,6 @@
         display: flex;
         align-items: center;
         gap: .5rem;
+        position: relative;
     }
 }
