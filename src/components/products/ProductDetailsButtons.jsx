@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "./ProductDetailsButtons.module.css";
 import Button from "../helpers/ui/button/Button";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,12 +11,20 @@ import {
 import { HiHeart, HiOutlineHeart } from "react-icons/hi";
 
 const ProductDetailsButtons = (props) => {
+  const { wishListItems } = useSelector((state) => state.wishlist);
+  const [isInList, setIsInList] = useState(false);
+  const { product } = props;
+
+  useEffect(() => {
+    const item = wishListItems.find((item) => item.id === product.id);
+    if (item) setIsInList(true);
+    else setIsInList(false);
+  }, [wishListItems, product]);
+
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
   const navigate = useNavigate();
-  const { itemIsInList } = useSelector((state) => state.wishlist);
 
-  const { product } = props;
   const { id, name, price, images } = product;
   const productData = {
     id,
@@ -45,7 +53,7 @@ const ProductDetailsButtons = (props) => {
   //check if current product is in wishlist
   useEffect(() => {
     if (user?.id) dispatch(checkIfItemIsInWishList(id));
-  }, [dispatch, product, user, id, itemIsInList]);
+  }, [dispatch, product, user, id, isInList]);
 
   //add current product to wishlist
   const handleWishlist = () => {
@@ -54,11 +62,7 @@ const ProductDetailsButtons = (props) => {
   };
 
   // show the heart icon based on if the product is in the wishlist
-  const heart = itemIsInList ? (
-    <HiHeart size={22} />
-  ) : (
-    <HiOutlineHeart size={22} />
-  );
+  const heart = isInList ? <HiHeart size={22} /> : <HiOutlineHeart size={22} />;
 
   return (
     <div className={styled.buttons}>
