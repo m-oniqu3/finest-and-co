@@ -4,10 +4,7 @@ import Button from "../helpers/ui/button/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../store/features/cart/cartSlice";
 import { useNavigate } from "react-router-dom";
-import {
-  addToWishList,
-  checkIfItemIsInWishList,
-} from "../../store/features/wishlist/wishlistSlice";
+import { addToWishList } from "../../store/features/wishlist/wishlistSlice";
 import { HiHeart, HiOutlineHeart } from "react-icons/hi";
 
 const ProductDetailsButtons = (props) => {
@@ -49,11 +46,6 @@ const ProductDetailsButtons = (props) => {
       dispatch(addToCart(productData));
     }
   };
-
-  //check if current product is in wishlist
-  useEffect(() => {
-    if (user?.id) dispatch(checkIfItemIsInWishList(id));
-  }, [dispatch, product, user, id, isInList]);
 
   //add current product to wishlist
   const handleWishlist = () => {

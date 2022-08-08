@@ -3,12 +3,20 @@
     justify-content: space-between;
     align-items: center;
     gap: 1rem;
-
     overflow-x: scroll;
     -ms-overflow-style: none;
     scrollbar-width: none;
-    /* max-width: 1200px; */
     margin: 1rem auto;
+}
+
+/* hide scrollbar for chrome */
+::-webkit-scrollbar {
+    display: none;
+}
+
+:-webkit-scrollbar {
+    width: 0 !important;
+
 }
 
 .shop__buttons button {

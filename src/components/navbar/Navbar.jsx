@@ -15,6 +15,7 @@ import Modal from "../helpers/modal/Modal";
 const Navbar = (props) => {
   const { user } = useSelector((state) => state.auth);
   const { amountOfItemsInCart } = useSelector((state) => state.cart);
+  const { amountOfItemsInWishList } = useSelector((state) => state.wishlist);
   const [isOpen, setIsOpen] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const navigate = useNavigate();
@@ -35,17 +36,24 @@ const Navbar = (props) => {
   //change color of navbar depending on light prop
   const color = light ? "var(--primary-light)" : "var(--primary)";
 
+  //when user is logged in, show logout modal else navigate to account page
   const handleAccount = () => {
     if (!user.id) navigate("/account");
     else setOpenModal((state) => !state);
   };
+
+  const handleHome = () => navigate("/");
 
   return (
     <>
       <div className={styled.nav}>
         <Container>
           <nav className={styled.nav__group}>
-            <p className="logo" style={{ color: `${color}` }}>
+            <p
+              className="logo"
+              style={{ color: `${color}` }}
+              onClick={handleHome}
+            >
               finest&co
             </p>
 
@@ -67,6 +75,12 @@ const Navbar = (props) => {
                   <NavLink to="/wishlist">
                     <CgHeart size="22" color={color} />
                   </NavLink>
+
+                  {!!amountOfItemsInWishList && (
+                    <span className={styled.nav__amount}>
+                      {amountOfItemsInWishList}
+                    </span>
+                  )}
                 </li>
                 <li>
                   <NavLink to="/cart">

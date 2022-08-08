@@ -45,20 +45,8 @@ const wishlistSlice = createSlice({
         );
       }
     },
-
-    /**checks if the current item is already in the wishlist
-     * returns boolean
-     */
-    checkIfItemIsInWishList: (state, action) => {
-      //check if the id of the item is in the wishlist
-      const id = action.payload;
-      const item = state.wishListItems.find((item) => item.id === id);
-
-      if (item) state.itemIsInList = true;
-      else state.itemIsInList = false;
-    },
   },
 });
 
-export const { addToWishList, checkIfItemIsInWishList } = wishlistSlice.actions;
+export const { addToWishList } = wishlistSlice.actions;
 export default wishlistSlice.reducer;

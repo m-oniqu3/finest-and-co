@@ -19,8 +19,8 @@ const WishList = () => {
   if (wishListItems) {
     content = (
       <>
-        <h3>
-          Wishlist <span>{amountOfItemsInWishList}</span>
+        <h3 className={styled.wishlist__heading}>
+          Wishlist <span>{amountOfItemsInWishList} items</span>
         </h3>
         <div className={styled.wishlist}>
           {wishListItems?.map((product) => {
@@ -35,14 +35,16 @@ const WishList = () => {
   const emptyText =
     "Your wishlist is empty. Visit the shop and start adding items to your wishlist.";
 
-  if (!wishListItems) {
-    return (
-      <Empty
-        heading="Your wishlist is empty."
-        text={emptyText}
-        button="Start shopping"
-        route="/shop"
-      />
+  if (!amountOfItemsInWishList) {
+    content = (
+      <div className={styled.wishlist__empty}>
+        <Empty
+          heading="Your wishlist is empty."
+          text={emptyText}
+          button="Start shopping"
+          route="/shop"
+        />
+      </div>
     );
   }
 

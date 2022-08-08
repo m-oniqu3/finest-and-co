@@ -1,8 +1,29 @@
 .wishlist {
-    padding: 1rem 0 2rem;
+    padding: 2rem 0;
     display: grid;
     gap: 1rem;
+}
 
+.wishlist__heading {
+    color: var(--primary);
+    font-weight: 500;
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.wishlist__heading span {
+    font-size: 1rem;
+}
+
+.wishlist__empty {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: min(100%, 400px);
 }
 
 
