@@ -25,7 +25,7 @@ const wishlistSlice = createSlice({
 
       //if payload does not exist then create a new object with its values
       if (!itemToAddExists) {
-        state.wishListItems.push(itemToAdd);
+        state.wishListItems.unshift(itemToAdd);
 
         //Update the feedback and increase the amount of items in the wishlist
         state.feedback.message = "Item added";
@@ -50,17 +50,15 @@ const wishlistSlice = createSlice({
      * returns boolean
      */
     checkIfItemIsInWishList: (state, action) => {
-      const item = state.wishListItems.find(
-        (item) => item.id === action.payload
-      );
-      state.itemIsInList = state.wishListItems.includes(item);
+      //check if the id of the item is in the wishlist
+      const id = action.payload;
+      const item = state.wishListItems.find((item) => item.id === id);
+
+      if (item) state.itemIsInList = true;
+      else state.itemIsInList = false;
     },
   },
 });
 
-export const {
-  addToWishList,
-  removeItemFromWishList,
-  checkIfItemIsInWishList,
-} = wishlistSlice.actions;
+export const { addToWishList, checkIfItemIsInWishList } = wishlistSlice.actions;
 export default wishlistSlice.reducer;
