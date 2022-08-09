@@ -110,10 +110,10 @@ const cartSlice = createSlice({
     updateCartFromFirebase: (state, action) => {
       state.cartItems = action.payload;
       let temp = 0;
-      // const amount =
-      state.amountOfItemsInCart = state.cartItems.forEach((item) => {
-        return (temp += item.quantity);
+      state.cartItems.forEach((item) => {
+        temp = temp + item.quantity;
       });
+      state.amountOfItemsInCart = temp;
     },
   },
 });

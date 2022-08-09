@@ -18,7 +18,7 @@ function App() {
   const dispatch = useDispatch();
   const currentUser = useAuth();
 
-  const cart = useSelector((state) => state.cart);
+  const { cartItems } = useSelector((state) => state.cart);
   const { user } = useSelector((state) => state.auth);
 
   //get data from the api
@@ -39,10 +39,9 @@ function App() {
 
   //add to firebase
   useEffect(() => {
-    const { cartItems } = cart;
     if (user?.id && cartItems.length > 0)
       addCartToFirebase(user?.id, cartItems);
-  }, [cart, user]);
+  }, [cartItems, user]);
 
   return <>{results.isLoading ? <Loading /> : <Pages />}</>;
 }

@@ -22,7 +22,8 @@ const Pages = () => {
   useEffect(() => {
     // console.log(cartItemsForCurrentUser);
     if (user?.id && !!cartItemsForCurrentUser) {
-      cartItemsForCurrentUser.forEach((item) => dispatch(addToCart(item)));
+      dispatch(updateCartFromFirebase(cartItemsForCurrentUser));
+      // console.log(cartItemsForCurrentUser);
     }
   }, [cartItemsForCurrentUser, user, dispatch]);
 
