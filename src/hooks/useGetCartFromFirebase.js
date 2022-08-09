@@ -1,48 +1,47 @@
-import { getDocs, onSnapshot } from "firebase/firestore";
+import { getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { cartCollection } from "../components/firebase/firebase-config";
+import { userDataCollection } from "../components/firebase/firebase-config";
+import Loading from "../components/helpers/loading/Loading";
 
 const useGetCartFromFirebase = () => {
-  const [cart, setCart] = useState([]);
-  const [cartItemsForCurrentUser, setCartItemsForCurrentUser] = useState([]);
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [dataForUser, setDataForUser] = useState([]);
   const { user } = useSelector((state) => state.auth);
 
   useEffect(() => {
     //get the cart from firebase
+    setLoading(true);
     try {
       const getData = async () => {
-        const data = await getDocs(cartCollection).then((snapshot) => {
+        const data = await getDocs(userDataCollection).then((snapshot) => {
           const data = snapshot.docs.map((doc) => {
             return { document: doc.data(), id: doc.id };
           });
           return data;
         });
-        setCart(data);
+        setData(data);
         console.log("hi");
       };
       getData();
     } catch (error) {
       console.log(error);
     }
-
-    //clean up
-    // return () => getData()
+    setLoading(false);
   }, []);
-
-  // if (data.length !== 0) {
-  //     dispatch(updateLibraryState({ user: currentUser, userData: data }));
-  //   }
 
   //when the data is available get the cart for the current user
   useEffect(() => {
-    if (cart && cart.length !== 0) {
-      const cartItems = cart.find((item) => item.id === user?.id);
-      setCartItemsForCurrentUser(cartItems?.document?.cartItems);
+    if (data && data.length !== 0) {
+      const userData = data.find((item) => item.id === user?.id);
+      setDataForUser(userData?.document?.userData);
     }
-  }, [cart, user]);
+  }, [data, user]);
 
-  return cartItemsForCurrentUser;
+  if (loading) return <Loading />;
+
+  return dataForUser;
 };
 
 export default useGetCartFromFirebase;

@@ -8,24 +8,20 @@ import Cart from "./Cart";
 import Account from "./Account";
 import { useDispatch, useSelector } from "react-redux";
 import useGetCartFromFirebase from "../../hooks/useGetCartFromFirebase";
-import {
-  addToCart,
-  updateCartFromFirebase,
-} from "../../store/features/cart/cartSlice";
+import { updateCartFromFirebase } from "../../store/features/cart/cartSlice";
 
 const Pages = () => {
   const { user } = useSelector((state) => state.auth);
-  const cartItemsForCurrentUser = useGetCartFromFirebase();
+  const dataForUser = useGetCartFromFirebase();
   const dispatch = useDispatch();
 
   //get cartdata from firebase
   useEffect(() => {
-    // console.log(cartItemsForCurrentUser);
-    if (user?.id && !!cartItemsForCurrentUser) {
-      dispatch(updateCartFromFirebase(cartItemsForCurrentUser));
-      // console.log(cartItemsForCurrentUser);
+    if (user?.id && !!dataForUser) {
+      // dispatch(updateCartFromFirebase(dataForUser));
+      console.log(dataForUser);
     }
-  }, [cartItemsForCurrentUser, user, dispatch]);
+  }, [dataForUser, user, dispatch]);
 
   return (
     <div>

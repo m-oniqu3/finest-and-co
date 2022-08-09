@@ -9,12 +9,11 @@ import {
 } from "../firebase/firebase-config";
 import Loading from "../helpers/loading/Loading";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addToCart } from "../../store/features/cart/cartSlice";
 import { addToWishList } from "../../store/features/wishlist/wishlistSlice";
 
 const SignIn = (props) => {
-  const { user } = useSelector((state) => state.auth);
   const [userHasAccount, setUserHasAccount] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

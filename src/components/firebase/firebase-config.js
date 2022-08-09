@@ -41,10 +41,15 @@ export const signInUserAnonymously = () => signInAnonymously(auth);
 export const logOut = () => signOut(auth);
 
 const database = getFirestore(app);
-export const cartCollection = collection(database, "cart");
+export const userDataCollection = collection(database, "userData");
 
 // Add cart to firebase database
-export const addCartToFirebase = async (userID, cart) => {
-  const currentUserDocument = doc(database, "cart", `${userID}`);
-  await setDoc(currentUserDocument, { cartItems: [...cart] }, { merge: true });
+export const addCartToFirebase = async (userID, cart, wishlist) => {
+  const currentUserDocument = doc(database, "userData", `${userID}`);
+
+  await setDoc(
+    currentUserDocument,
+    { userData: { cart: [...cart], wishlist: [...wishlist] } },
+    { merge: true }
+  );
 };

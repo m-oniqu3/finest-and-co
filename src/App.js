@@ -18,7 +18,9 @@ function App() {
   const dispatch = useDispatch();
   const currentUser = useAuth();
 
+  //data from the store
   const { cartItems } = useSelector((state) => state.cart);
+  const { wishListItems } = useSelector((state) => state.wishlist);
   const { user } = useSelector((state) => state.auth);
 
   //get data from the api
@@ -39,9 +41,9 @@ function App() {
 
   //add to firebase
   useEffect(() => {
-    if (user?.id && cartItems.length > 0)
-      addCartToFirebase(user?.id, cartItems);
-  }, [cartItems, user]);
+    if (user?.id && cartItems.length > 0 && wishListItems.length > 0)
+      addCartToFirebase(user?.id, cartItems, wishListItems);
+  }, [cartItems, wishListItems, user]);
 
   return <>{results.isLoading ? <Loading /> : <Pages />}</>;
 }
