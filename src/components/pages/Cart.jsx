@@ -12,7 +12,7 @@ import SignInPrompt from "../auth/SignInPrompt";
 const Cart = () => {
   const dispatch = useDispatch();
 
-  //get cartItems
+  //get cartItems and user
   const { cartItems, amountOfItemsInCart } = useSelector((state) => state.cart);
   const { user } = useSelector((state) => state.auth);
 

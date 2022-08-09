@@ -44,8 +44,13 @@ const wishlistSlice = createSlice({
         );
       }
     },
+    updateListFromFirebase: (state, action) => {
+      //update the wishlist and the amount of items
+      state.wishListItems = action.payload;
+      state.amountOfItemsInWishList = state.wishListItems.length;
+    },
   },
 });
 
-export const { addToWishList } = wishlistSlice.actions;
+export const { addToWishList, updateListFromFirebase } = wishlistSlice.actions;
 export default wishlistSlice.reducer;

@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "../shop/Shop.module.css";
 import Arrivals from "../arrival/Arrivals";
 import Button from "../helpers/ui/button/Button";
 import Navbar from "../navbar/Navbar";
 import ProductList from "../products/ProductList";
 import Container from "../helpers/wrapper/Container";
+import { addCartToFirebase } from "../firebase/firebase-config";
+import { useSelector } from "react-redux";
 
 const categories = [
   "dining",

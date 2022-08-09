@@ -76,7 +76,8 @@ const Navbar = (props) => {
                     <CgHeart size="22" color={color} />
                   </NavLink>
 
-                  {!!amountOfItemsInWishList && (
+                  {/* show amount of items if it is not null and if user exists */}
+                  {!!amountOfItemsInWishList && user?.id && (
                     <span className={styled.nav__amount}>
                       {amountOfItemsInWishList}
                     </span>
@@ -87,7 +88,8 @@ const Navbar = (props) => {
                     <IoCartOutline size="25" color={color} />
                   </NavLink>
 
-                  {!!amountOfItemsInCart && (
+                  {/* show amount of items if it is not null and if user exists */}
+                  {!!amountOfItemsInCart && user?.id && (
                     <span className={styled.nav__amount}>
                       {amountOfItemsInCart}
                     </span>

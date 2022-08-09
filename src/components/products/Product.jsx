@@ -46,7 +46,7 @@ const Product = (props) => {
     id: product.id,
     name: product.name,
     price: product.price,
-    imgSrc: product.image,
+    image: product.image,
   };
 
   //add the current product to the cart and remove from wishlist

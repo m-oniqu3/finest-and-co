@@ -1,4 +1,4 @@
-import { createSlice, current } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   cartItems: [],
@@ -55,7 +55,7 @@ const cartSlice = createSlice({
           price: itemToAdd.price,
           quantity: 1,
           productTotal: itemToAdd.price,
-          image: itemToAdd.imgSrc,
+          image: itemToAdd.image,
         });
       } else {
         itemToAddExists.quantity++;
@@ -106,9 +106,24 @@ const cartSlice = createSlice({
         finalTotal: total,
       };
     },
+
+    updateCartFromFirebase: (state, action) => {
+      state.cartItems = action.payload;
+      //get the amount of items in the cart
+      let temp = 0;
+      state.cartItems.forEach((item) => {
+        temp = temp + item.quantity;
+      });
+      state.amountOfItemsInCart = temp;
+    },
   },
 });
 
-export const { increase, addToCart, decrease, calculateTotal } =
-  cartSlice.actions;
+export const {
+  increase,
+  addToCart,
+  decrease,
+  calculateTotal,
+  updateCartFromFirebase,
+} = cartSlice.actions;
 export default cartSlice.reducer;
