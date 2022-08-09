@@ -26,7 +26,7 @@ function App() {
   //get data from the api
   const results = useGetProductsQuery();
 
-  //update the products in the store
+  //update the products in the store with api data
   useEffect(() => {
     const { data, error, isSuccess, isError } = results;
 
@@ -39,9 +39,9 @@ function App() {
     if (currentUser) dispatch(setUser(currentUser));
   }, [currentUser, dispatch]);
 
-  //add to firebase
+  //add cart and wishlist data firebase
   useEffect(() => {
-    if (user?.id && cartItems.length > 0 && wishListItems.length > 0)
+    if (user?.id && (cartItems.length > 0 || wishListItems.length > 0))
       addCartToFirebase(user?.id, cartItems, wishListItems);
   }, [cartItems, wishListItems, user]);
 

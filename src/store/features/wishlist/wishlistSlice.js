@@ -45,6 +45,7 @@ const wishlistSlice = createSlice({
       }
     },
     updateListFromFirebase: (state, action) => {
+      //update the wishlist and the amount of items
       state.wishListItems = action.payload;
       state.amountOfItemsInWishList = state.wishListItems.length;
     },

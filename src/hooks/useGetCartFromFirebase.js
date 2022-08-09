@@ -10,8 +10,8 @@ const useGetCartFromFirebase = () => {
   const [dataForUser, setDataForUser] = useState([]);
   const { user } = useSelector((state) => state.auth);
 
+  //get the userData from firebase
   useEffect(() => {
-    //get the cart from firebase
     setLoading(true);
     try {
       const getData = async () => {
@@ -22,16 +22,15 @@ const useGetCartFromFirebase = () => {
           return data;
         });
         setData(data);
-        console.log("hi");
       };
       getData();
     } catch (error) {
-      console.log(error);
+      alert(error);
     }
     setLoading(false);
   }, []);
 
-  //when the data is available get the cart for the current user
+  //when the data is available get the data for the current user
   useEffect(() => {
     if (data && data.length !== 0) {
       const currentUserData = data.find((item) => item.id === user?.id);
