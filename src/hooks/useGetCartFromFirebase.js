@@ -34,8 +34,8 @@ const useGetCartFromFirebase = () => {
   //when the data is available get the cart for the current user
   useEffect(() => {
     if (data && data.length !== 0) {
-      const userData = data.find((item) => item.id === user?.id);
-      setDataForUser(userData?.document?.userData);
+      const currentUserData = data.find((item) => item.id === user?.id);
+      setDataForUser(currentUserData?.document?.userData);
     }
   }, [data, user]);
 

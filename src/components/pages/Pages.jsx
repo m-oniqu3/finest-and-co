@@ -9,6 +9,7 @@ import Account from "./Account";
 import { useDispatch, useSelector } from "react-redux";
 import useGetCartFromFirebase from "../../hooks/useGetCartFromFirebase";
 import { updateCartFromFirebase } from "../../store/features/cart/cartSlice";
+import { updateListFromFirebase } from "../../store/features/wishlist/wishlistSlice";
 
 const Pages = () => {
   const { user } = useSelector((state) => state.auth);
@@ -18,8 +19,10 @@ const Pages = () => {
   //get cartdata from firebase
   useEffect(() => {
     if (user?.id && !!dataForUser) {
-      // dispatch(updateCartFromFirebase(dataForUser));
-      console.log(dataForUser);
+      const { cart, wishlist } = dataForUser;
+
+      if (!!cart) dispatch(updateCartFromFirebase(cart));
+      if (!!wishlist) dispatch(updateListFromFirebase(wishlist));
     }
   }, [dataForUser, user, dispatch]);
 
