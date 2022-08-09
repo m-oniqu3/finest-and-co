@@ -5,9 +5,7 @@ import { addCartToFirebase } from "./components/firebase/firebase-config";
 import Loading from "./components/helpers/loading/Loading";
 import Pages from "./components/pages/Pages";
 import useAuth from "./hooks/useAuth";
-
 import { useGetProductsQuery } from "./store/features/api/apiSlice";
-
 import {
   setError,
   updateProducts,

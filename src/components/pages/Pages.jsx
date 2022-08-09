@@ -7,13 +7,13 @@ import WishList from "./WishList";
 import Cart from "./Cart";
 import Account from "./Account";
 import { useDispatch, useSelector } from "react-redux";
-import useGetCartFromFirebase from "../../hooks/useGetCartFromFirebase";
+import useGetDataFromFirebase from "../../hooks/useGetDataFromFirebase";
 import { updateCartFromFirebase } from "../../store/features/cart/cartSlice";
 import { updateListFromFirebase } from "../../store/features/wishlist/wishlistSlice";
 
 const Pages = () => {
   const { user } = useSelector((state) => state.auth);
-  const dataForUser = useGetCartFromFirebase();
+  const dataForUser = useGetDataFromFirebase();
   const dispatch = useDispatch();
 
   //get cartdata from firebase

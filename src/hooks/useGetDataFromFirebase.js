@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { userDataCollection } from "../components/firebase/firebase-config";
 import Loading from "../components/helpers/loading/Loading";
 
-const useGetCartFromFirebase = () => {
+const useGetDataFromFirebase = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [dataForUser, setDataForUser] = useState([]);
@@ -43,4 +43,4 @@ const useGetCartFromFirebase = () => {
   return dataForUser;
 };
 
-export default useGetCartFromFirebase;
+export default useGetDataFromFirebase;
