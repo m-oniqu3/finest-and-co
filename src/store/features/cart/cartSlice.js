@@ -55,7 +55,7 @@ const cartSlice = createSlice({
           price: itemToAdd.price,
           quantity: 1,
           productTotal: itemToAdd.price,
-          image: itemToAdd.imgSrc,
+          image: itemToAdd.image,
         });
       } else {
         itemToAddExists.quantity++;
@@ -106,9 +106,23 @@ const cartSlice = createSlice({
         finalTotal: total,
       };
     },
+
+    updateCartFromFirebase: (state, action) => {
+      state.cartItems = action.payload;
+      let temp = 0;
+      // const amount =
+      state.amountOfItemsInCart = state.cartItems.forEach((item) => {
+        return (temp += item.quantity);
+      });
+    },
   },
 });
 
-export const { increase, addToCart, decrease, calculateTotal } =
-  cartSlice.actions;
+export const {
+  increase,
+  addToCart,
+  decrease,
+  calculateTotal,
+  updateCartFromFirebase,
+} = cartSlice.actions;
 export default cartSlice.reducer;

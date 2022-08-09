@@ -5,7 +5,9 @@ import { addCartToFirebase } from "./components/firebase/firebase-config";
 import Loading from "./components/helpers/loading/Loading";
 import Pages from "./components/pages/Pages";
 import useAuth from "./hooks/useAuth";
+
 import { useGetProductsQuery } from "./store/features/api/apiSlice";
+
 import {
   setError,
   updateProducts,
@@ -16,13 +18,9 @@ function App() {
   const dispatch = useDispatch();
   const currentUser = useAuth();
 
-  const { cartItems } = useSelector((state) => state.cart);
+  const cart = useSelector((state) => state.cart);
   const { user } = useSelector((state) => state.auth);
 
-  //add to firebase
-  useEffect(() => {
-    if (user?.id) addCartToFirebase(user?.id, cartItems);
-  }, [cartItems, user]);
   //get data from the api
   const results = useGetProductsQuery();
 
@@ -38,6 +36,13 @@ function App() {
   useEffect(() => {
     if (currentUser) dispatch(setUser(currentUser));
   }, [currentUser, dispatch]);
+
+  //add to firebase
+  useEffect(() => {
+    const { cartItems } = cart;
+    if (user?.id && cartItems.length > 0)
+      addCartToFirebase(user?.id, cartItems);
+  }, [cart, user]);
 
   return <>{results.isLoading ? <Loading /> : <Pages />}</>;
 }

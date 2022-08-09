@@ -27,7 +27,7 @@ const ProductDetailsButtons = (props) => {
     id,
     name,
     price,
-    imgSrc: images[0].thumbnails.large.url,
+    image: images[0].thumbnails.large.url,
   };
 
   const addToCartHandler = () => {

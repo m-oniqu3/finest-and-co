@@ -43,9 +43,8 @@ export const logOut = () => signOut(auth);
 const database = getFirestore(app);
 export const cartCollection = collection(database, "cart");
 
+// Add cart to firebase database
 export const addCartToFirebase = async (userID, cart) => {
   const currentUserDocument = doc(database, "cart", `${userID}`);
-  await setDoc(currentUserDocument, { ...cart }, { merge: true });
+  await setDoc(currentUserDocument, { cartItems: [...cart] }, { merge: true });
 };
-
-// Add cart to firebase database
