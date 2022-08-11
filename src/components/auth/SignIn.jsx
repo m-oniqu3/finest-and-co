@@ -39,9 +39,11 @@ const SignIn = (props) => {
     setPasswordFeedback(validatePassword(e.target.value));
   };
 
+  //check if form is valid
   useEffect(() => {
     const isValid = passwordFeedback?.valid && emailFeedback?.valid;
-    setValid(isValid);
+    if (isValid) setValid(true);
+    else setValid(false);
   }, [passwordFeedback, emailFeedback]);
 
   //dynamic text
@@ -69,16 +71,9 @@ const SignIn = (props) => {
     } else navigate("/shop", { replace: true });
   };
 
-  // useEffect(() => {
-  //   const { emailError, passwordError, valid } = validateForm(email, password);
-  //   setValid({ emailError, passwordError, valid });
-  // }, [email, password]);
-  // console.log(valid);
-  // console.log(valid.valid);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    console.log("hi");
     if (!valid) {
       return;
     } else if (!userHasAccount) {
@@ -104,8 +99,6 @@ const SignIn = (props) => {
     }
   };
 
-  console.log(valid);
-
   //login anonymously then redirect user if successful
   const handleGuest = async () => {
     setLoading(true);
@@ -124,6 +117,7 @@ const SignIn = (props) => {
   const showEmailError = !emailFeedback?.valid && emailFeedback?.emailError;
   const showPasswordError =
     !passwordFeedback?.valid && passwordFeedback?.passwordError;
+  const disabledButton = !valid || loading;
 
   return (
     <Container>
@@ -144,10 +138,9 @@ const SignIn = (props) => {
             onChange={handleEmail}
             value={email}
           />
-
-          {showEmailError && (
-            <p className="error">{emailFeedback?.emailError}</p>
-          )}
+          <div className={styled.form__error}>
+            {showEmailError && <p>{emailFeedback?.emailError}</p>}
+          </div>
 
           <input
             type="password"
@@ -156,15 +149,15 @@ const SignIn = (props) => {
             onChange={handlePassword}
             value={password}
           />
-          {showPasswordError && (
-            <p className="error">{passwordFeedback?.passwordError}</p>
-          )}
+          <div className={styled.form__error}>
+            {showPasswordError && <p>{passwordFeedback?.passwordError}</p>}
+          </div>
         </div>
 
-        <Button type="submit" disabled={loading} className="primary">
+        <Button type="submit" disabled={disabledButton} className="primary">
           {text}
         </Button>
-        <Button disabled={loading} className="secondary" onClick={handleGuest}>
+        <Button className="secondary" onClick={handleGuest}>
           Continue as Guest
         </Button>
 
