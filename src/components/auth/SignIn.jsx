@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "./SignIn.module.css";
 import Button from "../helpers/ui/button/Button";
 import Container from "../helpers/wrapper/Container";
@@ -12,6 +12,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../store/features/cart/cartSlice";
 import { addToWishList } from "../../store/features/wishlist/wishlistSlice";
+import { validateEmail, validatePassword } from "./validateForm";
 
 const SignIn = (props) => {
   const [userHasAccount, setUserHasAccount] = useState(false);
@@ -21,13 +22,31 @@ const SignIn = (props) => {
   const navigate = useNavigate();
   const { state } = useLocation();
   const dispatch = useDispatch();
+  const [valid, setValid] = useState(false);
+  const [emailFeedback, setEmailFeedback] = useState({});
+  const [passwordFeedback, setPasswordFeedback] = useState({});
 
   //toggle userHasAccount
   const toggleFormFields = () => setUserHasAccount((state) => !state);
 
-  //update field values
-  const handleEmail = (e) => setEmail(e.target.value);
-  const handlePassword = (e) => setPassword(e.target.value);
+  //update field values and validate on change
+  const handleEmail = (e) => {
+    setEmail(e.target.value);
+    setEmailFeedback(validateEmail(e.target.value));
+  };
+
+  const handlePassword = (e) => {
+    setPassword(e.target.value);
+    setPasswordFeedback(validatePassword(e.target.value));
+  };
+
+  //check if form is valid
+  useEffect(() => {
+    //form is valid if all fields are valid
+    const isValid = passwordFeedback?.valid && emailFeedback?.valid;
+    if (isValid) setValid(true);
+    else setValid(false);
+  }, [passwordFeedback, emailFeedback]);
 
   //dynamic text
   const text = userHasAccount ? "Sign In" : "Create Account";
@@ -54,29 +73,35 @@ const SignIn = (props) => {
     } else navigate("/shop", { replace: true });
   };
 
+  //sign in user
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!userHasAccount) {
-      //create account then redirect user if successful
-      setLoading(true);
-      try {
-        await createAccount(email, password);
-        redirectUser();
-      } catch (error) {
-        alert(error.message);
+    /**if fields are not valid, return early
+    if fields are valiad begin sign in process*/
+    if (!valid) return;
+    else if (valid) {
+      if (!userHasAccount) {
+        //create account then redirect user if successful
+        setLoading(true);
+        try {
+          await createAccount(email, password);
+          redirectUser();
+        } catch (error) {
+          alert(error.message);
+        }
+        setLoading(false);
+      } else if (userHasAccount) {
+        //sign in then redirect user if successful
+        setLoading(true);
+        try {
+          await signInUser(email, password);
+          redirectUser();
+        } catch (error) {
+          alert(error.message);
+        }
+        setLoading(false);
       }
-      setLoading(false);
-    } else if (userHasAccount) {
-      //sign in then redirect user if successful
-      setLoading(true);
-      try {
-        await signInUser(email, password);
-        redirectUser();
-      } catch (error) {
-        alert(error.message);
-      }
-      setLoading(false);
     }
   };
 
@@ -91,6 +116,12 @@ const SignIn = (props) => {
     }
     setLoading(false);
   };
+
+  //determine when to show errors
+  const showEmailError = !emailFeedback?.valid && emailFeedback?.emailError;
+  const showPasswordError =
+    !passwordFeedback?.valid && passwordFeedback?.passwordError;
+  const disabledButton = !valid || loading;
 
   //render loading spinner
   if (loading) return <Loading />;
@@ -115,6 +146,11 @@ const SignIn = (props) => {
             value={email}
           />
 
+          {/* Error Message */}
+          <div className={styled.form__error}>
+            {showEmailError && <p>{emailFeedback?.emailError}</p>}
+          </div>
+
           <input
             type="password"
             id="password"
@@ -122,12 +158,16 @@ const SignIn = (props) => {
             onChange={handlePassword}
             value={password}
           />
+          {/* Error Message */}
+          <div className={styled.form__error}>
+            {showPasswordError && <p>{passwordFeedback?.passwordError}</p>}
+          </div>
         </div>
 
-        <Button type="submit" disabled={loading} className="primary">
+        <Button type="submit" disabled={disabledButton} className="primary">
           {text}
         </Button>
-        <Button disabled={loading} className="secondary" onClick={handleGuest}>
+        <Button className="secondary" disabled={loading} onClick={handleGuest}>
           Continue as Guest
         </Button>
 
