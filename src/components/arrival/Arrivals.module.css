@@ -25,10 +25,13 @@
     padding: 2rem 0;
 }
 
-
 .arrivals article h1 {
     font-size: clamp(1.8rem, 3vw, 2.5rem);
     font-weight: 600;
+}
+
+strong {
+    font-weight: 500;
 }
 
 /* Media Queries */

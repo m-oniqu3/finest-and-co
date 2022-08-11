@@ -22,24 +22,19 @@
   place-items: center;
   place-content: center;
   margin: auto;
-  max-width: 400px;
+  max-width: 500px;
 }
 
 .hero__content * {
   color: var(--primary-light)
 }
 
-
-
 .hero__content h1 {
   font-weight: 400;
-  font-size: clamp(2rem, 6vw, 2.8rem);
+  font-size: clamp(1.65rem, 6vw, 2.8rem);
   text-transform: uppercase;
   font-weight: 700;
-
 }
-
-
 
 .hero__content button {
   color: var(--primary);
@@ -47,7 +42,6 @@
   border: none;
 
 }
-
 
 
 /* Media Queries */

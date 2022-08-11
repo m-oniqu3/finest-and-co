@@ -15,10 +15,10 @@ const Hero = () => {
         <Navbar light={true} />
         <Container>
           <div className={styled.hero__content}>
-            <h1>sit with luxury</h1>
+            <h1>The epitome of luxury furniture</h1>
             <p className="text">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed
-              eligendi non qui impedit. Lorem ipsum dolor sit amet.
+              We believe that furniture should be more than just functional – it
+              should be a reflection of your personal style and taste.
             </p>
             <Button className="secondary" onClick={handleClick}>
               Shop Now

@@ -23,10 +23,11 @@ const Arrivals = () => {
               </div>
 
               <p className="text">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime,
-                quia iste quaerat asperiores dolores earum culpa! Deleniti
-                obcaecati quae ut. Quisquam, quidem. Lorem ipsum dolor sit amet
-                consectetur adipisicing elit.
+                Introducing our new kitchen set, the
+                <strong> "Gourmet Collection"</strong>. This luxurious set
+                features all the latest in kitchenware, from cookware and
+                utensils to appliances and storage solutions. With this set,
+                you'll be able to cook like a pro and entertain in style.
               </p>
             </Container>
           </article>
