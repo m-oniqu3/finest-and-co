@@ -38,7 +38,7 @@ const Navbar = (props) => {
 
   //when user is logged in, show logout modal else navigate to account page
   const handleAccount = () => {
-    if (!user.id) navigate("/account");
+    if (!user?.id) navigate("/account");
     else setOpenModal((state) => !state);
   };
 
