@@ -1,9 +1,12 @@
-import { EmailAuthProvider, linkWithCredential } from "firebase/auth";
+import { EmailAuthProvider, linkWithCredential, unlink } from "firebase/auth";
 import React, { useState } from "react";
-import { auth, createAccount } from "../firebase/firebase-config";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { auth } from "../firebase/firebase-config";
 import styled from "./LinkAccounts.module.css";
 
 const LinkAccounts = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -22,7 +25,19 @@ const LinkAccounts = () => {
       linkWithCredential(auth.currentUser, credential).then((usercred) => {
         const user = usercred.user;
         console.log("Account linking success", user);
+        //navigate to home
+        navigate("/", { replace: true });
       });
+
+      //   //unlink account
+      //   unlink(auth?.currentUser, providerID)
+      //     .then(() => {
+      //       //remove provider from user
+      //       console.log("Account unlinking success");
+      //     })
+      //     .catch((error) => {
+      //       console.log(error);
+      //     });
     } catch (error) {
       console.log(error.message);
     }

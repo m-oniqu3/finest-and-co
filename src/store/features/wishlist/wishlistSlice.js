@@ -49,8 +49,13 @@ const wishlistSlice = createSlice({
       state.wishListItems = action.payload;
       state.amountOfItemsInWishList = state.wishListItems.length;
     },
+    clearListOnLogout: (state) => {
+      state.wishListItems = [];
+      state.amountOfItemsInWishList = 0;
+    },
   },
 });
 
-export const { addToWishList, updateListFromFirebase } = wishlistSlice.actions;
+export const { addToWishList, updateListFromFirebase, clearListOnLogout } =
+  wishlistSlice.actions;
 export default wishlistSlice.reducer;

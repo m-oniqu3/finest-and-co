@@ -10,6 +10,8 @@ import Loading from "../helpers/loading/Loading";
 import { IoCloseSharp } from "react-icons/io5";
 import LinkAccounts from "./LinkAccounts";
 import Modal from "../helpers/modal/Modal";
+import { clearCartOnLogout } from "../../store/features/cart/cartSlice";
+import { clearListOnLogout } from "../../store/features/wishlist/wishlistSlice";
 
 const Logout = (props) => {
   const { setOpenModal } = props;
@@ -25,13 +27,24 @@ const Logout = (props) => {
 
     try {
       await logOut();
-      dispatch(setUser(null));
+      const user = {
+        id: null,
+        isAnonymous: false,
+        email: null,
+        providerID: null,
+      };
+      dispatch(setUser(user));
+      //clear cart and wishlist
+      dispatch(clearCartOnLogout());
+      dispatch(clearListOnLogout());
       navigate("/", { replace: true });
     } catch (error) {
       alert(error.message);
     }
-
     setLoading(false);
+
+    //close modal
+    setOpenModal(false);
   };
 
   //open sign in modal
@@ -85,7 +98,7 @@ const Logout = (props) => {
       </section>
 
       {openSignInModal && (
-        <Modal openModal={openSignInModal}>
+        <Modal openModal={openSignInModal} setOpenModal={setOpenSignInModal}>
           <LinkAccounts />
         </Modal>
       )}
