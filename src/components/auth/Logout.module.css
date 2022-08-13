@@ -33,6 +33,7 @@
 .logout__transfer {
     font-weight: 500;
     text-decoration: underline;
+    cursor: pointer;
 }
 
 .logout__btns {

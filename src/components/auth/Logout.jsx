@@ -99,7 +99,10 @@ const Logout = (props) => {
 
       {openSignInModal && (
         <Modal openModal={openSignInModal} setOpenModal={setOpenSignInModal}>
-          <LinkAccounts />
+          <LinkAccounts
+            setOpenModal={setOpenSignInModal}
+            closeLogoutModal={setOpenModal}
+          />
         </Modal>
       )}
     </>
