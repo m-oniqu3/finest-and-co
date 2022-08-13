@@ -3,7 +3,7 @@ import styled from "./Logout.module.css";
 import Button from "../helpers/ui/button/Button";
 import { HiLogout } from "react-icons/hi";
 import { useDispatch, useSelector } from "react-redux";
-import { logOut } from "../firebase/firebase-config";
+import { deleteUserData, logOut } from "../firebase/firebase-config";
 import { setUser } from "../../store/features/user/authSlice";
 import { useNavigate } from "react-router-dom";
 import Loading from "../helpers/loading/Loading";
@@ -20,21 +20,19 @@ const Logout = (props) => {
   const [loading, setLoading] = useState(false);
   const [openSignInModal, setOpenSignInModal] = useState(false);
   const navigate = useNavigate();
+  const updateUser = { id: null, isAnonymous: false, email: null };
 
   //logout user
   const handleLogout = async () => {
     setLoading(true);
 
     try {
+      //delete user from firebase
+      if (user?.isAnonymous) await deleteUserData(user?.id);
       await logOut();
-      const user = {
-        id: null,
-        isAnonymous: false,
-        email: null,
-        providerID: null,
-      };
-      dispatch(setUser(user));
-      //clear cart and wishlist
+
+      //clear user, cart and wishlist and navigate to home
+      dispatch(setUser(updateUser));
       dispatch(clearCartOnLogout());
       dispatch(clearListOnLogout());
       navigate("/", { replace: true });
@@ -42,15 +40,12 @@ const Logout = (props) => {
       alert(error.message);
     }
     setLoading(false);
-
     //close modal
     setOpenModal(false);
   };
 
-  //open sign in modal
+  //handle Modals
   const handleModal = () => setOpenSignInModal((state) => !state);
-
-  //close modal
   const handleCancel = () => setOpenModal((state) => !state);
 
   //dynamic text

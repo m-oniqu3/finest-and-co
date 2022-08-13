@@ -48,13 +48,6 @@ const SignIn = (props) => {
     else setValid(false);
   }, [passwordFeedback, emailFeedback]);
 
-  //dynamic text
-  const text = userHasAccount ? "Sign In" : "Create Account";
-  const link = userHasAccount ? "Create Account" : "Sign In";
-  const prompt = userHasAccount
-    ? "Don't have an account?"
-    : "Already have an account?";
-
   /**redirect user after sign in and dispatch action if any
    * destructured state from location
    * if state, navigate to state.redirect
@@ -123,6 +116,16 @@ const SignIn = (props) => {
     !passwordFeedback?.valid && passwordFeedback?.passwordError;
   const disabledButton = !valid || loading;
 
+  //dynamic text
+  const text = userHasAccount ? "Sign In" : "Create Account";
+  const link = userHasAccount ? "Create Account" : "Sign In";
+  const prompt = userHasAccount
+    ? "Don't have an account?"
+    : "Already have an account?";
+  const accountParagraph = userHasAccount
+    ? "Welcome back! Enter your details and get started."
+    : "Welcome to Finest & Co. Create an account to get started.";
+
   //render loading spinner
   if (loading) return <Loading />;
 
@@ -131,10 +134,7 @@ const SignIn = (props) => {
       <form className={styled.form} onSubmit={handleSubmit}>
         <div className={styled.form__heading}>
           <h3>{text}</h3>
-          <p className="text">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae
-            tempora illum.
-          </p>
+          <p className="text">{accountParagraph}</p>
         </div>
 
         <div className={styled.form__group}>

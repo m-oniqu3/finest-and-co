@@ -5,8 +5,15 @@ import {
   signOut,
   signInWithEmailAndPassword,
   signInAnonymously,
+  deleteUser,
 } from "firebase/auth";
-import { getFirestore, collection, doc, setDoc } from "firebase/firestore";
+import {
+  getFirestore,
+  collection,
+  doc,
+  setDoc,
+  deleteDoc,
+} from "firebase/firestore";
 
 // Firebase configuration
 const firebaseConfig = {
@@ -53,4 +60,16 @@ export const addCartToFirebase = async (userID, cart, wishlist) => {
     { userData: { cart: [...cart], wishlist: [...wishlist] } },
     { merge: true }
   );
+};
+
+// Delete user, cart and wishlist data from firebase database
+export const deleteUserData = async (userID) => {
+  try {
+    const currentUserDocument = doc(database, "userData", `${userID}`);
+    const user = auth.currentUser;
+    await deleteDoc(currentUserDocument);
+    await deleteUser(user);
+  } catch (error) {
+    alert(error.message);
+  }
 };
