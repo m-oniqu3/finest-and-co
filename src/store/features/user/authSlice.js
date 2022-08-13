@@ -4,6 +4,8 @@ const initialState = {
   user: {
     id: null,
     isAnonymous: false,
+    email: null,
+    providerID: null,
   },
 };
 

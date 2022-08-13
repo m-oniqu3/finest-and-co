@@ -1,19 +1,18 @@
-.form {
+.link {
+    background: var(--primary-light);
+    padding: 2rem 0;
+    max-width: 400px;
     margin: 0 auto;
-    max-width: 300px;
+    position: relative;
 }
 
-.form__heading {
-    padding-bottom: 1rem;
-}
-
-.form__heading h3 {
+.link h3 {
     font-size: clamp(1.2rem, 3vw, 1.5rem);
     font-weight: 500;
 }
 
 .form__group {
-    padding: .5rem 0;
+    padding: 1rem 0;
 }
 
 .form__group input {
@@ -22,30 +21,21 @@
     border: none;
     border-bottom: 1px solid #777777;
     width: 100%;
-
 }
 
 .form__group input:focus {
     outline: none;
 }
 
-.form button {
+.link__btns {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.link__btns button {
     width: 100%;
-}
-
-.form__prompt {
-    text-align: center;
-    padding: .8rem 0;
-}
-
-.form__prompt span {
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-}
-
-.form__prompt span:hover {
-    border-bottom: 1px solid var(--primary);
 }
 
 .form__error {
@@ -57,4 +47,12 @@
     color: var(--danger);
     font-size: .8rem;
     font-weight: 500;
+}
+
+/* Media Queries */
+
+@media (min-width: 600px) {
+    .link {
+        padding: 2rem 1rem;
+    }
 }

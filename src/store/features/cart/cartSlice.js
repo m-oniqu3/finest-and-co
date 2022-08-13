@@ -116,6 +116,16 @@ const cartSlice = createSlice({
       });
       state.amountOfItemsInCart = temp;
     },
+    clearCartOnLogout: (state) => {
+      state.cartItems = [];
+      state.amountOfItemsInCart = 0;
+      state.total = {
+        subTotal: 0,
+        tax: 0,
+        shipping: 0,
+        finalTotal: 0,
+      };
+    },
   },
 });
 
@@ -125,5 +135,6 @@ export const {
   decrease,
   calculateTotal,
   updateCartFromFirebase,
+  clearCartOnLogout,
 } = cartSlice.actions;
 export default cartSlice.reducer;

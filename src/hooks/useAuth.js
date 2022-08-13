@@ -11,6 +11,8 @@ const useAuth = () => {
       const userData = {
         id: user?.uid ?? null,
         isAnonymous: user?.isAnonymous ?? null,
+        email: user?.email ?? null,
+        providerID: user?.providerData[0]?.providerId ?? null,
       };
       setCurrentUser(userData);
     });
