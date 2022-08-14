@@ -44,6 +44,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - The Course API
 - Firebase
 
+## Design File
+
+[Figma Design File](https://www.figma.com/file/2kMItgEasTn7cs5DXdvXwX/finest%26co?node-id=0%3A1)
+
 ## Installation
 
 To install and run the project locally, download the repo and run the following commands:
