@@ -48,7 +48,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Installation
 
-To install and run the project locally, download the repo and run the following commands:
+To install and run the project locally, download/clone the repo and run the following commands:
 
 ```bash
 npm install
