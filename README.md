@@ -30,8 +30,6 @@ The app has the following features:
 - Authenticated users can view their wishlist items and move them to their cart
 - Authenticated users can view their cart and order details/summary
 
-## Motivation
-
 ## Tools and Technologies
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). Technologies used include:
