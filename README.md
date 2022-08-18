@@ -2,7 +2,7 @@
 
 ## Finest & Co | The Epitome of Luxury Funiture
 
-Welcome to Finest and Co, an e-commerce platform for luxury funiture company that provides the perfect piece to complete any home. We believe that furniture should be more than just functional, it should be beautiful and luxurious. Our selection of high-end furniture is the perfect way to add a touch of class to any room.
+Welcome to Finest and Co, an e-commerce platform for a luxury funiture company that provides the perfect piece to complete any home. We believe that furniture should be more than just functional, it should be beautiful and luxurious. Our selection of high-end furniture is the perfect way to add a touch of class to any room.
 
 ![Screenshot of the home page](/src/images/homepage.jpeg)
 ![Screenshot of the shop page](/src/images/shoppage.jpeg)
