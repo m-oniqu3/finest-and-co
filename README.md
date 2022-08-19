@@ -14,7 +14,7 @@ Finest & Co. is an e-commerce platform for a luxury funiture company. The app al
 
 This project uses Firebase as the backend, and communicates with the Firestore database to store and manage user data. The Firebase authentication system is used to authenticate users and manage user credentials.
 
-If a user does not wish to provide their credentials they have the option to sign in anonymously. Anonymous users, upon logging out of the app, are provided with the option to convert their anonymous account to a permanent one. Guests who refuse this feature are logged out and their data is deleted.
+If a user does not wish to provide their credentials, they have the option to sign in anonymously. Anonymous users, upon logging out of the app, are provided with the option to convert their anonymous account to a permanent one. Guests who refuse this feature are logged out and their data is deleted.
 
 ## Features
 
@@ -59,7 +59,9 @@ This runs the app in the development mode. Open [http://localhost:3000](http://l
 
 ## Environment Variables
 
-This project requires the following environment variables in order to run. Environment variables can be set in a .env file.
+This project requires the following environment variables in order to run. Environment variables can be set in a .env file in the root directory of the project.
+
+````bash
 
 ```bash
 # example .env file
@@ -73,4 +75,4 @@ REACT_APP_FIREBASE_PROJECT_ID=<your-project-id>
 REACT_APP_FIREBASE_STORAGE_BUCKET=<your-storage-bucket>
 REACT_APP_FIREBASE_MESSAGING_SENDER_ID=<your-messaging-sender-id>
 REACT_APP_FIREBASE_APP_ID=<your-app-id>
-```
+````
