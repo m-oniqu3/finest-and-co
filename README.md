@@ -10,7 +10,7 @@ Welcome to Finest and Co, an e-commerce platform for a luxury funiture company t
 
 ## Description
 
-Finest & Co. is an e-commerce platform for a luxury funiture company. The app allows users to browse through the available furniture styles, and when authenticated, they can add items to their cart, or wishlist.
+Finest & Co. is an e-commerce platform for a luxury funiture company. The app allows users to browse through the available furniture styles, and when authenticated, they can manage items in their cart and wishlist.
 
 This project uses Firebase as the backend, and communicates with the Firestore database to store and manage user data. The Firebase authentication system is used to authenticate users and manage user credentials.
 
