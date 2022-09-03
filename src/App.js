@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import "./App.css";
-import { addCartToFirebase } from "./components/firebase/firebase-config";
 import Loading from "./components/helpers/loading/Loading";
 import Pages from "./components/pages/Pages";
 import useAuth from "./hooks/useAuth";
@@ -15,11 +14,6 @@ import { setUser } from "./store/features/user/authSlice";
 function App() {
   const dispatch = useDispatch();
   const currentUser = useAuth();
-
-  //data from the store
-  const { cartItems } = useSelector((state) => state.cart);
-  const { wishListItems } = useSelector((state) => state.wishlist);
-  const { user } = useSelector((state) => state.auth);
 
   //get data from the api
   const results = useGetProductsQuery();
@@ -36,12 +30,6 @@ function App() {
   useEffect(() => {
     if (currentUser) dispatch(setUser(currentUser));
   }, [currentUser, dispatch]);
-
-  //add cart and wishlist data firebase
-  useEffect(() => {
-    if (user?.id && (cartItems.length > 0 || wishListItems.length > 0))
-      addCartToFirebase(user?.id, cartItems, wishListItems);
-  }, [cartItems, wishListItems, user]);
 
   return <>{results.isLoading ? <Loading /> : <Pages />}</>;
 }

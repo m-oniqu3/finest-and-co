@@ -14,7 +14,7 @@ const Cart = () => {
 
   //get cartItems and user
   const { cartItems, amountOfItemsInCart } = useSelector((state) => state.cart);
-  const { user } = useSelector((state) => state.auth);
+  const { id } = useSelector((state) => state.auth);
 
   //calculate the total everytime the cartItems change
   useEffect(() => {
@@ -31,7 +31,7 @@ const Cart = () => {
     "Your cart is empty, but we can fix that. Visit the shop and start adding items to your cart.";
 
   //if the user is not logged in, show the sign in prompt
-  if (!user?.id) return <SignInPrompt page="cart" />;
+  if (!id) return <SignInPrompt page="cart" />;
 
   return (
     <div>

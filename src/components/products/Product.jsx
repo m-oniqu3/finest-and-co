@@ -12,7 +12,7 @@ const Product = (props) => {
   const { product, wishlist } = props;
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.auth);
+  const { id } = useSelector((state) => state.auth);
   const { wishListItems } = useSelector((state) => state.wishlist);
   const [isInList, setIsInList] = useState(false);
 
@@ -29,7 +29,7 @@ const Product = (props) => {
 
   //add the current product to the wishlist
   const wishListHandler = () => {
-    if (!user?.id) {
+    if (!id) {
       //navigate to the account page and send state data
       navigate("/account", {
         state: {

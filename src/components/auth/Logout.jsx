@@ -15,7 +15,7 @@ import { clearListOnLogout } from "../../store/features/wishlist/wishlistSlice";
 
 const Logout = (props) => {
   const { setOpenModal } = props;
-  const { user } = useSelector((state) => state.auth);
+  const { id, isAnonymous } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const [openSignInModal, setOpenSignInModal] = useState(false);
@@ -28,7 +28,7 @@ const Logout = (props) => {
 
     try {
       //delete user from firebase
-      if (user?.isAnonymous) await deleteUserData(user?.id);
+      if (isAnonymous) await deleteUserData(id);
       await logOut();
 
       //clear user, cart and wishlist and navigate to home
@@ -49,7 +49,7 @@ const Logout = (props) => {
   const handleCancel = () => setOpenModal((state) => !state);
 
   //dynamic text
-  const text = user?.isAnonymous
+  const text = isAnonymous
     ? "You are using a guest acount. If you logout now, all your data will be lost."
     : "Leaving so soon?";
 
@@ -72,7 +72,7 @@ const Logout = (props) => {
           </h1>
           <p className={`text ${styled.logout__text}`}>{text}</p>
 
-          {user?.isAnonymous && (
+          {isAnonymous && (
             <p
               className={`text ${styled.logout__transfer}`}
               onClick={handleModal}
