@@ -8,12 +8,12 @@ import Product from "../products/Product";
 import Empty from "../helpers/ui/empty/Empty";
 
 const WishList = () => {
-  const { user } = useSelector((state) => state.auth);
+  const { id } = useSelector((state) => state.auth);
   const { amountOfItemsInWishList, wishListItems } = useSelector(
     (state) => state.wishlist
   );
 
-  if (!user?.id) return <SignInPrompt page="wishlist" />;
+  if (!id) return <SignInPrompt page="wishlist" />;
 
   let content;
   if (wishListItems) {

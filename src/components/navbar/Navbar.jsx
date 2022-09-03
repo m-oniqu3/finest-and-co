@@ -13,7 +13,7 @@ import Logout from "../auth/Logout";
 import Modal from "../helpers/modal/Modal";
 
 const Navbar = (props) => {
-  const { user } = useSelector((state) => state.auth);
+  const { id } = useSelector((state) => state.auth);
   const { amountOfItemsInCart } = useSelector((state) => state.cart);
   const { amountOfItemsInWishList } = useSelector((state) => state.wishlist);
   const [isOpen, setIsOpen] = useState(false);
@@ -23,11 +23,8 @@ const Navbar = (props) => {
 
   //if isOpen is true, prevent scrolling on body
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-    } else if (!isOpen) {
-      document.body.style.overflow = "auto";
-    }
+    if (isOpen) document.body.style.overflow = "hidden";
+    else if (!isOpen) document.body.style.overflow = "auto";
   }, [isOpen]);
 
   //function to change isOpen state
@@ -38,7 +35,7 @@ const Navbar = (props) => {
 
   //when user is logged in, show logout modal else navigate to account page
   const handleAccount = () => {
-    if (!user?.id) navigate("/account");
+    if (!id) navigate("/account");
     else setOpenModal((state) => !state);
   };
 
@@ -77,7 +74,7 @@ const Navbar = (props) => {
                   </NavLink>
 
                   {/* show amount of items if it is not null and if user exists */}
-                  {!!amountOfItemsInWishList && user?.id && (
+                  {!!amountOfItemsInWishList && id && (
                     <span className={styled.nav__amount}>
                       {amountOfItemsInWishList}
                     </span>
@@ -89,7 +86,7 @@ const Navbar = (props) => {
                   </NavLink>
 
                   {/* show amount of items if it is not null and if user exists */}
-                  {!!amountOfItemsInCart && user?.id && (
+                  {!!amountOfItemsInCart && id && (
                     <span className={styled.nav__amount}>
                       {amountOfItemsInCart}
                     </span>

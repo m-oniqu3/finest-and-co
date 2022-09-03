@@ -19,20 +19,19 @@ const ProductDetailsButtons = (props) => {
   }, [wishListItems, product]);
 
   const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.auth);
+  const { id } = useSelector((state) => state.auth);
   const navigate = useNavigate();
 
-  const { id, name, price, images } = product;
   const productData = {
-    id,
-    name,
-    price,
-    image: images[0].thumbnails.large.url,
+    id: product.id,
+    name: product.name,
+    price: product.price,
+    image: product.images[0].thumbnails.large.url,
   };
 
   const addToCartHandler = () => {
     //if the user is not logged in, redirect to the account page
-    if (!user?.id) {
+    if (!id) {
       //navigate to the account page and send state data
       navigate("/account", {
         state: {
@@ -48,7 +47,7 @@ const ProductDetailsButtons = (props) => {
 
   //add current product to wishlist
   const handleWishlist = () => {
-    if (!user?.id) {
+    if (!id) {
       //navigate to the account page and send state data
       navigate("/account", {
         state: {

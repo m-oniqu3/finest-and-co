@@ -51,13 +51,13 @@ const database = getFirestore(app);
 export const userDataCollection = collection(database, "userData");
 
 // Add cart and wishlist data to firebase database
-export const addCartToFirebase = async (userID, cart, wishlist) => {
-  const currentUserDocument = doc(database, "userData", `${userID}`);
+export const addCartToFirebase = async (id, cart, wishlist) => {
+  const currentUserDocument = doc(database, "userData", `${id}`);
 
   //set doc with cart and wishlist data and merge with existing data
   await setDoc(
     currentUserDocument,
-    { userData: { cart: [...cart], wishlist: [...wishlist] } },
+    { id, cart: [...cart], wishlist: [...wishlist] },
     { merge: true }
   );
 };

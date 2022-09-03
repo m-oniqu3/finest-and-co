@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "./Home";
 import Shop from "./Shop";
@@ -7,25 +7,59 @@ import WishList from "./WishList";
 import Cart from "./Cart";
 import Account from "./Account";
 import { useDispatch, useSelector } from "react-redux";
-import useGetDataFromFirebase from "../../hooks/useGetDataFromFirebase";
 import { updateCartFromFirebase } from "../../store/features/cart/cartSlice";
 import { updateListFromFirebase } from "../../store/features/wishlist/wishlistSlice";
+import Loading from "../helpers/loading/Loading";
+import {
+  addCartToFirebase,
+  userDataCollection,
+} from "../firebase/firebase-config";
+import { onSnapshot, query, where } from "firebase/firestore";
 
 const Pages = () => {
-  const { user } = useSelector((state) => state.auth);
-  const dataForUser = useGetDataFromFirebase();
+  const { id } = useSelector((state) => state.auth);
+  const { cartItems } = useSelector((state) => state.cart);
+  const { wishListItems } = useSelector((state) => state.wishlist);
+  const [loading, setLoading] = useState(true);
+  const [dataForUser, setDataForUser] = useState([]);
   const dispatch = useDispatch();
 
-  //get cartdata from firebase
+  //add cart and wishlist data firebase
   useEffect(() => {
-    if (user?.id && !!dataForUser) {
-      const { cart, wishlist } = dataForUser;
+    if (id !== null && (cartItems.length !== 0 || wishListItems.length !== 0))
+      addCartToFirebase(id, cartItems, wishListItems);
+  }, [cartItems, wishListItems, id]);
 
-      if (!!cart) dispatch(updateCartFromFirebase(cart));
-      if (!!wishlist) dispatch(updateListFromFirebase(wishlist));
+  //get the userData from firebase
+  useEffect(() => {
+    // query to find data for the current user
+    const request = query(userDataCollection, where("id", "==", `${id}`));
+
+    // get document from firebase
+    const unsub = onSnapshot(request, (snapshot) => {
+      setDataForUser(
+        snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
+      );
+      setLoading(false);
+    });
+
+    // clean up, unsubscribe from listener
+    return () => unsub();
+  }, [id]);
+
+  // update the store with data from firebase
+  useEffect(() => {
+    const valid = dataForUser?.length !== 0 && dataForUser !== undefined;
+    if (id !== null && valid) {
+      const { cart, wishlist } = dataForUser[0];
+
+      // if cart/wishlist is not null then update the store
+      if (cart?.length !== 0) dispatch(updateCartFromFirebase(cart));
+      if (wishlist?.length !== 0) dispatch(updateListFromFirebase(wishlist));
     }
-  }, [dataForUser, user, dispatch]);
+  }, [dataForUser, id, dispatch]);
 
+  if (id && loading) return <Loading />;
   return (
     <div>
       <Routes>
@@ -36,7 +70,7 @@ const Pages = () => {
         <Route path="/cart" element={<Cart />} />
         <Route
           path="/account"
-          element={user?.id ? <Navigate to="/" /> : <Account />}
+          element={id ? <Navigate to="/" /> : <Account />}
         />
       </Routes>
     </div>
