@@ -7,6 +7,7 @@ import Button from "../helpers/ui/button/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { addToWishList } from "../../store/features/wishlist/wishlistSlice";
 import { addToCart } from "../../store/features/cart/cartSlice";
+import { toast } from "react-toastify";
 
 const Product = (props) => {
   const { product, wishlist } = props;
@@ -15,6 +16,11 @@ const Product = (props) => {
   const { id } = useSelector((state) => state.auth);
   const { wishListItems } = useSelector((state) => state.wishlist);
   const [isInList, setIsInList] = useState(false);
+
+  const notify = () => {
+    if (isInList) toast.success("Item removed from wishlist");
+    else toast.success("Item added to wishlist");
+  };
 
   //format for price
   const nf = new Intl.NumberFormat("en-US");
@@ -40,7 +46,10 @@ const Product = (props) => {
       });
     }
     //dispatch the action to add the current item to the wishlist
-    else dispatch(addToWishList(product));
+    else {
+      dispatch(addToWishList(product));
+      notify();
+    }
   };
   const productData = {
     id: product.id,
