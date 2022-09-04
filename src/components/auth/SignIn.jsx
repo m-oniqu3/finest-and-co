@@ -55,15 +55,8 @@ const SignIn = (props) => {
    * if neither, navigate to shop
    */
   const redirectUser = () => {
-    if (state) {
-      const { redirect, action, payload } = state;
-      navigate(`${redirect}`, { replace: true });
-
-      if (action) {
-        if (action === "addToCart") dispatch(addToCart(payload));
-        if (action === "addToWishList") dispatch(addToWishList(payload));
-      }
-    } else navigate("/shop", { replace: true });
+    if (state) navigate(`${state.redirect}`, { replace: true });
+    else navigate("/shop", { replace: true });
   };
 
   //sign in user

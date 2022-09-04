@@ -43,11 +43,7 @@ const ProductDetailsButtons = (props) => {
     if (!id) {
       //navigate to the account page and send state data
       navigate("/account", {
-        state: {
-          redirect: "/shop",
-          action: "addToCart",
-          payload: productData,
-        },
+        state: { redirect: `/shop/${product.id}` },
       });
     }
     //dispatch the action to add the current item to the cart
@@ -61,13 +57,7 @@ const ProductDetailsButtons = (props) => {
   const handleWishlist = () => {
     if (!id) {
       //navigate to the account page and send state data
-      navigate("/account", {
-        state: {
-          redirect: "/shop",
-          action: "addToWishList",
-          payload: product,
-        },
-      });
+      navigate("/account", { state: { redirect: `/shop/${product.id}` } });
     }
     //if the user is logged in, dispatch the action to add the current item to the wishlist
     else {

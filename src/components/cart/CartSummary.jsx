@@ -3,6 +3,7 @@ import styled from "./CartSummary.module.css";
 import { useSelector } from "react-redux";
 import Button from "../helpers/ui/button/Button";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const CartSummary = () => {
   const navigate = useNavigate();
@@ -16,6 +17,11 @@ const CartSummary = () => {
 
   //navigate to the shop page
   const handleShop = () => navigate("/shop");
+
+  const notify = () => toast.success("Order placed successfully");
+
+  // checkout
+  const handleCheckout = () => notify();
 
   return (
     <article className={styled.summary}>
@@ -46,7 +52,9 @@ const CartSummary = () => {
         <Button className="secondary" onClick={handleShop}>
           Continue Shopping
         </Button>
-        <Button className="primary">Checkout</Button>
+        <Button onClick={handleCheckout} className="primary">
+          Checkout
+        </Button>
       </div>
     </article>
   );

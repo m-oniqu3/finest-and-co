@@ -35,22 +35,16 @@ const Product = (props) => {
 
   //add the current product to the wishlist
   const wishListHandler = () => {
-    if (!id) {
-      //navigate to the account page and send state data
-      navigate("/account", {
-        state: {
-          redirect: "/shop",
-          action: "addToWishList",
-          payload: product,
-        },
-      });
-    }
+    //navigate to the account page and send state data
+    if (!id) navigate("/account");
     //dispatch the action to add the current item to the wishlist
+    // show notification
     else {
       dispatch(addToWishList(product));
       notify();
     }
   };
+
   const productData = {
     id: product.id,
     name: product.name,
@@ -58,10 +52,14 @@ const Product = (props) => {
     image: product.image,
   };
 
+  // show notification
+  const moveToCartNotification = () => toast.success("Item moved to cart");
+
   //add the current product to the cart and remove from wishlist
   const handleMoveToCart = () => {
     dispatch(addToCart(productData));
     dispatch(addToWishList(product));
+    moveToCartNotification();
   };
 
   //check if the current product is in the wishlist
