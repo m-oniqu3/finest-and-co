@@ -1,22 +1,24 @@
 import { EmailAuthProvider, linkWithCredential } from "firebase/auth";
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { auth } from "../firebase/firebase-config";
 import Loading from "../helpers/loading/Loading";
 import Button from "../helpers/ui/button/Button";
 import Container from "../helpers/wrapper/Container";
 import styled from "./LinkAccounts.module.css";
 import { validateEmail, validatePassword } from "./validateForm";
+import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../store/features/user/authSlice";
 
 const LinkAccounts = (props) => {
   const { setOpenModal, closeLogoutModal } = props;
-  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [valid, setValid] = useState(false);
   const [emailFeedback, setEmailFeedback] = useState({});
   const [passwordFeedback, setPasswordFeedback] = useState({});
   const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
 
   //update field values and validate on change
   const handleEmail = (e) => {
@@ -37,36 +39,44 @@ const LinkAccounts = (props) => {
     else setValid(false);
   }, [passwordFeedback, emailFeedback]);
 
+  const notifyLink = (user) =>
+    toast.success(
+      `Accounts linked successfully! You can now sign in with this account ${user}`,
+      {
+        autoClose: 5000,
+      }
+    );
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!valid) return;
     else if (valid) {
-      setLoading(true);
       try {
+        setLoading(true);
         const credential = EmailAuthProvider.credential(email, password);
 
         //link account
         linkWithCredential(auth.currentUser, credential).then((usercred) => {
           const user = usercred.user;
-          console.log("Account linking success", user);
-          alert(
-            "Account linking success. You can now sign in with this account."
-          );
-          window.location.reload();
+          // window.location.reload();
+          const data = {
+            id: user.uid,
+            isAnonymous: user.isAnonymous,
+            email: user.email,
+            providerID: user.providerId,
+          };
+          notifyLink(user?.email ?? "");
+          dispatch(setUser(data));
 
-          //navigate to home
-          // navigate("/", { replace: true });
-          //refresh the page
-
+          setLoading(false);
           //close modal
           setOpenModal(false);
           closeLogoutModal(false);
         });
       } catch (error) {
-        alert(error.message);
+        toast.error(error.message, { autoClose: 5000 });
       }
-      setLoading(false);
     }
   };
 
@@ -79,6 +89,7 @@ const LinkAccounts = (props) => {
   const disabledButton = !valid || loading;
 
   if (loading) return <Loading />;
+  console.log(loading);
 
   return (
     <section className={styled.link}>

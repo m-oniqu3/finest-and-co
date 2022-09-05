@@ -9,10 +9,8 @@ import {
 } from "../firebase/firebase-config";
 import Loading from "../helpers/loading/Loading";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { addToCart } from "../../store/features/cart/cartSlice";
-import { addToWishList } from "../../store/features/wishlist/wishlistSlice";
 import { validateEmail, validatePassword } from "./validateForm";
+import { toast } from "react-toastify";
 
 const SignIn = (props) => {
   const [userHasAccount, setUserHasAccount] = useState(false);
@@ -21,7 +19,7 @@ const SignIn = (props) => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { state } = useLocation();
-  const dispatch = useDispatch();
+
   const [valid, setValid] = useState(false);
   const [emailFeedback, setEmailFeedback] = useState({});
   const [passwordFeedback, setPasswordFeedback] = useState({});
@@ -48,12 +46,9 @@ const SignIn = (props) => {
     else setValid(false);
   }, [passwordFeedback, emailFeedback]);
 
-  /**redirect user after sign in and dispatch action if any
+  /**redirect user after sign in
    * destructured state from location
-   * if state, navigate to state.redirect
-   * if action, dispatch action with state.payload
-   * if neither, navigate to shop
-   */
+   * if state, navigate to state.redirect else navigate to shop   */
   const redirectUser = () => {
     if (state) navigate(`${state.redirect}`, { replace: true });
     else navigate("/shop", { replace: true });
@@ -63,8 +58,7 @@ const SignIn = (props) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    /**if fields are not valid, return early
-    if fields are valiad begin sign in process*/
+    // if fields are not valid, return early else begin sign in process
     if (!valid) return;
     else if (valid) {
       if (!userHasAccount) {
@@ -74,7 +68,7 @@ const SignIn = (props) => {
           await createAccount(email, password);
           redirectUser();
         } catch (error) {
-          alert(error.message);
+          toast.error(error.message, { autoClose: 5000 });
         }
         setLoading(false);
       } else if (userHasAccount) {
@@ -84,7 +78,7 @@ const SignIn = (props) => {
           await signInUser(email, password);
           redirectUser();
         } catch (error) {
-          alert(error.message);
+          toast.error(error.message, { autoClose: 5000 });
         }
         setLoading(false);
       }
@@ -98,7 +92,7 @@ const SignIn = (props) => {
       await signInUserAnonymously();
       redirectUser();
     } catch (error) {
-      alert(error.message);
+      toast.error(error.message, { autoClose: 5000 });
     }
     setLoading(false);
   };
