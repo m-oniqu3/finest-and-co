@@ -61,7 +61,12 @@ const ProductDetailsButtons = (props) => {
     }
     //if the user is logged in, dispatch the action to add the current item to the wishlist
     else {
-      dispatch(addToWishList(product));
+      dispatch(
+        addToWishList({
+          ...product,
+          image: product.images[0].thumbnails.large.url,
+        })
+      );
       notify();
     }
   };

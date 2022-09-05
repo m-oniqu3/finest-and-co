@@ -17,6 +17,7 @@ const Product = (props) => {
   const { wishListItems } = useSelector((state) => state.wishlist);
   const [isInList, setIsInList] = useState(false);
 
+  // show notification
   const notify = () => {
     if (isInList) toast.success("Item removed from wishlist");
     else toast.success("Item added to wishlist");
@@ -37,8 +38,7 @@ const Product = (props) => {
   const wishListHandler = () => {
     //navigate to the account page and send state data
     if (!id) navigate("/account");
-    //dispatch the action to add the current item to the wishlist
-    // show notification
+    //add the current item to the wishlist and show notification
     else {
       dispatch(addToWishList(product));
       notify();
