@@ -6,11 +6,20 @@ import { addToCart } from "../../store/features/cart/cartSlice";
 import { useNavigate } from "react-router-dom";
 import { addToWishList } from "../../store/features/wishlist/wishlistSlice";
 import { HiHeart, HiOutlineHeart } from "react-icons/hi";
+import { toast } from "react-toastify";
 
 const ProductDetailsButtons = (props) => {
   const { wishListItems } = useSelector((state) => state.wishlist);
   const [isInList, setIsInList] = useState(false);
   const { product } = props;
+
+  // show notification
+  const notify = () => {
+    if (isInList) toast.success("Item removed from wishlist");
+    else toast.success("Item added to wishlist");
+  };
+
+  const cartNotification = () => toast.success("Item added to cart");
 
   useEffect(() => {
     const item = wishListItems.find((item) => item.id === product.id);
@@ -34,31 +43,32 @@ const ProductDetailsButtons = (props) => {
     if (!id) {
       //navigate to the account page and send state data
       navigate("/account", {
-        state: {
-          redirect: "/shop",
-          action: "addToCart",
-          payload: productData,
-        },
+        state: { redirect: `/shop/${product.id}` },
       });
     }
     //dispatch the action to add the current item to the cart
-    else dispatch(addToCart(productData));
+    else {
+      dispatch(addToCart(productData));
+      cartNotification();
+    }
   };
 
   //add current product to wishlist
   const handleWishlist = () => {
     if (!id) {
       //navigate to the account page and send state data
-      navigate("/account", {
-        state: {
-          redirect: "/shop",
-          action: "addToWishList",
-          payload: product,
-        },
-      });
+      navigate("/account", { state: { redirect: `/shop/${product.id}` } });
     }
     //if the user is logged in, dispatch the action to add the current item to the wishlist
-    else dispatch(addToWishList(product));
+    else {
+      dispatch(
+        addToWishList({
+          ...product,
+          image: product.images[0].thumbnails.large.url,
+        })
+      );
+      notify();
+    }
   };
 
   // show the heart icon based on if the product is in the wishlist

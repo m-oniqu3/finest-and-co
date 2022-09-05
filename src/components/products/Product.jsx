@@ -7,6 +7,7 @@ import Button from "../helpers/ui/button/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { addToWishList } from "../../store/features/wishlist/wishlistSlice";
 import { addToCart } from "../../store/features/cart/cartSlice";
+import { toast } from "react-toastify";
 
 const Product = (props) => {
   const { product, wishlist } = props;
@@ -15,6 +16,12 @@ const Product = (props) => {
   const { id } = useSelector((state) => state.auth);
   const { wishListItems } = useSelector((state) => state.wishlist);
   const [isInList, setIsInList] = useState(false);
+
+  // show notification
+  const notify = () => {
+    if (isInList) toast.success("Item removed from wishlist");
+    else toast.success("Item added to wishlist");
+  };
 
   //format for price
   const nf = new Intl.NumberFormat("en-US");
@@ -29,19 +36,15 @@ const Product = (props) => {
 
   //add the current product to the wishlist
   const wishListHandler = () => {
-    if (!id) {
-      //navigate to the account page and send state data
-      navigate("/account", {
-        state: {
-          redirect: "/shop",
-          action: "addToWishList",
-          payload: product,
-        },
-      });
+    //navigate to the account page and send state data
+    if (!id) navigate("/account");
+    //add the current item to the wishlist and show notification
+    else {
+      dispatch(addToWishList(product));
+      notify();
     }
-    //dispatch the action to add the current item to the wishlist
-    else dispatch(addToWishList(product));
   };
+
   const productData = {
     id: product.id,
     name: product.name,
@@ -49,10 +52,14 @@ const Product = (props) => {
     image: product.image,
   };
 
+  // show notification
+  const moveToCartNotification = () => toast.success("Item moved to cart");
+
   //add the current product to the cart and remove from wishlist
   const handleMoveToCart = () => {
     dispatch(addToCart(productData));
     dispatch(addToWishList(product));
+    moveToCartNotification();
   };
 
   //check if the current product is in the wishlist

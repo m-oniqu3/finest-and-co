@@ -10,6 +10,8 @@ import {
   updateProducts,
 } from "./store/features/products/productsSlice";
 import { setUser } from "./store/features/user/authSlice";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const dispatch = useDispatch();
@@ -31,7 +33,18 @@ function App() {
     if (currentUser) dispatch(setUser(currentUser));
   }, [currentUser, dispatch]);
 
-  return <>{results.isLoading ? <Loading /> : <Pages />}</>;
+  return (
+    <>
+      {results.isLoading ? (
+        <Loading />
+      ) : (
+        <>
+          <Pages />
+          <ToastContainer autoClose={2500} limit={3} position={"top-left"} />
+        </>
+      )}
+    </>
+  );
 }
 
 export default App;

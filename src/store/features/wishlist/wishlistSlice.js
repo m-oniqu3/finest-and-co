@@ -3,10 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   wishListItems: [],
   amountOfItemsInWishList: 0,
-  feedback: {
-    image: "",
-    message: "",
-  },
+  feedback: { message: "", type: "" },
 };
 
 const wishlistSlice = createSlice({
@@ -27,16 +24,15 @@ const wishlistSlice = createSlice({
         state.wishListItems.unshift(itemToAdd);
 
         //Update the feedback and increase the amount of items in the wishlist
-        state.feedback.message = "Item added";
-        state.feedback.image = itemToAdd.imgSrc;
+        state.feedback.message = "Item added to wishlist";
+        state.feedback.type = "success";
         state.amountOfItemsInWishList++;
-        // state.itemIsInList = state.wishListItems.includes(itemToAdd);
       }
       if (itemToAddExists) {
         //Update the feedback and increase the amount of items in the wishlist
-        state.message = "Item removed";
         state.amountOfItemsInWishList--;
-        // state.itemIsInList = state.wishListItems.includes(itemToAddExists);
+        state.feedback.message = "Item removed from wishlist";
+        state.feedback.type = "success";
 
         //remove the selected item from the array
         state.wishListItems = state.wishListItems.filter(

@@ -13,11 +13,7 @@ const FilterOptions = (props) => {
 
   //clear all filters
   const handleClear = () => {
-    setFilter({
-      category: [],
-      company: [],
-      sortBy: "",
-    });
+    setFilter({ category: [], company: [], sortBy: "" });
 
     dispatch(clearFilters());
     if (props.setOpenFilterMenu) props.setOpenFilterMenu(false);
@@ -29,6 +25,7 @@ const FilterOptions = (props) => {
   const handleSort = (e) => {
     const sortBy = e.target.value;
     setFilter({ ...filter, sortBy });
+    localStorage.setItem("filters", JSON.stringify({ ...filter, sortBy }));
   };
 
   //map over the sort options and input for each option
